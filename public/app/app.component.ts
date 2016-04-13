@@ -24,12 +24,22 @@ export class AppComponent {
 
 	constructor(af: AngularFire, private _auth: FirebaseAuth) {
 		this.items = af.database.list('/users');
-		this.doLogin();
+		this.doLogin("james.garcia@us.sogeti.com", "password");
+
+		var firebase = new Firebase('https://dazzling-inferno-8835.firebaseio.com');
+
+		firebase.onAuth(function(authData) {
+			firebase.child('users').child(authData.uid).set({
+				provider: authData.provider,
+				name: authData.password.email.split('@')[0].replace('.','_')
+			})
+		});
 	}
 
-	public doLogin () {
+	public doLogin (email: string, password: string) {
 		this._auth.login({
-			provider: AuthProviders.Password
+			email: email,
+			password: password
 		});
 	}
 }

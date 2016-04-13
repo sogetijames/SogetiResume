@@ -3,11 +3,15 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {AngularFire} from 'angularfire2';
 import {Observable} from 'rxjs/Observable';
 
-
 @Component({
 	selector: 'my-app',
 	providers: [],
-	templateUrl: '/views/home.html',
+	template: 
+	`<ul *ngFor="#item of items | async">
+		<li class="text">
+			{{item.name}}
+		</li>
+	</ul>`,
 	directives: [ROUTER_DIRECTIVES],
 	pipes: []
 })
@@ -16,8 +20,8 @@ import {Observable} from 'rxjs/Observable';
 ])
 
 export class AppComponent {
-	root: Observable<any[]>;
+	items: Observable<any[]>;
 	constructor(af: AngularFire) {
-		this.root = af.list('/');
+		this.items = af.database.list('/items');
 	}
 }

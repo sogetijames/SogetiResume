@@ -14,8 +14,10 @@
   "license": "ISC",
   "dependencies": {
     "angular2": "2.0.0-beta.14",
+    "angularfire2": "^2.0.0-alpha.14",
     "bootstrap": "^4.0.0-alpha.2",
     "es6-shim": "^0.35.0",
+    "firebase": "^2.4.2",
     "font-awesome": "github:fortawesome/Font-Awesome",
     "jquery": "^2.2.3",
     "reflect-metadata": "0.1.2",

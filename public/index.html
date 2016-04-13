@@ -15,14 +15,28 @@
     <script src="node_modules/systemjs/dist/system.src.js"></script>
     <script src="node_modules/rxjs/bundles/Rx.js"></script>
     <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script src="node_modules/angular2/bundles/router.dev.js"></script>
+
+    <!-- Firebase -->
+    <!-- <script src="node_modules/firebase/lib/firebase-web.js"></script> -->
+    <!-- AngularFire -->
+    <!-- <script src="node_modules/angularfire2/angularfire2.js"></script> -->
 
     <!-- 2. Configure SystemJS -->
     <script>
         System.config({
+            map: {
+                firebase: 'node_modules/firebase/lib/firebase-web.js',
+                angularfire2: 'node_modules/angularfire2'
+            },
             packages: {        
                 app: {
                     format: 'register',
                     defaultExtension: 'js'
+                },
+                angularfire2: {
+                    defaultExtension: 'js',
+                    main: 'angularfire2.js'
                 }
             }
         });

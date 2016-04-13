@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-import {AngularFire} from 'angularfire2';
+import {AngularFire, AuthProviders, FirebaseAuth} from 'angularfire2';
 import {Observable} from 'rxjs/Observable';
 
 @Component({
@@ -9,7 +9,7 @@ import {Observable} from 'rxjs/Observable';
 	template: 
 	`<ul *ngFor="#item of items | async">
 		<li class="text">
-			{{item.name}}
+			{{item.first}}
 		</li>
 	</ul>`,
 	directives: [ROUTER_DIRECTIVES],
@@ -21,7 +21,15 @@ import {Observable} from 'rxjs/Observable';
 
 export class AppComponent {
 	items: Observable<any[]>;
-	constructor(af: AngularFire) {
-		this.items = af.database.list('/items');
+
+	constructor(af: AngularFire, private _auth: FirebaseAuth) {
+		this.items = af.database.list('/users');
+		this.doLogin();
+	}
+
+	public doLogin () {
+		this._auth.login({
+			provider: AuthProviders.Password
+		});
 	}
 }

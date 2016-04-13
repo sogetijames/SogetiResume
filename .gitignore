@@ -1,6 +1,6 @@
 typings
-app/**/*.js
-app/**/*.map
+public/app/**/*.js
+public/app/**/*.map
 node_modules
 jspm_packages
 bower_components

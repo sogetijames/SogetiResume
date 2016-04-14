@@ -1,0 +1,1 @@
+export var FirebaseRef: Firebase = new Firebase('https://dazzling-inferno-8835.firebaseio.com');

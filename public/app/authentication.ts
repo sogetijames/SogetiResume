@@ -1,7 +1,7 @@
-import {Inject} from 'angular2/core';
+import {Injectable, Inject} from 'angular2/core';
 import {FirebaseAuth} from 'angularfire2';
-import {Observable} from 'rxjs/Observable';
 
+@Injectable()
 export class Authentication {
 	public login(email: string, password: string) {
 		this._auth.login({

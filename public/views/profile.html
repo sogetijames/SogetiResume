@@ -4,7 +4,10 @@
     <div class="col-xl-4">
       <h1>Sogeti Resume</h1>
       
-      <div class="row top-buffer">
+      <ul *ngFor="#user  of users | async">
+        <li><user-detail [user]="user"></user-detail></li>
+      </ul>
+      <!-- <div class="row top-buffer">
         <div class="input-group input-group-lg">
           <span class="input-group-addon" id="sizing-addon1">@</span>
           <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
@@ -20,7 +23,7 @@
 
       <div class="row top-buffer">
         <button type="button" class="btn btn-danger btn-lg" style="width:100%">Login</button>
-      </div>
+      </div> -->
 
     </div>
     <div class="col-xl-4"></div>

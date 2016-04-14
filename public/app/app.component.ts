@@ -3,17 +3,13 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {AngularFire, FirebaseAuth} from 'angularfire2';
 import {Observable} from 'rxjs/Observable';
 import {Authentication} from './authentication';
+import {UserDetailComponent} from './user-detail.component';
 
 @Component({
 	selector: 'my-app',
 	providers: [Authentication],
-	template: 
-	`<ul *ngFor="#item of items | async">
-		<li class="text">
-			{{item.first}}
-		</li>
-	</ul>`,
-	directives: [ROUTER_DIRECTIVES],
+	templateUrl: "../views/profile.html",
+	directives: [ROUTER_DIRECTIVES, UserDetailComponent],
 	pipes: []
 })
 @RouteConfig([
@@ -21,12 +17,12 @@ import {Authentication} from './authentication';
 ])
 
 export class AppComponent {
-	items: Observable<any[]>;
+	users: Observable<any[]>;
 
 	constructor(af: AngularFire, private _auth: FirebaseAuth) {
-		this.items = af.database.list('/users');
-
-		var auth = new Authentication(this._auth);
-		auth.login("james.garcia@us.sogeti.com", "password");
+		this.users = af.database.list('/users');
+		console.log(this.users);
+		// var auth = new Authentication(this._auth);
+		// auth.login("james.garcia@us.sogeti.com", "password");
 	}
 }

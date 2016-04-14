@@ -2,6 +2,10 @@
   "name": "react-sogeti-resume",
   "version": "1.0.0",
   "license": "ISC",
+  "scripts": {
+    "start": "npm run lite",
+    "lite": "lite-server"
+  },
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.2",
     "firebase": "^2.4.2",
@@ -9,5 +13,8 @@
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "reactfire": "^0.6.0"
+  },
+  "devDependencies": {
+    "lite-server": "^2.2.0"
   }
 }

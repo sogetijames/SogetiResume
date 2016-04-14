@@ -1,35 +1,47 @@
-<div class="col-xl-12">
-  <div class="row">
+<nav></nav>
+<div class="row profile-header">
     <div class="col-xl-4"></div>
     <div class="col-xl-4">
-      <h1>Sogeti Resume</h1>
       
-      <ul *ngFor="#user  of users | async">
-        <li><user-detail [user]="user"></user-detail></li>
-      </ul>
-      <!-- <div class="row top-buffer">
-        <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="sizing-addon1">@</span>
-          <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
-        </div>
-      </div>
+      <div class="center-block"><h1 class="display-4" style="text-align: center;">Sogeti Resume</h1></div>
       
-      <div class="row top-buffer">
-        <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="sizing-addon1">****</span>
-          <input type="text" class="form-control" placeholder="Password" aria-describedby="sizing-addon1">
-        </div>
-      </div>
-
-      <div class="row top-buffer">
-        <button type="button" class="btn btn-danger btn-lg" style="width:100%">Login</button>
-      </div> -->
+      <!-- <user-detail [user]="users[0]"></user-detail> -->
 
     </div>
     <div class="col-xl-4"></div>
 
+  
+</div>
+
+<div class="row">
+  <div class="col-xl-4 top-buffer">
+    <div class="card">
+      <div class="card-block">
+        <h4 class="card-title">Bio</h4>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-danger">Button</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 top-buffer">
+    <div class="card">
+      <div class="card-block">
+        <h4 class="card-title">Skill</h4>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-danger">Button</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 top-buffer">
+    <div class="card">
+      <div class="card-block">
+        <h4 class="card-title">Education</h4>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-danger">Button</a>
+      </div>
+    </div>
   </div>
   
 </div>
 
- 
+<footer></footer>

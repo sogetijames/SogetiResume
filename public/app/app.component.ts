@@ -4,12 +4,14 @@ import {AngularFire, FirebaseAuth} from 'angularfire2';
 import {Observable} from 'rxjs/Observable';
 import {Authentication} from './authentication';
 import {UserDetailComponent} from './user-detail.component';
+import {NavComponent} from './nav.component';
+import {FooterComponent} from './footer.component';
 
 @Component({
 	selector: 'my-app',
 	providers: [Authentication],
 	templateUrl: "../views/profile.html",
-	directives: [ROUTER_DIRECTIVES, UserDetailComponent],
+	directives: [ROUTER_DIRECTIVES, UserDetailComponent, NavComponent, FooterComponent],
 	pipes: []
 })
 @RouteConfig([

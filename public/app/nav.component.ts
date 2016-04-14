@@ -1,7 +1,7 @@
 import {Component,Input} from 'angular2/core';
 
 @Component({
-	selector: 'nav',
+	selector: 'navigation',
 	templateUrl: "../views/nav.html"
 })
 

@@ -7,6 +7,7 @@
     "firebase": "^2.4.2",
     "jquery": "^2.2.3",
     "react": "^15.0.1",
-    "react-dom": "^15.0.1"
+    "react-dom": "^15.0.1",
+    "reactfire": "^0.6.0"
   }
 }

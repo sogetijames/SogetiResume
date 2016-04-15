@@ -31,7 +31,7 @@ export class SearchComponent {
 					this._userService.searchUsersByLastName(searchText).then( 
 						lastname => {
 							last = lastname.val();
-							// this.searchResults = $.extend({}, first, last);
+							this.searchResults = $.extend({}, first, last);
 						}
 					);
 				}

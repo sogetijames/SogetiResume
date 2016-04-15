@@ -1,13 +1,10 @@
 import {Component} from 'angular2/core';
 import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 import {Observable} from 'rxjs/Observable';
-
 import {LoginComponent} from './login.component';
 import {UserDetailComponent} from './user-detail.component';
 import {FooterComponent} from './footer.component';
-
 import {UserService} from './user.service';
-
 import {ValuesPipe} from './values.pipe';
 
 @Component({
@@ -18,8 +15,7 @@ import {ValuesPipe} from './values.pipe';
 	],
 	templateUrl: "../views/nav.html",
 	directives: [
-		ROUTER_DIRECTIVES,
-		FooterComponent
+		ROUTER_DIRECTIVES
 	],
 	pipes: [
 		ValuesPipe
@@ -51,5 +47,25 @@ export class AppComponent {
 	onClickLogin() { 
 		let link = ['Login'];
   		this._router.navigate(link);
+	}
+
+	searchUsersByName() {
+		var searchResult: Object;
+		var first: Object;
+		var last: Object;
+
+		this._userService.searchUsersByFirstName("james").then(
+			firstname => {
+				first = firstname.val();
+				this._userService.searchUsersByLastName("james").then( 
+					lastname => {
+						last = lastname.val();
+						searchResult = $.extend({}, first, last);
+						console.log(searchResult);
+					}
+				);
+			}
+			
+		);
 	}
 }

@@ -63,3 +63,32 @@ div {
 .navbar-default .navbar-nav > .open > a:focus {
     background-color: transparent !important;
 }
+
+.logo-spinner {
+    width: 100px;
+    height: 100px;
+    color:#b30000;
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
+
+.logo-spinner-text {
+    width: 100px;
+    height: 100px;
+
+    position: absolute;
+    top:200px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+    color:#b30000;
+
+}

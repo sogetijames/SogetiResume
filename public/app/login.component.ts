@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {FirebaseRef} from './firebase-ref';
 import {AuthenticationService} from './authentication.service';
@@ -9,12 +9,16 @@ import {AuthenticationService} from './authentication.service';
 	providers: [AuthenticationService]
 })
 
-export class LoginComponent { 
+export class LoginComponent implements OnInit { 
 	email: string;
 	password: string;
 
-	constructor(private _router: Router, private _authenticationService: AuthenticationService) { 
-		this._authenticationService.logout();
+	constructor(private _router: Router, private _authenticationService: AuthenticationService) { }
+
+	ngOnInit() {
+		if (FirebaseRef.getAuth()) {
+			this._router.navigate(['Profile']);
+		}
 	}
 
 	onClickLogin() {
@@ -37,6 +41,7 @@ export class LoginComponent {
 					var name = this.email.split('.');
 
 					FirebaseRef.child('/users').child(authData.uid).update({
+						fullname: name[0].toLowerCase() + ' ' + name[1].toLowerCase(),
 						first: name[0].toLowerCase(),
 						last: name[1].toLowerCase()
 					});

@@ -5,17 +5,21 @@ import {LoginComponent} from './login.component';
 import {UserDetailComponent} from './user-detail.component';
 import {FooterComponent} from './footer.component';
 import {UserService} from './user.service';
+import {AuthenticationService} from './authentication.service';
 import {ValuesPipe} from './values.pipe';
+import {FirebaseRef} from './firebase-ref';
 
 @Component({
 	selector: 'my-app',
 	providers: [
 		ROUTER_PROVIDERS, 
-		UserService
+		UserService,
+		AuthenticationService
 	],
 	templateUrl: "../views/nav.html",
 	directives: [
-		ROUTER_DIRECTIVES, FooterComponent
+		ROUTER_DIRECTIVES, 
+		FooterComponent
 	],
 	pipes: [
 		ValuesPipe
@@ -36,22 +40,26 @@ import {ValuesPipe} from './values.pipe';
 ])
 
 export class AppComponent {
-	users: Object;
-	inputValues='';
+	currentUser: Object;
 	searchResults: Object;
+	inputValues = '';
+	firebaseRef = FirebaseRef;
 
-	constructor(private _router: Router, private _userService: UserService) { }
+	constructor(private _router: Router, 
+		private _userService: UserService, 
+		private _authenticationService: AuthenticationService) { 
 
-	getUsers() {
-		this._userService.getUsers().then( users => this.users = users.val() );
+		FirebaseRef.onAuth( (authData: FirebaseAuthData) => {
+			if (authData != null) {
+				this._userService.getUser(authData.uid).then(user => this.currentUser = user.val());
+			}
+		});
 	}
-	
-	onClickLogin() { 
-		let link = ['Login'];
-  		this._router.navigate(link);
-	}
 
-	
+	onClickLogout() {
+		this._authenticationService.logout();
+  		this._router.navigate(['Login']);
+	}	
 
   	// without strong typing
 	searchUsersByName(event: any) {
@@ -65,8 +73,8 @@ export class AppComponent {
 				this._userService.searchUsersByLastName(this.inputValues).then( 
 					lastname => {
 						last = lastname.val();
-						searchResults = $.extend({}, first, last);
-						console.log(searchResults)
+						// searchResults = $.extend({}, first, last);
+						// console.log(searchResults);
 					}
 				);
 			}

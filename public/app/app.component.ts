@@ -18,7 +18,8 @@ import {ValuesPipe} from './values.pipe';
 	],
 	templateUrl: "../views/nav.html",
 	directives: [
-		ROUTER_DIRECTIVES
+		ROUTER_DIRECTIVES,
+		FooterComponent
 	],
 	pipes: [
 		ValuesPipe

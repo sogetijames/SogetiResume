@@ -6,11 +6,11 @@
       <div class="card-block text-xl-right">
         <form class="form">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Email" aria-describedby="basic-addon2">
+            <input [(ngModel)]="email" type="text" class="form-control" placeholder="Email" aria-describedby="basic-addon2"required>
             <span class="input-group-addon" id="basic-addon2">@us.sogeti.com</span>
           </div> <br />
-          <input type="password" class="form-control" placeholder="Password"> <br />
-          <button class="btn btn-primary-outline" type="submit">Login</button>
+          <input [(ngModel)]="password" type="password" class="form-control" placeholder="Password" required> <br />
+          <button class="btn btn-primary-outline" type="submit" (click)="onClickLogin()">Login</button>
         </form>
       </div>
     </div>

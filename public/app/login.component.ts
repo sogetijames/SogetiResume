@@ -20,17 +20,29 @@ export class LoginComponent {
 	onClickLogin() {
 		this._authenticationService.login(this.email + "@us.sogeti.com", this.password).then(
 			(authData: FirebaseAuthData) => {
-				var name = authData.password.email.split('@')[0].split('.');
-
-				FirebaseRef.child('users').child(authData.uid).update({
-					first: name[0].toLowerCase(),
-					last: name[1].toLowerCase()
-				});
-
 				this._router.navigate(['Profile']);
 			}, 
 			(error: any) => {
 				console.log(error);
+			}
+		);
+	}
+
+	onClickCreate() {
+		this._authenticationService.createUser(this.email + "@us.sogeti.com", this.password, 
+			(error: any, authData: FirebaseAuthData) => {
+				if (error) {
+					console.log(error);
+				} else {
+					var name = this.email.split('.');
+
+					FirebaseRef.child('/users').child(authData.uid).update({
+						first: name[0].toLowerCase(),
+						last: name[1].toLowerCase()
+					});
+
+					this.onClickLogin();
+				}			
 			}
 		);
 	}

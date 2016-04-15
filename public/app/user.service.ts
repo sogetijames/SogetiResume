@@ -18,9 +18,9 @@ export class UserService {
 		
 	}
 
-	public searchUsersByFirstName(name: string){
+	public searchUsersByFullName(name: string){
 		name = name.toLowerCase();
-		var firstnameSearch = FirebaseRefUsers.orderByChild("first").startAt(name).endAt(name + "\uf8ff").once("value");
+		var firstnameSearch = FirebaseRefUsers.orderByChild("fullname").startAt(name).endAt(name + "\uf8ff").once("value");
 		return  firstnameSearch;
 	}
 

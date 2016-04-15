@@ -42,8 +42,7 @@ import {FirebaseRef} from './firebase-ref';
 export class AppComponent {
 	currentUser: Object;
 	searchResults: Object;
-	inputValues = '';
-	firebaseRef = FirebaseRef;
+	searchText: String;
 
 	constructor(private _router: Router, 
 		private _userService: UserService, 
@@ -65,20 +64,18 @@ export class AppComponent {
 	searchUsersByName(event: any) {
 		var first: Object;
 		var last: Object;
-		this.inputValues = (<HTMLInputElement>event.target).value;
-		console.log(this.inputValues);
-		this._userService.searchUsersByFirstName(this.inputValues).then(
+		var searchText = (<HTMLInputElement>event.target).value;
+		console.log(searchText);
+		this._userService.searchUsersByFullName(searchText).then(
 			firstname => {
 				first = firstname.val();
-				this._userService.searchUsersByLastName(this.inputValues).then( 
+				this._userService.searchUsersByLastName(searchText).then( 
 					lastname => {
 						last = lastname.val();
-						// searchResults = $.extend({}, first, last);
-						// console.log(searchResults);
+						this.searchResults = $.extend({}, first, last);
 					}
 				);
-			}
-			
-		);
+			}			
+		);		
 	}
 }

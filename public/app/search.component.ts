@@ -11,11 +11,11 @@ import {UserService} from './user.service';
 	]
 })
 
-export class searchComponent {
+export class SearchComponent {
 
 	searchResults: Object;
 	searchText: String;
-	
+
 	constructor(private _userService: UserService) { }
 
 	searchUsersByName(event: any) {
@@ -23,18 +23,21 @@ export class searchComponent {
 		var last: Object;
 		var searchText = (<HTMLInputElement>event.target).value;
 		console.log(searchText);
-		this._userService.searchUsersByFullName(searchText).then(
-			firstname => {
-				first = firstname.val();
-				this._userService.searchUsersByLastName(searchText).then( 
-					lastname => {
-						last = lastname.val();
-						this.searchResults = $.extend({}, first, last);
-					}
-				);
-			}
-			
-		);
-		
+		if(searchText == ""){
+			this.searchResults = {}
+		} else {
+			this._userService.searchUsersByFullName(searchText).then(
+				firstname => {
+					first = firstname.val();
+					this._userService.searchUsersByLastName(searchText).then( 
+						lastname => {
+							last = lastname.val();
+							this.searchResults = $.extend({}, first, last);
+						}
+					);
+				}
+				
+			);
+		}
 	}
 }

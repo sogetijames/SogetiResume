@@ -8,6 +8,7 @@ import {UserService} from './user.service';
 import {AuthenticationService} from './authentication.service';
 import {ValuesPipe} from './values.pipe';
 import {FirebaseRef} from './firebase-ref';
+import {SearchComponent} from './search.component';
 
 @Component({
 	selector: 'my-app',
@@ -36,13 +37,16 @@ import {FirebaseRef} from './firebase-ref';
 		name: 'Login',
 		component: LoginComponent,
 		useAsDefault: true
+	},
+	{
+		path: '/search',
+		name: 'Search',
+		component: SearchComponent
 	}
 ])
 
 export class AppComponent {
 	currentUser: Object;
-	searchResults: Object;
-	searchText: String;
 
 	constructor(private _router: Router, 
 		private _userService: UserService, 

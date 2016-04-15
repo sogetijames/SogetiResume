@@ -16,13 +16,24 @@
           <a class="nav-link" [routerLink]="['Login']">Login </a>
         </li> -->
       </ul>
-
-      <form class="form-inline pull-xl-right">
-        <input class="form-control" type="text" placeholder="Search">
-        <button class="btn btn-default-outline" type="submit" (click)="searchUsersByName()">Search</button>
-      </form>
     </div>
   </nav>
+</div>
+<div class="row">
+  <div class="col-xl-4 col-xl-offset-4">
+    <form class="form-inline">
+      <input class="form-control search" type="text" placeholder="Search" (keyup)="searchUsersByName($event)">
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li *ngFor="#result of searchResults | values">
+            {{ result.first + " " + result.last }}
+          </li>
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+    </form>
+  </div>
+  
 </div>
 <router-outlet></router-outlet>
 <footer></footer>

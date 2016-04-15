@@ -15,7 +15,7 @@ import {ValuesPipe} from './values.pipe';
 	],
 	templateUrl: "../views/nav.html",
 	directives: [
-		ROUTER_DIRECTIVES
+		ROUTER_DIRECTIVES, FooterComponent
 	],
 	pipes: [
 		ValuesPipe
@@ -37,6 +37,8 @@ import {ValuesPipe} from './values.pipe';
 
 export class AppComponent {
 	users: Object;
+	inputValues='';
+	searchResults: Object;
 
 	constructor(private _router: Router, private _userService: UserService) { }
 
@@ -49,19 +51,22 @@ export class AppComponent {
   		this._router.navigate(link);
 	}
 
-	searchUsersByName() {
-		var searchResult: Object;
+	
+
+  	// without strong typing
+	searchUsersByName(event: any) {
 		var first: Object;
 		var last: Object;
-
-		this._userService.searchUsersByFirstName("james").then(
+		this.inputValues = (<HTMLInputElement>event.target).value;
+		console.log(this.inputValues);
+		this._userService.searchUsersByFirstName(this.inputValues).then(
 			firstname => {
 				first = firstname.val();
-				this._userService.searchUsersByLastName("james").then( 
+				this._userService.searchUsersByLastName(this.inputValues).then( 
 					lastname => {
 						last = lastname.val();
-						searchResult = $.extend({}, first, last);
-						console.log(searchResult);
+						searchResults = $.extend({}, first, last);
+						console.log(searchResults)
 					}
 				);
 			}

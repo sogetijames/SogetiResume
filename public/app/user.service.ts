@@ -10,6 +10,10 @@ export class UserService {
 		return FirebaseRef.child('/users').once("value");
 	}
 
+	public getUser(uid: string) {
+		return FirebaseRef.child('/users').child(uid).once("value");
+	}
+
 	public updateUser(user: Object) {
 		
 	}

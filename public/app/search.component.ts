@@ -2,7 +2,6 @@ import {Component,Input} from 'angular2/core';
 import {ValuesPipe} from './values.pipe';
 import {UserService} from './user.service';
 
-
 @Component({
 	selector: 'search',
 	templateUrl: "../views/search.html",
@@ -32,7 +31,7 @@ export class SearchComponent {
 					this._userService.searchUsersByLastName(searchText).then( 
 						lastname => {
 							last = lastname.val();
-							this.searchResults = $.extend({}, first, last);
+							// this.searchResults = $.extend({}, first, last);
 						}
 					);
 				}

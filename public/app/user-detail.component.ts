@@ -13,14 +13,11 @@ import {UserService} from './user.service';
 })
 
 export class UserDetailComponent implements OnInit {
-	user: Object
 
 	constructor(private _router: Router, private _userService: UserService) { }
 
 	ngOnInit() {
-		if (FirebaseRef.getAuth()) {
-			this._userService.getUser(FirebaseRef.getAuth().uid).then( user => this.user = user.val() );
-		} else {
+		if (!FirebaseRef.getAuth()) {
 			this._router.navigate(['Login']);
 		}
 	}

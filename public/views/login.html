@@ -10,8 +10,12 @@
             <span class="input-group-addon" id="basic-addon2">@us.sogeti.com</span>
           </div> <br />
           <input [(ngModel)]="password" type="password" class="form-control" placeholder="Password" required> <br />
-          <button class="btn btn-secondary-outline" type="submit" (click)="onClickCreate()">Create Account</button>
-          <button class="btn btn-danger-outline" type="submit" (click)="onClickLogin()">Login</button>
+          <button class="btn btn-secondary-outline" type="submit" (click)="onClickCreate()">
+            <i class="fa fa-user-plus" aria-hidden="true"></i> Create Account
+          </button>
+          <button class="btn btn-danger-outline" type="submit" (click)="onClickLogin()">
+            <i class="fa fa-sign-in" aria-hidden="true"></i> Login
+          </button>
         </form>
       </div>
     </div>

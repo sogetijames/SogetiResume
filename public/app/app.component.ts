@@ -65,17 +65,20 @@ export class AppComponent {
 		var first: Object;
 		var last: Object;
 		var searchText = (<HTMLInputElement>event.target).value;
-		console.log(searchText);
-		this._userService.searchUsersByFullName(searchText).then(
-			firstname => {
-				first = firstname.val();
-				this._userService.searchUsersByLastName(searchText).then( 
-					lastname => {
-						last = lastname.val();
-						this.searchResults = $.extend({}, first, last);
-					}
-				);
-			}			
-		);		
+		if (searchText == "") {
+			this.searchResults = {}
+		} else {
+			this._userService.searchUsersByFullName(searchText).then(
+				firstname => {
+					first = firstname.val();
+					this._userService.searchUsersByLastName(searchText).then( 
+						lastname => {
+							last = lastname.val();
+							this.searchResults = $.extend({}, first, last);
+						}
+					);
+				}			
+			);	
+		}			
 	}
 }

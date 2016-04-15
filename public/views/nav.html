@@ -21,14 +21,11 @@
 </div>
 <form class="form-inline">
   <input style="width:100%;" class="form-control search" type="text" placeholder="Search" (keyup)="searchUsersByName($event)">
-    <div *ngIf="searchText != '' || searchText != null || searchText != undefined">
       <ul class="list-group">
         <li *ngFor="#result of searchResults | values" class="list-group-item">
           <a >{{ result.first + " " + result.last }}</a>
         </li>
       </ul>
-    </div>
-    
 </form>
 <router-outlet></router-outlet>
 <footer></footer>

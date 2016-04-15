@@ -59,9 +59,6 @@ export class AppComponent {
 		var last: Object;
 		var searchText = (<HTMLInputElement>event.target).value;
 		console.log(searchText);
-		if(this.searchText == "" || this.searchText == null || this.searchText == undefined) {
-			this.searchResults = {};
-		}
 		this._userService.searchUsersByFullName(searchText).then(
 			firstname => {
 				first = firstname.val();

@@ -6,8 +6,8 @@
     <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
       <a class="navbar-brand" href="#"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Sogeti Resume</a>
       <ul class="nav navbar-nav">
-        <li class="pull-xs-right" *ngIf="!currentUser">
-          <a class="btn btn-secondary-outline" [routerLink]="['Login']">Login</a>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['Search']"><i class="fa fa-search" aria-hidden="true"></i> Search</a>
         </li>
         <li class="pull-xs-right" *ngIf="currentUser" style="padding-top: 5px;">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

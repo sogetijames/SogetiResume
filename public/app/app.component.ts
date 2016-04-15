@@ -59,26 +59,4 @@ export class AppComponent {
 		this._authenticationService.logout();
   		this._router.navigate(['Login']);
 	}	
-
-  	// without strong typing
-	searchUsersByName(event: any) {
-		var first: Object;
-		var last: Object;
-		var searchText = (<HTMLInputElement>event.target).value;
-		if (searchText == "") {
-			this.searchResults = {}
-		} else {
-			this._userService.searchUsersByFullName(searchText).then(
-				firstname => {
-					first = firstname.val();
-					this._userService.searchUsersByLastName(searchText).then( 
-						lastname => {
-							last = lastname.val();
-							this.searchResults = $.extend({}, first, last);
-						}
-					);
-				}			
-			);	
-		}			
-	}
 }

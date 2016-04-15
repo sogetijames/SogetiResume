@@ -18,8 +18,7 @@
       </ul>
 
       <form class="form-inline pull-xl-right">
-        <input class="form-control" type="text" placeholder="Search">
-        <button class="btn btn-default-outline" type="submit" (click)="searchUsersByName()">Search</button>
+        <input class="form-control" type="text" placeholder="Search" (keyup)="searchUsersByName($event)">
       </form>
     </div>
   </nav>

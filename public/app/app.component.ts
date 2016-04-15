@@ -38,6 +38,7 @@ import {ValuesPipe} from './values.pipe';
 export class AppComponent {
 	users: Object;
 	inputValues='';
+	searchResults: Object;
 
 	constructor(private _router: Router, private _userService: UserService) { }
 
@@ -54,7 +55,6 @@ export class AppComponent {
 
   	// without strong typing
 	searchUsersByName(event: any) {
-		var searchResult: Object;
 		var first: Object;
 		var last: Object;
 		this.inputValues = (<HTMLInputElement>event.target).value;
@@ -65,8 +65,8 @@ export class AppComponent {
 				this._userService.searchUsersByLastName(this.inputValues).then( 
 					lastname => {
 						last = lastname.val();
-						searchResult = $.extend({}, first, last);
-						console.log(searchResult);
+						searchResults = $.extend({}, first, last);
+						console.log(searchResults)
 					}
 				);
 			}

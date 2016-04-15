@@ -7,7 +7,7 @@
       </ul> -->
 	<div *ngIf="searchText != ''" class="dropdown open" >
 	  <div class="dropdown-menu">
-	  	<button *ngFor="#result of searchResults | values"  class="dropdown-item" type="button">{{ result.first + " " + result.last }}</button>
+	  	<button *ngFor="#result of searchResults | values"  class="dropdown-item" type="button">{{ result?.first + " " + result?.last }}</button>
 	  </div>
 	</div>
 </form>

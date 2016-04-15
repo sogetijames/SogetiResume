@@ -1,35 +1,54 @@
 import {Component, OnInit} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-import {AngularFire, FirebaseAuth} from 'angularfire2';
+import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 import {Observable} from 'rxjs/Observable';
-import {Authentication} from './authentication';
+
+import {LoginComponent} from './login.component';
 import {UserDetailComponent} from './user-detail.component';
-import {NavComponent} from './nav.component';
 import {FooterComponent} from './footer.component';
+
 import {UserService} from './user.service';
+
 import {ValuesPipe} from './values.pipe';
 
 @Component({
 	selector: 'my-app',
-	providers: [Authentication, UserService],
-	templateUrl: "../views/profile.html",
-	directives: [ROUTER_DIRECTIVES, UserDetailComponent, NavComponent, FooterComponent],
-	pipes: [ValuesPipe]
+	providers: [
+		ROUTER_PROVIDERS, 
+		UserService
+	],
+	templateUrl: "../views/nav.html",
+	directives: [
+		ROUTER_DIRECTIVES
+	],
+	pipes: [
+		ValuesPipe
+	]
 })
 @RouteConfig([
-
+	{
+		path: '/profile',
+		name: 'Profile',
+		component: UserDetailComponent
+	},
+	{
+		path: '/login',
+		name: 'Login',
+		component: LoginComponent,
+		useAsDefault: true
+	}
 ])
 
-export class AppComponent implements OnInit {
+export class AppComponent {
 	users: Object;
 
-	constructor(private _userService: UserService, private _authentication: Authentication) { }
+	constructor(private _router: Router, private _userService: UserService) { }
 
 	getUsers() {
 		this._userService.getUsers().then( users => this.users = users.val() );
 	}
 	
-	ngOnInit() {
-		this.getUsers();
+	onClickLogin() { 
+		let link = ['Login'];
+  		this._router.navigate(link);
 	}
 }

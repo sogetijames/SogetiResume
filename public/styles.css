@@ -45,6 +45,10 @@ div {
 	margin-top: 20px;
 }
 
+.bottom-buffer {
+    margin-bottom: 20px;
+}
+
 .profile-header {
 	background-color: #b30000;
 }

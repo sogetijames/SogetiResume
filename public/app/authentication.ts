@@ -1,23 +1,27 @@
 import {Injectable, Inject} from 'angular2/core';
-import {FirebaseAuth} from 'angularfire2';
+import {FirebaseRef} from './firebase-ref';
 
 @Injectable()
 export class Authentication {
+	public getLoggedInUserUid() {
+		return FirebaseRef.getAuth().uid;
+	}
+
 	public login(email: string, password: string) {
-		this._auth.login({
+		FirebaseRef.authWithPassword({
 			email: email,
 			password: password
+		}, function (error: any, authData: FirebaseAuthData) {
+			if (error) {
+				return error;
+			} else {
+				FirebaseRef.child('users').child(authData.uid).set({
+					name: authData.password.email.split('@')[0].replace('.','_')
+				});
+				return FirebaseRef.child('users').child(authData.uid);
+			}
 		});
 	}
 
-	constructor(@Inject(FirebaseAuth) public _auth: FirebaseAuth) {
-		var firebase = new Firebase('https://dazzling-inferno-8835.firebaseio.com');
-
-		firebase.onAuth(function(authData) {
-			firebase.child('users').child(authData.uid).set({
-				provider: authData.provider,
-				name: authData.password.email.split('@')[0].replace('.','_')
-			})
-		});
-	}
+	constructor() { }
 }

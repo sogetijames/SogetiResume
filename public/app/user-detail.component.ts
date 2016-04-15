@@ -1,6 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {FirebaseRef} from './firebase-ref';
+import {CurrentUser} from './currentUser';
 
 import {UserService} from './user.service';
 
@@ -14,7 +15,11 @@ import {UserService} from './user.service';
 
 export class UserDetailComponent implements OnInit {
 
-	constructor(private _router: Router, private _userService: UserService) { }
+	constructor(
+		private _currentUser: CurrentUser,
+		private _router: Router, 
+		private _userService: UserService
+	) { } 
 
 	ngOnInit() {
 		if (!FirebaseRef.getAuth()) {

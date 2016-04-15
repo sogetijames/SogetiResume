@@ -9,6 +9,7 @@ import {AuthenticationService} from './authentication.service';
 import {ValuesPipe} from './values.pipe';
 import {FirebaseRef} from './firebase-ref';
 import {SearchComponent} from './search.component';
+import {CurrentUser} from './currentUser';
 
 @Component({
 	selector: 'my-app',
@@ -46,21 +47,23 @@ import {SearchComponent} from './search.component';
 ])
 
 export class AppComponent {
-	currentUser: Object;
 
-	constructor(private _router: Router, 
+	constructor(
+		private _currentUser: CurrentUser,
+		private _router: Router, 
 		private _userService: UserService, 
 		private _authenticationService: AuthenticationService) { 
 
 		FirebaseRef.onAuth( (authData: FirebaseAuthData) => {
 			if (authData != null) {
-				this._userService.getUser(authData.uid).then(user => this.currentUser = user.val());
+				this._userService.getUser(authData.uid).then(user => this._currentUser.setCurrentUser(user.val()) );
 			}
 		});
 	}
 
 	onClickLogout() {
 		this._authenticationService.logout();
+		this._currentUser.setCurrentUser(undefined);
   		this._router.navigate(['Login']);
 	}	
 }

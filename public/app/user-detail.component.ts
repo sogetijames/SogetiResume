@@ -24,7 +24,6 @@ export class UserDetailComponent implements OnInit {
 		this._userService.searchBioByUID(FirebaseRef.getAuth().uid).then(
 			returnedBio => {
 				this.bio = returnedBio.val();
-				console.log(this.bio.text);
 			}
 		);
 	} 

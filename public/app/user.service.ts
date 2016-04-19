@@ -1,5 +1,5 @@
 import {Injectable, Inject} from 'angular2/core';
-import {FirebaseRef, FirebaseRefUsers} from './firebase-ref';
+import {FirebaseRef, FirebaseRefUsers, FirebaseRefBio} from './firebase-ref';
 
 @Injectable()
 export class UserService {
@@ -27,5 +27,9 @@ export class UserService {
 		name = name.toLowerCase();
 		var lastnameSearch = FirebaseRefUsers.orderByChild("last").startAt(name).endAt( name+ "\uf8ff").once("value") ;
 		return  lastnameSearch;
+	}
+
+	public searchBioByUID(uid: string){
+		return FirebaseRef.child('/bio').child(uid).once("value");
 	}
 }

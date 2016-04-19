@@ -2,7 +2,6 @@ import {Component, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {FirebaseRef} from './firebase-ref';
 import {CurrentUser} from './currentUser';
-
 import {UserService} from './user.service';
 
 @Component({
@@ -15,11 +14,20 @@ import {UserService} from './user.service';
 
 export class UserDetailComponent implements OnInit {
 
+	bio: Object;
+
 	constructor(
 		private _currentUser: CurrentUser,
 		private _router: Router, 
 		private _userService: UserService
-	) { } 
+	) { 
+		this._userService.searchBioByUID(FirebaseRef.getAuth().uid).then(
+			returnedBio => {
+				this.bio = returnedBio.val();
+				console.log(this.bio.text);
+			}
+		);
+	} 
 
 	ngOnInit() {
 		if (!FirebaseRef.getAuth()) {

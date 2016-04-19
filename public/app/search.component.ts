@@ -21,7 +21,6 @@ export class SearchComponent {
 		var first: Object;
 		var last: Object;
 		var searchText = (<HTMLInputElement>event.target).value;
-		console.log(searchText);
 		if(searchText == ""){
 			this.searchResults = {}
 		} else {
@@ -31,7 +30,7 @@ export class SearchComponent {
 					this._userService.searchUsersByLastName(searchText).then( 
 						lastname => {
 							last = lastname.val();
-							this.searchResults = $.extend({}, first, last);
+							this.searchResults = Object.assign({}, first, last);
 						}
 					);
 				}

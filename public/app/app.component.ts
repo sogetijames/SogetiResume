@@ -56,7 +56,7 @@ export class AppComponent {
 
 		FirebaseRef.onAuth( (authData: FirebaseAuthData) => {
 			if (authData != null) {
-				this._userService.getUser(authData.uid).then(user => this._currentUser.setCurrentUser(user.val()) );
+				this._userService.getUser(authData.uid).then(user => this._currentUser.setCurrentUser(authData));
 			}
 		});
 	}

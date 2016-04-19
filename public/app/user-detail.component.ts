@@ -14,6 +14,7 @@ import {UserService} from './user.service';
 
 export class UserDetailComponent implements OnInit {
 
+	user: Object;
 	bio: Object;
 
 	constructor(
@@ -27,7 +28,11 @@ export class UserDetailComponent implements OnInit {
 					this.bio = returnedBio.val();
 				}
 			);
-			console.log(FirebaseRef.getAuth());
+			this._userService.getUser(this._currentUser.user.uid).then(
+				userInfo => {
+					this.user = userInfo.val();
+				}
+			);
 		}
 		
 	} 

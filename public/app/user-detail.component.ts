@@ -21,16 +21,21 @@ export class UserDetailComponent implements OnInit {
 		private _router: Router, 
 		private _userService: UserService
 	) { 
-		this._userService.searchBioByUID(FirebaseRef.getAuth().uid).then(
-			returnedBio => {
-				this.bio = returnedBio.val();
-			}
-		);
+		if (FirebaseRef.getAuth()) {
+			this._userService.searchBioByUID(FirebaseRef.getAuth().uid).then(
+				returnedBio => {
+					this.bio = returnedBio.val();
+				}
+			);
+			console.log(FirebaseRef.getAuth());
+		}
+		
 	} 
-
 	ngOnInit() {
 		if (!FirebaseRef.getAuth()) {
 			this._router.navigate(['Login']);
 		}
 	}
+
+	
 }

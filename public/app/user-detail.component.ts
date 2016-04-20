@@ -32,12 +32,18 @@ export class UserDetailComponent implements OnInit {
 	}
 
 	clickSave() {
-		var usersRef = FirebaseRef.child("users").child(this._currentUser.auth.uid);
-		var obj = {};
+		this._currentUser.info.fullname = this._currentUser.info.first + " " + this._currentUser.info.last; 
+		var usersRef = FirebaseRef.child("users");
+		var infoObj = {};
+		infoObj[this._currentUser.auth.uid + '/first'] = this._currentUser.info.first;
+		infoObj[this._currentUser.auth.uid + '/last'] = this._currentUser.info.last;
+		infoObj[this._currentUser.auth.uid + '/fullname'] = this._currentUser.info.fullname;
+		infoObj[this._currentUser.auth.uid + '/title'] = this._currentUser.info.title;
+		infoObj[this._currentUser.auth.uid + '/unit'] = this._currentUser.info.unit;
 
-		usersRef.update({
-		  first:this._currentUser.info.first
-		  }, (error) => {
+		usersRef.update(
+		  infoObj
+		, (error) => {
 		  if (error) {
 		    alert("Data could not be saved." + error);
 		  } else {

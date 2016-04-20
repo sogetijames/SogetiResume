@@ -15,8 +15,9 @@ import {ValuesPipe} from './values.pipe';
 })
 export class UserDetailComponent implements OnInit {
 	editable: boolean;
+	uid: string;
 	user: any;
-	userCopy: Object;
+	userCopy: any;
 
 	constructor(
 		private _currentUser: CurrentUser,
@@ -26,8 +27,10 @@ export class UserDetailComponent implements OnInit {
 		private _valuesPipe: ValuesPipe
 	) {  
 		this.editable = false;
+
 		let username = this._routeParams.get('username');
 		this._userService.getUserByUsername(username.replace('_', '.')).then( user => {
+			this.uid = Object.keys(user.val())[0];
 			this.user = this._valuesPipe.transform(user.val())[0];
 			this.userCopy = $.extend(true, {}, this.user);
 		});
@@ -49,20 +52,22 @@ export class UserDetailComponent implements OnInit {
 
 		this.user.fullname = this.user.first + ' ' + this.user.last;
 
+		userObj[this._currentUser.auth.uid + '/bio'] = this.user.bio;
 		userObj[this._currentUser.auth.uid + '/first'] = this.user.first;
-		userObj[this._currentUser.auth.uid + '/last'] = this.user.last;
 		userObj[this._currentUser.auth.uid + '/fullname'] = this.user.fullname;
+		userObj[this._currentUser.auth.uid + '/last'] = this.user.last;
 		userObj[this._currentUser.auth.uid + '/title'] = this.user.title;
 		userObj[this._currentUser.auth.uid + '/unit'] = this.user.unit;
 
 		userRef.update(userObj, (error) => {
 			if (error) {
-				this._router.navigate(['Profile', { username: this.user.email.split('@')[0].replace('.', '_') }]);
+				alert("Error: " + error);
 			} else {
 				alert("Data saved successfully.");
-				this.editable = !this.editable;
 			}
 		});
+
+		this.editable = !this.editable;
 	}
 
 	clickCancel() {

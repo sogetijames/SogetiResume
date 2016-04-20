@@ -45,10 +45,17 @@ export class LoginComponent implements OnInit {
 					console.log(error);
 				} else {
 					FirebaseRef.child('/users').child(authData.uid).update({
+						bio: '',
 						email: email,
-						fullname: name[0] + ' ' + name[1],
 						first: name[0],
-						last: name[1]
+						fullname: name[0] + ' ' + name[1],
+						last: name[1],
+						status: {
+							description: '',
+							text: ''
+						},
+						title: '',
+						unit: ''
 					});
 
 					this.onClickLogin();

@@ -31,8 +31,7 @@
     <p>{{ user?.email }}</p>
   </div> 
   <div class="col-xl-1">
-    <button type="button" class="btn btn-link" (click)="clickEdit()" *ngIf="!editable"><i class="fa fa-pencil-square-o black-link" aria-hidden="true"> Edit</i></button>
-
+    <button type="button" class="btn btn-link" (click)="clickEdit()" *ngIf="!editable && _currentUser.auth.uid == uid"><i class="fa fa-pencil-square-o black-link" aria-hidden="true"> Edit</i></button>
     <button type="button" class="btn btn-link" (click)="clickSave()" *ngIf="editable"><i class="fa fa-floppy-o green-link" aria-hidden="true"> Save</i></button>
     <button type="button" class="btn btn-link" (click)="clickCancel()" *ngIf="editable"><i class="fa fa-times red-link" aria-hidden="true"> Cancel</i></button>
   </div>
@@ -43,7 +42,7 @@
     <div class="card">
       <div class="card-block">
         <h4 class="card-title"><i class="fa fa-book" aria-hidden="true"></i> Bio</h4>
-        <p class="card-text">{{ _currentUser.bio?.text }}
+        <p class="card-text">{{ user?.bio }}
         </p>
       </div>
     </div>
@@ -99,7 +98,7 @@
       <div class="card-block">
         <h4 class="card-title"><i class="fa fa-book" aria-hidden="true"></i> Bio</h4>
           <fieldset class="form-group">
-            <textarea class="form-control" rows="3" [(ngModel)]="_currentUser.bio.text" ></textarea>
+            <textarea class="form-control" rows="3" [(ngModel)]="user.bio" ></textarea>
           </fieldset>
       </div>
     </div>

@@ -1,5 +1,8 @@
 <div class="row">
-  <div class="col-xl-4">
+  <div class="col-xl-2">
+      <img class="img-fluid" src="{{_currentUser.auth.password.profileImageURL}}" />
+  </div>
+  <div class="col-xl-2">
     <div class="card">
       <div class="card-block">
         <p class="card-text">{{ _currentUser.info?.title }}</p>
@@ -8,11 +11,9 @@
         <p class="card-text">{{ _currentUser.info?.unit }}</p>
         <p class="card-text">{{ _currentUser.info?.fullname }}</p>
       </div>
-      <img class="card-img-bottom" src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAHOAAAAJDM3NjFlMTUwLTg0YTEtNDFkZC1iYzdjLTVkYzdmZGUxZGVjOQ.jpg" />
     </div>
   </div>
-  <div class="col-xl-4"></div>
-  <div class="col-xl-4"></div>  
+  <div class="col-xl-7"></div>  
 </div>
 <div class="row">
   <div class="col-xl-4 top-buffer">

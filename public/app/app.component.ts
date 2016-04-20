@@ -58,7 +58,10 @@ export class AppComponent {
 				this._currentUser.auth = authData;
 
 				this._userService.getUser(authData.uid).then(
-					info => this._currentUser.info = info.val()
+					info => {
+						this._currentUser.info = info.val();
+						this._currentUser.auth.password.profileImageURL = this._currentUser.auth.password.profileImageURL.replace("?d=retro","?s=250");
+					}
 				);
 
 				this._userService.searchBioByUID(authData.uid).then(

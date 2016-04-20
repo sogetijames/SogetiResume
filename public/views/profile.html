@@ -2,11 +2,11 @@
   <div class="col-xl-4">
     <div class="card">
       <div class="card-block">
-        <p class="card-text">{{ user?.title }}</p>
-        <p class="card-text">{{ user?.fullname }}</p>
-        <p class="card-text">{{ email }}</p>
-        <p class="card-text">{{ user?.unit }}</p>
-        <p class="card-text">{{ user?.fullname }}</p>
+        <p class="card-text">{{ _currentUser.info?.title }}</p>
+        <p class="card-text">{{ _currentUser.info?.fullname }}</p>
+        <p class="card-text">{{ _currentUser.auth?.password.email }}</p>
+        <p class="card-text">{{ _currentUser.info?.unit }}</p>
+        <p class="card-text">{{ _currentUser.info?.fullname }}</p>
       </div>
       <img class="card-img-bottom" src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAHOAAAAJDM3NjFlMTUwLTg0YTEtNDFkZC1iYzdjLTVkYzdmZGUxZGVjOQ.jpg" />
     </div>
@@ -19,7 +19,7 @@
     <div class="card">
       <div class="card-block">
         <h4 class="card-title"><i class="fa fa-book" aria-hidden="true"></i> Bio</h4>
-        <p class="card-text">{{bio?.text}}
+        <p class="card-text">{{ _currentUser.bio?.text }}
         </p>
       </div>
     </div>

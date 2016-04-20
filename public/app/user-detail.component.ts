@@ -13,25 +13,12 @@ import {UserService} from './user.service';
 })
 
 export class UserDetailComponent implements OnInit {
-	user: Object;
-	bio: Object;
 
 	constructor(
 		private _currentUser: CurrentUser,
-		private _router: Router, 
-		private _userService: UserService
-	) { 
-		if (FirebaseRef.getAuth()) {
-			this._userService.searchBioByUID(FirebaseRef.getAuth().uid).then(
-				returnedBio => {
-					this.bio = returnedBio.val();
-				}
-			);
-			this.user = this._currentUser.user.info;
-		}
-		
-	} 
-	
+		private _router: Router
+	) {  } 
+
 	ngOnInit() {
 		if (!FirebaseRef.getAuth()) {
 			this._router.navigate(['Login']);

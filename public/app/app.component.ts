@@ -55,10 +55,15 @@ export class AppComponent {
 
 		FirebaseRef.onAuth( (authData: FirebaseAuthData) => {
 			if (authData != null) {
-				this._userService.getUser(authData.uid).then(user => {
-					this._currentUser.user.auth = authData;
-					this._currentUser.user.info = user.val();
-				});
+				this._currentUser.auth = authData;
+
+				this._userService.getUser(authData.uid).then(
+					info => this._currentUser.info = info.val()
+				);
+
+				this._userService.searchBioByUID(authData.uid).then(
+					bio => this._currentUser.bio = bio.val()
+				);
 			}
 		});
 	}

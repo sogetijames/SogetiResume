@@ -2,15 +2,13 @@ import {Injectable} from "angular2/core";
 
 @Injectable()
 export class CurrentUser {
-    public user: any = {
-    	auth: {},
-    	info: {}
-    }
+    public auth: any = {};
+    public info: any = {};
+    public bio:  any = {};
 
     public resetCurrentUser() {
-    	this.user = {
-	    	auth: {},
-	    	info: {}
-	    };
+    	this.auth = {};
+        this.info = {};
+        this.bio = {};
 	}
 }

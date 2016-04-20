@@ -1,24 +1,33 @@
 import {Component, OnInit} from 'angular2/core';
-import {Router} from 'angular2/router';
+import {Router, RouteParams} from 'angular2/router';
 import {FirebaseRef} from './firebase-ref';
 import {CurrentUser} from './currentUser';
 import {UserService} from './user.service';
+import {ValuesPipe} from './values.pipe';
 
 @Component({
 	selector: 'user-detail',
 	templateUrl: '../views/profile.html',
 	providers: [ 
-		UserService
-	],
+		UserService,
+		ValuesPipe
+	]
 })
-
 export class UserDetailComponent implements OnInit {
 	editable: boolean;
+	user: any;
+
 	constructor(
 		private _currentUser: CurrentUser,
-		private _router: Router
+		private _userService: UserService, 
+		private _routeParams: RouteParams,
+		private _router: Router,
+		private _valuesPipe: ValuesPipe
 	) {  
 		this.editable = false;
+
+		let username = this._routeParams.get('username');
+		this._userService.getUserByUsername(username.replace('_', '.')).then( user => this.user = this._valuesPipe.transform(user.val())[0] );
 	} 
 
 	ngOnInit() {
@@ -32,25 +41,25 @@ export class UserDetailComponent implements OnInit {
 	}
 
 	clickSave() {
-		this._currentUser.info.fullname = this._currentUser.info.first + " " + this._currentUser.info.last; 
-		var usersRef = FirebaseRef.child("users");
-		var infoObj = {};
-		infoObj[this._currentUser.auth.uid + '/first'] = this._currentUser.info.first;
-		infoObj[this._currentUser.auth.uid + '/last'] = this._currentUser.info.last;
-		infoObj[this._currentUser.auth.uid + '/fullname'] = this._currentUser.info.fullname;
-		infoObj[this._currentUser.auth.uid + '/title'] = this._currentUser.info.title;
-		infoObj[this._currentUser.auth.uid + '/unit'] = this._currentUser.info.unit;
+		let userRef = FirebaseRef.child('users');
+		let userObj = {};
 
-		usersRef.update(
-		  infoObj
-		, (error) => {
-		  if (error) {
-		    alert("Data could not be saved." + error);
-		  } else {
-		    alert("Data saved successfully.");
-		  }
+		this.user.fullname = this.user.first + ' ' + this.user.last;
+
+		userObj[this._currentUser.auth.uid + '/first'] = this.user.first;
+		userObj[this._currentUser.auth.uid + '/last'] = this.user.last;
+		userObj[this._currentUser.auth.uid + '/fullname'] = this.user.fullname;
+		userObj[this._currentUser.auth.uid + '/title'] = this.user.title;
+		userObj[this._currentUser.auth.uid + '/unit'] = this.user.unit;
+
+		userRef.update(userObj, (error) => {
+			if (error) {
+				this._router.navigate(['Profile', { username: this.user.email.split('@')[0].replace('.', '_') }]);
+			} else {
+				alert("Data saved successfully.");
+				this.editable = !this.editable;
+			}
 		});
-		this.editable = !this.editable;
 	}
 
 	clickCancel() {

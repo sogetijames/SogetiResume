@@ -30,7 +30,7 @@ import {UserSettingsComponent} from './user-settings.component';
 })
 @RouteConfig([
 	{
-		path: '/profile',
+		path: '/profile/:username',
 		name: 'Profile',
 		component: UserDetailComponent
 	},
@@ -67,6 +67,7 @@ export class AppComponent {
 					info => {
 						this._currentUser.info = info.val();
 						this._currentUser.auth.password.profileImageURL = this._currentUser.auth.password.profileImageURL.replace("?d=retro","?s=250");
+						this._currentUser.info.username = this._currentUser.info.email.split('@')[0].replace('.', '_');
 					}
 				);
 

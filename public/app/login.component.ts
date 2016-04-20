@@ -13,7 +13,10 @@ export class LoginComponent implements OnInit {
 	email: string;
 	password: string;
 
-	constructor(private _router: Router, private _authenticationService: AuthenticationService) { }
+	constructor(
+		private _router: Router, 
+		private _authenticationService: AuthenticationService
+	) { }
 
 	ngOnInit() {
 		if (FirebaseRef.getAuth()) {
@@ -24,7 +27,7 @@ export class LoginComponent implements OnInit {
 	onClickLogin() {
 		this._authenticationService.login(this.email + "@us.sogeti.com", this.password).then(
 			(authData: FirebaseAuthData) => {
-				this._router.navigate(['Profile']);
+				this._router.navigate(['Profile', { username: this.email.replace('.', '_') }]);
 			}, 
 			(error: any) => {
 				console.log(error);
@@ -33,17 +36,19 @@ export class LoginComponent implements OnInit {
 	}
 
 	onClickCreate() {
-		this._authenticationService.createUser(this.email + "@us.sogeti.com", this.password, 
+		let email = this.email.toLowerCase() + "@us.sogeti.com";
+		let name = this.email.toLowerCase().split('.');
+
+		this._authenticationService.createUser(email, this.password, 
 			(error: any, authData: FirebaseAuthData) => {
 				if (error) {
 					console.log(error);
 				} else {
-					var name = this.email.split('.');
-
 					FirebaseRef.child('/users').child(authData.uid).update({
-						fullname: name[0].toLowerCase() + ' ' + name[1].toLowerCase(),
-						first: name[0].toLowerCase(),
-						last: name[1].toLowerCase()
+						email: email,
+						fullname: name[0] + ' ' + name[1],
+						first: name[0],
+						last: name[1]
 					});
 
 					this.onClickLogin();

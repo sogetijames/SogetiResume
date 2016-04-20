@@ -5,18 +5,15 @@ import {FirebaseRef, FirebaseRefUsers} from './firebase-ref';
 export class UserService {
 	constructor() { }
 
-	public getUsers() {
-		return FirebaseRef.child('/users').once("value");
-	}
-
 	public getUser(uid: string) {
 		return FirebaseRef.child('/users').child(uid).once("value");
 	}
-
-	public updateUser(user: Object) {
-		
+	
+	public getUserByUsername(username: string) {
+		let email = username + '@us.sogeti.com';
+		return FirebaseRef.child('/users').orderByChild('email').startAt(email).endAt(email + "\uf8ff").once("value");
 	}
-
+	
 	public searchUsersByFullName(name: string){
 		name = name.toLowerCase();
 		var firstnameSearch = FirebaseRefUsers.orderByChild("fullname").startAt(name).endAt(name + "\uf8ff").once("value");

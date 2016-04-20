@@ -6,29 +6,29 @@
   </div>
   <!-- Non Editable -->
   <div class="col-xl-8" *ngIf="!editable">
-    <p>{{ _currentUser.info?.fullname }}</p>
-    <p>{{ _currentUser.info?.unit }}</p>
-    <p>{{ _currentUser.info?.title }}</p>
-    <p>{{ _currentUser.auth?.password.email }}</p>
+    <p>{{ user?.fullname }}</p>
+    <p>{{ user?.unit }}</p>
+    <p>{{ user?.title }}</p>
+    <p>{{ user?.email }}</p>
   </div> 
   <!-- Editable -->
   <div class="col-xl-8" *ngIf="editable">
 
     <fieldset class="form-group row">
       <div class="col-xl-6">
-        <input type="text" class="form-control" [(ngModel)]="_currentUser.info.first">
+        <input type="text" class="form-control" [(ngModel)]="user.first">
       </div>
       <div class="col-xl-6">
-        <input type="text" class="form-control" [(ngModel)]="_currentUser.info.last">
+        <input type="text" class="form-control" [(ngModel)]="user.last">
       </div>
     </fieldset>
     <fieldset class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="_currentUser.info.unit">
+      <input type="text" class="form-control" [(ngModel)]="user.unit">
     </fieldset>
     <fieldset class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="_currentUser.info.title">
+      <input type="text" class="form-control" [(ngModel)]="user.title">
     </fieldset>
-    <p>{{ _currentUser.auth?.password.email }}</p>
+    <p>{{ user?.email }}</p>
   </div> 
   <div class="col-xl-1">
     <button type="button" class="btn btn-link" (click)="clickEdit()" *ngIf="!editable"><i class="fa fa-pencil-square-o black-link" aria-hidden="true"> Edit</i></button>

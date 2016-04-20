@@ -1,5 +1,5 @@
 import {Injectable, Inject} from 'angular2/core';
-import {FirebaseRef, FirebaseRefUsers, FirebaseRefBio} from './firebase-ref';
+import {FirebaseRef, FirebaseRefUsers} from './firebase-ref';
 
 @Injectable()
 export class UserService {

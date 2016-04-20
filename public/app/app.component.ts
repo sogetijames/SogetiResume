@@ -45,7 +45,6 @@ import {CurrentUser} from './currentUser';
 		component: SearchComponent
 	}
 ])
-
 export class AppComponent {
 
 	constructor(
@@ -56,14 +55,17 @@ export class AppComponent {
 
 		FirebaseRef.onAuth( (authData: FirebaseAuthData) => {
 			if (authData != null) {
-				this._userService.getUser(authData.uid).then(user => this._currentUser.setCurrentUser(authData));
+				this._userService.getUser(authData.uid).then(user => {
+					this._currentUser.user.auth = authData;
+					this._currentUser.user.info = user.val();
+				});
 			}
 		});
 	}
 
 	onClickLogout() {
 		this._authenticationService.logout();
-		this._currentUser.setCurrentUser(undefined);
+		this._currentUser.resetCurrentUser();
   		this._router.navigate(['Login']);
 	}	
 }

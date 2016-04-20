@@ -13,7 +13,6 @@ import {UserService} from './user.service';
 })
 
 export class UserDetailComponent implements OnInit {
-
 	user: Object;
 	bio: Object;
 
@@ -28,19 +27,14 @@ export class UserDetailComponent implements OnInit {
 					this.bio = returnedBio.val();
 				}
 			);
-			this._userService.getUser(this._currentUser.user.uid).then(
-				userInfo => {
-					this.user = userInfo.val();
-				}
-			);
+			this.user = this._currentUser.user.info;
 		}
 		
 	} 
+	
 	ngOnInit() {
 		if (!FirebaseRef.getAuth()) {
 			this._router.navigate(['Login']);
 		}
-	}
-
-	
+	}	
 }

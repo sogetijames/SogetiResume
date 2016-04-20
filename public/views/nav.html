@@ -9,9 +9,9 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['Search']"><i class="fa fa-search" aria-hidden="true"></i> Search</a>
         </li>
-        <li class="pull-xs-right" *ngIf="_currentUser.getCurrentUser()" style="padding-top: 5px;">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            {{ _currentUser.getCurrentUser().fullname }} <span class="caret"></span>
+        <li class="pull-xs-right dropdown" *ngIf="_currentUser.user.auth.uid" style="padding-top: 5px;">
+          <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+            {{ _currentUser.user.info.fullname }} <span class="caret"></span>
           </a>
           <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" [routerLink]="['Profile']">

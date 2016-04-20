@@ -89,3 +89,9 @@ div {
     margin: auto;
     color:#b30000;
 }
+
+@media (min-width: 979px) {
+  ul.nav li.dropdown:hover > div.dropdown-menu {
+    display: block;
+  }
+}

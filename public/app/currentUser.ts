@@ -2,15 +2,15 @@ import {Injectable} from "angular2/core";
 
 @Injectable()
 export class CurrentUser {
-    private user: any;
-
-    constructor() {}
-
-    setCurrentUser(user: any) {
-        this.user = user;
+    public user: any = {
+    	auth: {},
+    	info: {}
     }
 
-    getCurrentUser() {
-        return this.user;
-    }
+    public resetCurrentUser() {
+    	this.user = {
+	    	auth: {},
+	    	info: {}
+	    };
+	}
 }

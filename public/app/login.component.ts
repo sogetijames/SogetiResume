@@ -15,12 +15,13 @@ export class LoginComponent implements OnInit {
 
 	constructor(
 		private _router: Router, 
-		private _authenticationService: AuthenticationService
+		private _authenticationService: AuthenticationService,
+
 	) { }
 
 	ngOnInit() {
 		if (FirebaseRef.getAuth()) {
-			this._router.navigate(['Profile']);
+			this._router.navigate(['Profile', { username: FirebaseRef.getAuth().password.email.split('@')[0].replace('.', '_') }]);
 		}
 	}
 

@@ -27,8 +27,27 @@ export class UserDetailComponent implements OnInit {
 		}
 	}	
 
-	clickEdit(){
+	clickEdit() {
 		this.editable = !this.editable;
-		console.log(this.editable);
+	}
+
+	clickSave() {
+		var usersRef = FirebaseRef.child("users").child(this._currentUser.auth.uid);
+		var obj = {};
+
+		usersRef.update({
+		  first:this._currentUser.info.first
+		  }, (error) => {
+		  if (error) {
+		    alert("Data could not be saved." + error);
+		  } else {
+		    alert("Data saved successfully.");
+		  }
+		});
+		this.editable = !this.editable;
+	}
+
+	clickCancel() {
+		this.editable = !this.editable;
 	}
 }

@@ -16,6 +16,7 @@ import {ValuesPipe} from './values.pipe';
 export class UserDetailComponent implements OnInit {
 	editable: boolean;
 	user: any;
+	userCopy: Object;
 
 	constructor(
 		private _currentUser: CurrentUser,
@@ -25,9 +26,11 @@ export class UserDetailComponent implements OnInit {
 		private _valuesPipe: ValuesPipe
 	) {  
 		this.editable = false;
-
 		let username = this._routeParams.get('username');
-		this._userService.getUserByUsername(username.replace('_', '.')).then( user => this.user = this._valuesPipe.transform(user.val())[0] );
+		this._userService.getUserByUsername(username.replace('_', '.')).then( user => {
+			this.user = this._valuesPipe.transform(user.val())[0];
+			this.userCopy = $.extend(true, {}, this.user);
+		});
 	} 
 
 	ngOnInit() {
@@ -63,6 +66,7 @@ export class UserDetailComponent implements OnInit {
 	}
 
 	clickCancel() {
+		this.user = $.extend(true, {}, this.userCopy);
 		this.editable = !this.editable;
 	}
 }

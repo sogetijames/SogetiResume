@@ -13,15 +13,22 @@ import {UserService} from './user.service';
 })
 
 export class UserDetailComponent implements OnInit {
-
+	editable: boolean;
 	constructor(
 		private _currentUser: CurrentUser,
 		private _router: Router
-	) {  } 
+	) {  
+		this.editable = false;
+	} 
 
 	ngOnInit() {
 		if (!FirebaseRef.getAuth()) {
 			this._router.navigate(['Login']);
 		}
 	}	
+
+	clickEdit(){
+		this.editable = !this.editable;
+		console.log(this.editable);
+	}
 }

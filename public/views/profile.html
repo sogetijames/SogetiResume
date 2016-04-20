@@ -1,21 +1,44 @@
-<div class="row">
+<form>
+<div class="row" >
   <div class="col-xl-2">
-      <img class="img-fluid" src="{{_currentUser.auth.password.profileImageURL}}" />
+    <img class="img-fluid" src="{{_currentUser.auth.password.profileImageURL}}" />
+    <a *ngIf="editable" target="_blank" href="https://en.gravatar.com/connect/">Change Gravatar</a>
   </div>
-  <div class="col-xl-2">
-    <div class="card">
-      <div class="card-block">
-        <p class="card-text">{{ _currentUser.info?.title }}</p>
-        <p class="card-text">{{ _currentUser.info?.fullname }}</p>
-        <p class="card-text">{{ _currentUser.auth?.password.email }}</p>
-        <p class="card-text">{{ _currentUser.info?.unit }}</p>
-        <p class="card-text">{{ _currentUser.info?.fullname }}</p>
+  <!-- Non Editable -->
+  <div class="col-xl-8" *ngIf="!editable">
+    <p>{{ _currentUser.info?.fullname }}</p>
+    <p>{{ _currentUser.info?.unit }}</p>
+    <p>{{ _currentUser.info?.title }}</p>
+    <p>{{ _currentUser.auth?.password.email }}</p>
+  </div> 
+  <!-- Editable -->
+  <div class="col-xl-8" *ngIf="editable">
+
+    <fieldset class="form-group row">
+      <div class="col-xl-6">
+        <input type="text" class="form-control" [(ngModel)]="_currentUser.info.first">
       </div>
-    </div>
+      <div class="col-xl-6">
+        <input type="text" class="form-control" [(ngModel)]="_currentUser.info.last">
+      </div>
+    </fieldset>
+    <fieldset class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="_currentUser.info.unit">
+    </fieldset>
+    <fieldset class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="_currentUser.info.title">
+    </fieldset>
+    <p>{{ _currentUser.auth?.password.email }}</p>
+  </div> 
+  <div class="col-xl-1">
+    <button type="button" class="btn btn-link" (click)="clickEdit()" *ngIf="!editable"><i class="fa fa-pencil-square-o black-link" aria-hidden="true"> Edit</i></button>
+
+    <button type="button" class="btn btn-link" (click)="clickEdit()" *ngIf="editable"><i class="fa fa-floppy-o green-link" aria-hidden="true"> Save</i></button>
+    <button type="button" class="btn btn-link" (click)="clickEdit()" *ngIf="editable"><i class="fa fa-times red-link" aria-hidden="true"> Cancel</i></button>
   </div>
-  <div class="col-xl-7"></div>  
 </div>
-<div class="row">
+<!-- Non editable -->
+<div class="row" *ngIf="!editable">
   <div class="col-xl-4 top-buffer">
     <div class="card">
       <div class="card-block">
@@ -68,3 +91,60 @@
     </div>
   </div>  
 </div>
+
+<!-- Editable -->
+<div class="row" *ngIf="editable">
+  <div class="col-xl-4 top-buffer">
+    <div class="card">
+      <div class="card-block">
+        <h4 class="card-title"><i class="fa fa-book" aria-hidden="true"></i> Bio</h4>
+          <fieldset class="form-group">
+            <textarea class="form-control" rows="3" [(ngModel)]="_currentUser.bio.text" ></textarea>
+          </fieldset>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 top-buffer">
+    <div class="card">
+      <div class="card-block">
+        <h4 class="card-title"><i class="fa fa-tasks" aria-hidden="true"></i> Skills</h4>
+        <div class="list-group">
+          <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">Angular 1</h4>
+            <p class="list-group-item-text">Proficient</p>
+          </a>
+          <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">Angular 2</h4>
+            <p class="list-group-item-text">Previous Experience</p>
+          </a>
+          <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">Swift</h4>
+            <p class="list-group-item-text">Proficient</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 top-buffer">
+    <div class="card">
+      <div class="card-block">
+        <h4 class="card-title"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Education</h4>
+        <div class="list-group">
+          <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">B.S. Computer Science</h4>
+            <p class="list-group-item-text">University Of Houston</p>
+          </a>
+          <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">Sitecore C# Developer Certification</h4>
+            <p class="list-group-item-text">Sitecore</p>
+          </a>
+          <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">Angular Certification</h4>
+            <p class="list-group-item-text">Angular School</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>
+</form>

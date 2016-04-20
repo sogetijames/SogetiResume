@@ -10,6 +10,7 @@ import {ValuesPipe} from './values.pipe';
 import {FirebaseRef} from './firebase-ref';
 import {SearchComponent} from './search.component';
 import {CurrentUser} from './currentUser';
+import {UserSettingsComponent} from './user-settings.component';
 
 @Component({
 	selector: 'my-app',
@@ -43,6 +44,11 @@ import {CurrentUser} from './currentUser';
 		path: '/search',
 		name: 'Search',
 		component: SearchComponent
+	},
+	{
+		path: '/settings',
+		name: 'Settings',
+		component: UserSettingsComponent
 	}
 ])
 export class AppComponent {

@@ -75,7 +75,6 @@ export class AppComponent {
 	onClickLogout() {
 		this._authenticationService.logout();
 		this._currentUser.resetCurrentUser();
-  		this._router.navigate(['Login']);
 	}
 
 	private setCurrentUserInfo(uid: string) {

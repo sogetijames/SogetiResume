@@ -139,7 +139,7 @@
         <i class="fa fa-tasks" aria-hidden="true"></i> Skills
       </div>
       <ul class="list-group list-group-flush  text-xs-right">
-        <li class="list-group-item" *ngFor="#skill of user?.skills">
+        <li class="list-group-item" *ngFor="#skill of user?.skills; #i = index">
           <fieldset class="form-group row">
             <div class="col-xl-5" style="padding: 2px;">
               <input type="text" class="form-control" [(ngModel)]="skill.key" placeholder="Skill">
@@ -150,7 +150,7 @@
               </select>
             </div>
             <div class="col-xl-1" style="padding: 2px;">
-              <button type="button" class="btn btn-secondary-outline" (click)="user.skills.splice($index, 1)">
+              <button type="button" class="btn btn-secondary-outline" (click)="user.skills.splice(i, 1)">
                 <i class="fa fa-times" aria-hidden="true"></i>
               </button>
             </div>

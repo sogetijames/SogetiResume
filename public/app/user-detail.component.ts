@@ -9,17 +9,6 @@ import {NgClass} from 'angular2/common';
 @Component({
 	selector: 'user-detail',
 	templateUrl: '../views/profile.html',
-  	styles: [`
-    	.red-profile {
-	      	border: 5px solid #b30000;
-    	}
-	    .yellow-profile {
-	      	border: 5px solid Yellow;
-	   	}
-	    .green-profile {
-	      	border: 5px solid #008000;
-    	}
-  	`],
   directives: [NgClass],
 	providers: [ 
 		UserService,

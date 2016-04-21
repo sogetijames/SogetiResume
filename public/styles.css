@@ -4,6 +4,16 @@ div {
     font-family: 'Oswald', sans-serif;
 }
 
+.red-profile {
+    border: 5px solid #b30000;
+}
+.yellow-profile {
+    border: 5px solid #cccc00;
+}
+.green-profile {
+    border: 5px solid #008000;
+}
+
 .red-font {
     color: #b30000;
 }
@@ -17,7 +27,7 @@ div {
 }
 
 .yellow-font {
-    color: Yellow;
+    color: #cccc00;
 }
 
 .top-buffer {

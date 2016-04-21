@@ -22,10 +22,11 @@ export class SearchPipe implements PipeTransform {
 
 		if (value != undefined && value != null) {
 			Object.keys(value).forEach(function(key) {
-				if (value[key].first.toUpperCase().indexOf(args[0].toUpperCase()) > -1 || 
-					value[key].last.toUpperCase().indexOf(args[0].toUpperCase()) > -1 ||
+				if (value[key].active && (value[key].first.toUpperCase().indexOf(args[0].toUpperCase()) > -1 || 
+					value[key].last.toUpperCase().indexOf(args[0].toUpperCase()) > -1 || 
+					value[key].practice.toUpperCase().indexOf(args[0].toUpperCase()) > -1 ||
 					value[key].unit.toUpperCase().indexOf(args[0].toUpperCase()) > -1 ||
-					value[key].title.toUpperCase().indexOf(args[0].toUpperCase()) > -1
+					value[key].title.toUpperCase().indexOf(args[0].toUpperCase()) > -1)
 				) {
 					dataArr.push(value[key]);
 				}

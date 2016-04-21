@@ -16,7 +16,10 @@ export class LoginComponent implements OnInit {
 	constructor(
 		private _router: Router, 
 		private _authenticationService: AuthenticationService
-	) { }
+	) { 
+		this.email = '';
+		this.password = '';
+	}
 
 	ngOnInit() {
 		if (FirebaseRef.getAuth()) {
@@ -25,45 +28,49 @@ export class LoginComponent implements OnInit {
 	}
 
 	onClickLogin() {
-		this._authenticationService.login(this.email + "@us.sogeti.com", this.password).then(
-			(authData: FirebaseAuthData) => {
-				this._router.navigate(['Profile', { username: this.email.replace('.', '_') }]);
-			}, 
-			(error: any) => {
-				console.log(error);
-			}
-		);
+		if (this.email != '' && this.password != '') {
+			this._authenticationService.login(this.email + "@us.sogeti.com", this.password).then(
+				(authData: FirebaseAuthData) => {
+					this._router.navigate(['Profile', { username: this.email.replace('.', '_') }]);
+				}, 
+				(error: any) => {
+					console.log(error);
+				}
+			);
+		}
 	}
 
 	onClickCreate() {
-		let email = this.email.toLowerCase() + "@us.sogeti.com";
-		let name = this.email.toLowerCase().split('.');
+		if (this.email != '' && this.password != '') {
+			let email = this.email.toLowerCase() + "@us.sogeti.com";
+			let name = this.email.toLowerCase().split('.');
 
-		this._authenticationService.createUser(email, this.password, 
-			(error: any, authData: FirebaseAuthData) => {
-				if (error) {
-					console.log(error);
-				} else {
-					FirebaseRef.child('/users').child(authData.uid).update({
-						active: true,
-						admin: false,
-						bio: '',
-						email: email,
-						first: name[0],
-						last: name[1],
-						practice: '',
-						profileImageURL: authData.password.profileImageURL.replace("?d=retro","?s=250"),
-						status: {
-							description: '',
-							text: ''
-						},
-						title: '',
-						unit: ''
-					});
+			this._authenticationService.createUser(email, this.password, 
+				(error: any, authData: FirebaseAuthData) => {
+					if (error) {
+						console.log(error);
+					} else {
+						FirebaseRef.child('/users').child(authData.uid).update({
+							active: true,
+							admin: false,
+							bio: '',
+							email: email,
+							first: name[0],
+							last: name[1],
+							practice: '',
+							profileImageURL: authData.password.profileImageURL.replace("?d=retro","?s=250"),
+							status: {
+								description: '',
+								text: ''
+							},
+							title: '',
+							unit: ''
+						});
 
-					this.onClickLogin();
-				}			
-			}
-		);
+						this.onClickLogin();
+					}			
+				}
+			);
+		}		
 	}
 }

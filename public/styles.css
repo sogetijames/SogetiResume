@@ -107,6 +107,10 @@ div {
     text-decoration: none;
 }
 
+.card-hover:hover {
+    background-color: #e5e5e5;
+}
+
 @media (min-width: 979px) {
   ul.nav li.dropdown:hover > div.dropdown-menu {
     display: block;

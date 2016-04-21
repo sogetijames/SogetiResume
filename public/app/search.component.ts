@@ -31,11 +31,11 @@ export class SearchComponent {
 
 		FirebaseRef.child('users').orderByChild('email').on('value', (users) => {
 			this.allUsers = this._valuesPipe.transform(users.val());
-			this.searchUsersByName(null);
+			this.searchUsers(null);
 		});
 	}
 
-	searchUsersByName(event: any) {
+	searchUsers(event: any) {
 		this.searchResults = this._searchPipe.transform(this.allUsers, [this.searchText]);
 	}
 }

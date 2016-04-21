@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
 						bio: '',
 						email: email,
 						first: name[0],
-						fullname: name[0] + ' ' + name[1],
 						last: name[1],
 						status: {
 							description: '',

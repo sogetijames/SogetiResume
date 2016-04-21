@@ -102,6 +102,11 @@ div {
     color: #008000;
 }
 
+.card-link, .card-link:hover {
+    color: Black;
+    text-decoration: none;
+}
+
 @media (min-width: 979px) {
   ul.nav li.dropdown:hover > div.dropdown-menu {
     display: block;

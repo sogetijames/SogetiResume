@@ -1,7 +1,7 @@
 <form>
 <div class="row" >
   <div class="col-xl-2">
-    <img class="img-fluid" src="{{_currentUser.auth.password.profileImageURL}}" />
+    <img class="img-fluid" src="{{user?.profileImageURL}}" />
     <a *ngIf="editable" target="_blank" href="https://en.gravatar.com/connect/">Change Gravatar</a>
   </div>
   <!-- Non Editable -->

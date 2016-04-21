@@ -32,6 +32,7 @@ export class UserDetailComponent implements OnInit {
 		this._userService.getUserByUsername(username.replace('_', '.')).then( user => {
 			this.uid = Object.keys(user.val())[0];
 			this.user = this._valuesPipe.transform(user.val())[0];
+			this.user.profileImageURL = this.user.profileImageURL + "?s=250";
 			this.userCopy = $.extend(true, {}, this.user);
 		});
 	} 

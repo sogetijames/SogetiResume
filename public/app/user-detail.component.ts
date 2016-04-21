@@ -54,7 +54,6 @@ export class UserDetailComponent implements OnInit {
 
 		userObj[this._currentUser.auth.uid + '/bio'] = this.user.bio;
 		userObj[this._currentUser.auth.uid + '/first'] = this.user.first;
-		userObj[this._currentUser.auth.uid + '/fullname'] = this.user.fullname;
 		userObj[this._currentUser.auth.uid + '/last'] = this.user.last;
 		userObj[this._currentUser.auth.uid + '/title'] = this.user.title;
 		userObj[this._currentUser.auth.uid + '/unit'] = this.user.unit;

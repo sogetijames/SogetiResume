@@ -6,7 +6,7 @@
   </div>
   <!-- Non Editable -->
   <div class="col-xl-8" *ngIf="!editable">
-    <p>{{ user?.fullname }}</p>
+    <p>{{ user?.first + " " + user?.last  }}</p>
     <p>{{ user?.unit }}</p>
     <p>{{ user?.title }}</p>
     <p>{{ user?.email }}</p>

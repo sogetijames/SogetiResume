@@ -62,10 +62,15 @@ export class UserDetailComponent implements OnInit {
 	}
 
 	clickSave() {
+		this.saveUserInfo();
+		this.saveUserSkills();
+		this.userCopy = $.extend(true, {}, this.user);
+		this.editable = !this.editable;
+	}
+
+	private saveUserInfo() {
 		let userRef = FirebaseRef.child('users');
 		let userObj = {};
-
-		this.user.fullname = this.user.first + ' ' + this.user.last;
 
 		userObj[this._currentUser.auth.uid + '/bio'] = this.user.bio;
 		userObj[this._currentUser.auth.uid + '/first'] = this.user.first;
@@ -78,13 +83,29 @@ export class UserDetailComponent implements OnInit {
 
 		userRef.update(userObj, (error) => {
 			if (error) {
-				alert("Error: " + error);
+				console.error(error);
 			} else {
-				alert("Data saved successfully.");
+				console.log("User Info saved successfully.");
 			}
 		});
+	}
 
-		this.editable = !this.editable;
+	private saveUserSkills() {
+		let skillsRef = FirebaseRef.child('skills').child(this._currentUser.auth.uid);
+		let usrSkills = this.user.skills;
+		let skillsObj = {};
+
+		for (var i = 0; i < usrSkills.length; i++) {
+			skillsObj[usrSkills[i].key] = usrSkills[i].value;
+		}
+
+		skillsRef.set(skillsObj, (error) => {
+			if (error) {
+				console.error(error);
+			} else {
+				console.log("User Skills saved successfully.");
+			}
+		});
 	}
 
 	clickCancel() {

@@ -116,16 +116,17 @@
       <div class="card-header">
         <i class="fa fa-tasks" aria-hidden="true"></i> Skills
       </div>
-      <ul class="list-group list-group-flush">
+      <ul class="list-group list-group-flush  text-xs-right">
         <li class="list-group-item" *ngFor="#skill of user?.skills">
-          <fieldset class="form-group row">
-            <div class="col-xl-6">
+          <form class="form-inline">
+            <div class="form-group">
               <input type="text" class="form-control" [(ngModel)]="skill.key" placeholder="Skill">
-            </div>
-            <div class="col-xl-6">
               <input type="text" class="form-control" [(ngModel)]="skill.value" placeholder="Proficiency">
-            </div>            
-          </fieldset>
+              <button type="button" class="btn btn-secondary-outline" (click)="user.skills.splice($index, 1)">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>  
+            </div> 
+          </form>
         </li>
       </ul>
       <div class="card-block text-xs-right">

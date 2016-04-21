@@ -1,13 +1,8 @@
 <form class="form-inline">
-	<input style="width:100%;" class="form-control search" type="text" placeholder="Search" (keyup)="searchUsersByName($event)">
-      <!-- <ul class="list-group">
-        <li *ngFor="#result of searchResults | values" class="list-group-item">
-          <a >{{ result.first + " " + result.last }}</a>
-        </li>
-      </ul> -->
+	<input [(ngModel)]="searchText" style="width:100%;" class="form-control search" type="text" placeholder="Search" (keyup)="searchUsersByName($event)">
 	<div *ngIf="searchText != ''" class="dropdown open" >
 	  <div class="dropdown-menu">
-	  	<button *ngFor="#result of searchResults | values"  class="dropdown-item" type="button">{{ result?.first + " " + result?.last }}</button>
+	  	<button *ngFor="#result of searchResults"  class="dropdown-item" type="button">{{ result?.first + " " + result?.last }}</button>
 	  </div>
 	</div>
 </form>

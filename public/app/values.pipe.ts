@@ -14,3 +14,22 @@ export class ValuesPipe implements PipeTransform {
         return dataArr;        
     }
 }
+
+@Pipe({name: 'search'})
+export class SearchPipe implements PipeTransform {
+	transform(value: any, args: any[]): Object[] {
+		let dataArr = [];
+
+		if (value != undefined || value != null) {
+			Object.keys(value).forEach(function(key) {
+				if (value[key].fullname.toUpperCase().indexOf(args[0].toUpperCase()) > -1 || 
+					value[key].last.toUpperCase().indexOf(args[0].toUpperCase()) > -1
+				) {
+					dataArr.push(value[key]);
+				}
+			});
+		}
+
+		return dataArr;
+	}
+}

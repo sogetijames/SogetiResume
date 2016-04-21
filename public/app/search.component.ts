@@ -1,41 +1,40 @@
 import {Component,Input} from 'angular2/core';
-import {ValuesPipe} from './values.pipe';
+import {FirebaseRef} from './firebase-ref';
+import {ValuesPipe, SearchPipe} from './values.pipe';
 import {UserService} from './user.service';
 
 @Component({
 	selector: 'search',
 	templateUrl: "../views/search.html",
-	pipes: [
-		ValuesPipe
+	providers: [ 
+		UserService,
+		ValuesPipe,
+		SearchPipe
 	]
 })
-
 export class SearchComponent {
+	allUsers: any;
+	searchResults: any;
+	searchText: string;
 
-	searchResults: Object;
-	searchText: String;
+	constructor(
+		private _userService: UserService,
+		private _valuesPipe: ValuesPipe,
+		private _searchPipe: SearchPipe
+	) { 
+		FirebaseRef.child('users').orderByChild('email').on('value', (users) => {
+			this.allUsers = this._valuesPipe.transform(users.val());
+		});
 
-	constructor(private _userService: UserService) { }
+		this.searchText = '';
+		this.searchResults = [];
+	}
 
 	searchUsersByName(event: any) {
-		var first: Object;
-		var last: Object;
-		var searchText = (<HTMLInputElement>event.target).value;
-		if(searchText == ""){
-			this.searchResults = {}
+		if (this.searchText != '') {
+			this.searchResults = this._searchPipe.transform(this.allUsers, [this.searchText]);
 		} else {
-			this._userService.searchUsersByFullName(searchText).then(
-				firstname => {
-					first = firstname.val();
-					this._userService.searchUsersByLastName(searchText).then( 
-						lastname => {
-							last = lastname.val();
-							this.searchResults = Object.assign({}, first, last);
-						}
-					);
-				}
-				
-			);
+			this.searchResults = [];
 		}
 	}
 }

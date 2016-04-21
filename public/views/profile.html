@@ -64,6 +64,15 @@
 
     <div class="card">
       <div class="card-header">
+        <i class="fa fa-folder-open" aria-hidden="true"></i> Projects
+      </div>
+      <div class="card-block">
+        <p class="card-text">{{ user?.bio }}</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
         <i class="fa fa-tasks" aria-hidden="true"></i> Skills
       </div>
       <ul class="list-group list-group-flush">
@@ -104,6 +113,16 @@
     <div class="card">
       <div class="card-header">
         <i class="fa fa-book" aria-hidden="true"></i> Bio
+      </div>
+      <div class="card-block">
+        <fieldset class="form-group">
+          <textarea class="form-control" rows="3" [(ngModel)]="user.bio" ></textarea>
+        </fieldset>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-folder-open" aria-hidden="true"></i> Projects
       </div>
       <div class="card-block">
         <fieldset class="form-group">

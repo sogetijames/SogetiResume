@@ -19,14 +19,15 @@ export class ValuesPipe implements PipeTransform {
 export class SearchPipe implements PipeTransform {
 	transform(value: any, args: any[]): Object[] {
 		let dataArr = [];
+		let searchText = args[0].toUpperCase();
 
 		if (value != undefined && value != null) {
 			Object.keys(value).forEach(function(key) {
-				if (value[key].active && (value[key].first.toUpperCase().indexOf(args[0].toUpperCase()) > -1 || 
-					value[key].last.toUpperCase().indexOf(args[0].toUpperCase()) > -1 || 
-					value[key].practice.toUpperCase().indexOf(args[0].toUpperCase()) > -1 ||
-					value[key].unit.toUpperCase().indexOf(args[0].toUpperCase()) > -1 ||
-					value[key].title.toUpperCase().indexOf(args[0].toUpperCase()) > -1)
+				if (value[key].active && (value[key].first.toUpperCase().indexOf(searchText) > -1 || 
+					value[key].last.toUpperCase().indexOf(searchText) > -1 || 
+					value[key].practice.toUpperCase().indexOf(searchText) > -1 ||
+					value[key].unit.toUpperCase().indexOf(searchText) > -1 ||
+					value[key].title.toUpperCase().indexOf(searchText) > -1)
 				) {
 					dataArr.push(value[key]);
 				}

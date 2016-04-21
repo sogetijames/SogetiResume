@@ -96,6 +96,9 @@ export class UserDetailComponent implements OnInit {
 		userObj[this._currentUser.auth.uid + '/unit'] = this.user.unit;
 		userObj[this._currentUser.auth.uid + '/practice'] = this.user.practice;
 		userObj[this._currentUser.auth.uid + '/status/text'] = this.user.status.text;
+		if (this.user.status.text == 'ATO') {
+			this.user.status.description = '';
+		} 
 		userObj[this._currentUser.auth.uid + '/status/description'] = this.user.status.description;
 
 		userRef.update(userObj, (error) => {

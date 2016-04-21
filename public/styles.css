@@ -76,10 +76,6 @@ div {
     background-color: #e5e5e5;
 }
 
-.profile-image {
-    border: 5px solid #b30000; 
-}
-
 
 /* ------------------------------------Media------------------------------------ */
 @media (min-width: 979px) {

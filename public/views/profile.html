@@ -1,7 +1,7 @@
 <form>
 <div class="row" >
   <div class="col-xl-2">
-    <img class="img-fluid img-rounded profile-image" src="{{user?.profileImageURL}}" />
+    <img class="img-fluid img-rounded" [ngClass]="{'red-profile': user?.status?.text == 'PTO', 'green-profile': user?.status?.text == 'ATO', 'yellow-profile': user?.status?.text == 'Project'}" src="{{user?.profileImageURL}}" />
     <a *ngIf="editable" target="_blank" href="https://en.gravatar.com/connect/">Change Gravatar</a>
   </div>
   <!-- Non Editable -->
@@ -11,7 +11,7 @@
     <p>{{ user?.practice }}</p>
     <p>{{ user?.title }}</p>
     <p>{{ user?.email }}</p>
-    <p>{{ user?.status?.text}} <span *ngIf="user?.status?.description!='' ">{{": " + user?.status?.description}}</span></p>
+    <p [ngClass]="{'red-font': user?.status?.text == 'PTO', 'green-font': user?.status?.text == 'ATO', 'yellow-font': user?.status?.text == 'Project'}">{{ user?.status?.text}} <span *ngIf="user?.status?.description!='' ">{{": " + user?.status?.description}}</span></p>
   </div> 
   <!-- Editable -->
   <div class="col-xl-8" *ngIf="editable">

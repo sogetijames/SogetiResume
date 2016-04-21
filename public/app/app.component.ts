@@ -61,11 +61,13 @@ export class AppComponent {
 	) { 
 		if (FirebaseRef.getAuth()) {
 			this._currentUser.auth = FirebaseRef.getAuth();
+			this.setCurrentUserInfo(this._currentUser.auth.uid);
 		}
 
 		FirebaseRef.onAuth( (authData: FirebaseAuthData) => {
 			if (authData != null) {
 				this._currentUser.auth = authData;
+				this.setCurrentUserInfo(authData.uid);
 			}
 		});
 	}
@@ -74,5 +76,12 @@ export class AppComponent {
 		this._authenticationService.logout();
 		this._currentUser.resetCurrentUser();
   		this._router.navigate(['Login']);
+	}
+
+	private setCurrentUserInfo(uid: string) {
+		this._userService.getUser(uid).then(info => {
+			this._currentUser.info = info.val();
+			this._currentUser.info.username = this._currentUser.info.email.split('@')[0].replace('.', '_');
+		});
 	}
 }

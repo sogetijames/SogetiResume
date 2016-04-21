@@ -90,16 +90,17 @@ div {
     color:#b30000;
 }
 
-.red-link {
+.red-font {
     color: #b30000;
 }
-.black-link {
+
+.black-font {
     color: Black;
 }
-.green-link {
+
+.green-font {
     color: #008000;
 }
-
 
 @media (min-width: 979px) {
   ul.nav li.dropdown:hover > div.dropdown-menu {

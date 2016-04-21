@@ -31,9 +31,9 @@
     <p>{{ user?.email }}</p>
   </div> 
   <div class="col-xl-1">
-    <button type="button" class="btn btn-link" (click)="clickEdit()" *ngIf="!editable && _currentUser.auth.uid == uid"><i class="fa fa-pencil-square-o black-link" aria-hidden="true"> Edit</i></button>
-    <button type="button" class="btn btn-link" (click)="clickSave()" *ngIf="editable"><i class="fa fa-floppy-o green-link" aria-hidden="true"> Save</i></button>
-    <button type="button" class="btn btn-link" (click)="clickCancel()" *ngIf="editable"><i class="fa fa-times red-link" aria-hidden="true"> Cancel</i></button>
+    <button type="button" class="btn btn-link" (click)="clickEdit()" *ngIf="!editable && _currentUser.auth.uid == uid"><i class="fa fa-pencil-square-o black-font" aria-hidden="true"> Edit</i></button>
+    <button type="button" class="btn btn-link" (click)="clickSave()" *ngIf="editable"><i class="fa fa-floppy-o green-font" aria-hidden="true"> Save</i></button>
+    <button type="button" class="btn btn-link" (click)="clickCancel()" *ngIf="editable"><i class="fa fa-times red-font" aria-hidden="true"> Cancel</i></button>
   </div>
 </div>
 <!-- Non editable -->

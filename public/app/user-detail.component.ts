@@ -28,6 +28,8 @@ import {NgClass} from 'angular2/common';
 })
 export class UserDetailComponent implements OnInit {
 	editable: boolean;
+	proficiencyArr: any[];
+	statusArr: any[];
 	uid: string;
 	user: any;
 	userCopy: any;
@@ -40,6 +42,8 @@ export class UserDetailComponent implements OnInit {
 		private _valuesPipe: ValuesPipe
 	) {  
 		this.editable = false;
+		this.proficiencyArr = ['Fundamental Awareness', 'Novice', 'Intermediate', 'Advanced', 'Expert'];
+		this.statusArr = ['ATO', 'Project', 'PTO'];
 
 		let username = this._routeParams.get('username');
 		this._userService.getUserByUsername(username.replace('_', '.')).then( user => {

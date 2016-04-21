@@ -36,6 +36,9 @@
     <fieldset class="form-group row">
       <div class="col-xl-6">
         <input type="text" class="form-control" [(ngModel)]="user.status.text" placeholder="status">
+        <select [(ngModel)]="user.status.text" class="form-control">
+          <option *ngFor="#status of statusArr" [value]="status">{{ status }}</option>
+        </select>
       </div>
       <div class="col-xl-6">
         <input type="text" class="form-control" [(ngModel)]="user.status.description" placeholder="description (optional)">
@@ -120,6 +123,7 @@
         </fieldset>
       </div>
     </div>
+
     <div class="card">
       <div class="card-header">
         <i class="fa fa-folder-open" aria-hidden="true"></i> Projects
@@ -137,15 +141,21 @@
       </div>
       <ul class="list-group list-group-flush  text-xs-right">
         <li class="list-group-item" *ngFor="#skill of user?.skills">
-          <form class="form-inline">
-            <div class="form-group">
+          <fieldset class="form-group row">
+            <div class="col-xl-5" style="padding: 2px;">
               <input type="text" class="form-control" [(ngModel)]="skill.key" placeholder="Skill">
-              <input type="text" class="form-control" [(ngModel)]="skill.value" placeholder="Proficiency">
+            </div>
+            <div class="col-xl-5" style="padding: 2px;">
+              <select [(ngModel)]="skill.value" class="form-control">
+                <option *ngFor="#proficiency of proficiencyArr" [value]="proficiency">{{ proficiency }}</option>
+              </select>
+            </div>
+            <div class="col-xl-1" style="padding: 2px;">
               <button type="button" class="btn btn-secondary-outline" (click)="user.skills.splice($index, 1)">
                 <i class="fa fa-times" aria-hidden="true"></i>
-              </button>  
-            </div> 
-          </form>
+              </button>
+            </div>
+          </fieldset>
         </li>
       </ul>
       <div class="card-block text-xs-right">

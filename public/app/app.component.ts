@@ -69,10 +69,6 @@ export class AppComponent {
 						this._currentUser.info.username = this._currentUser.info.email.split('@')[0].replace('.', '_');
 					}
 				);
-
-				this._userService.searchBioByUID(authData.uid).then(
-					bio => this._currentUser.bio = bio.val()
-				);
 			}
 		});
 	}

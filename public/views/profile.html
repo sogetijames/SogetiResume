@@ -40,114 +40,113 @@
     <button type="button" class="btn btn-link" (click)="clickCancel()" *ngIf="editable"><i class="fa fa-times red-font" aria-hidden="true"> Cancel</i></button>
   </div>
 </div>
+
 <!-- Non editable -->
-<div class="row" *ngIf="!editable">
-  <div class="col-xl-4 top-buffer">
+<div class="card-deck-wrapper top-buffer" *ngIf="!editable">
+  <div class="card-deck">
+
     <div class="card">
+      <div class="card-header">
+        <i class="fa fa-book" aria-hidden="true"></i> Bio
+      </div>
       <div class="card-block">
-        <h4 class="card-title"><i class="fa fa-book" aria-hidden="true"></i> Bio</h4>
-        <p class="card-text">{{ user?.bio }}
-        </p>
+        <p class="card-text">{{ user?.bio }}</p>
       </div>
     </div>
-  </div>
-  <div class="col-xl-4 top-buffer">
+
     <div class="card">
-      <div class="card-block">
-        <h4 class="card-title"><i class="fa fa-tasks" aria-hidden="true"></i> Skills</h4>
-        <div class="list-group">
-          <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Angular 1</h4>
-            <p class="list-group-item-text">Proficient</p>
-          </a>
-          <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Angular 2</h4>
-            <p class="list-group-item-text">Previous Experience</p>
-          </a>
-          <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Swift</h4>
-            <p class="list-group-item-text">Proficient</p>
-          </a>
-        </div>
+      <div class="card-header">
+        <i class="fa fa-tasks" aria-hidden="true"></i> Skills
       </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="#skill of user?.skills">
+          <h4 class="list-group-item-heading">{{ skill.key }}</h4>
+          <p class="list-group-item-text">{{ skill.value }}</p>
+        </li>
+      </ul>
     </div>
-  </div>
-  <div class="col-xl-4 top-buffer">
+
     <div class="card">
-      <div class="card-block">
-        <h4 class="card-title"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Education</h4>
-        <div class="list-group">
-          <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">B.S. Computer Science</h4>
-            <p class="list-group-item-text">University Of Houston</p>
-          </a>
-          <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Sitecore C# Developer Certification</h4>
-            <p class="list-group-item-text">Sitecore</p>
-          </a>
-          <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Angular Certification</h4>
-            <p class="list-group-item-text">Angular School</p>
-          </a>
-        </div>
+      <div class="card-header">
+        <i class="fa fa-graduation-cap" aria-hidden="true"></i> Education
       </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <h4 class="list-group-item-heading">B.S. Computer Science</h4>
+          <p class="list-group-item-text">University Of Houston</p>
+        </li>
+        <li class="list-group-item">
+          <h4 class="list-group-item-heading">Sitecore C# Developer Certification</h4>
+          <p class="list-group-item-text">Sitecore</p>
+        </li>
+        <li class="list-group-item">
+          <h4 class="list-group-item-heading">Angular Certification</h4>
+          <p class="list-group-item-text">Angular School</p>
+        </li>
+      </ul>
     </div>
+
   </div>  
 </div>
 
 <!-- Editable -->
-<div class="row" *ngIf="editable">
-  <div class="col-xl-4 top-buffer">
+<div class="card-deck-wrapper top-buffer" *ngIf="editable">
+  <div class="card-deck">
+
     <div class="card">
+      <div class="card-header">
+        <i class="fa fa-book" aria-hidden="true"></i> Bio
+      </div>
       <div class="card-block">
-        <h4 class="card-title"><i class="fa fa-book" aria-hidden="true"></i> Bio</h4>
-          <fieldset class="form-group">
-            <textarea class="form-control" rows="3" [(ngModel)]="user.bio" ></textarea>
+        <fieldset class="form-group">
+          <textarea class="form-control" rows="3" [(ngModel)]="user.bio" ></textarea>
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-tasks" aria-hidden="true"></i> Skills
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="#skill of user?.skills">
+          <fieldset class="form-group row">
+            <div class="col-xl-6">
+              <input type="text" class="form-control" [(ngModel)]="skill.key" placeholder="Skill">
+            </div>
+            <div class="col-xl-6">
+              <input type="text" class="form-control" [(ngModel)]="skill.value" placeholder="Proficiency">
+            </div>            
           </fieldset>
+        </li>
+      </ul>
+      <div class="card-block text-xs-right">
+        <button type="button" class="btn btn-danger-outline" (click)="user.skills.push({})">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
       </div>
     </div>
-  </div>
-  <div class="col-xl-4 top-buffer">
+
     <div class="card">
-      <div class="card-block">
-        <h4 class="card-title"><i class="fa fa-tasks" aria-hidden="true"></i> Skills</h4>
-        <div class="list-group">
-          <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Angular 1</h4>
-            <p class="list-group-item-text">Proficient</p>
-          </a>
-          <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Angular 2</h4>
-            <p class="list-group-item-text">Previous Experience</p>
-          </a>
-          <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Swift</h4>
-            <p class="list-group-item-text">Proficient</p>
-          </a>
-        </div>
+      <div class="card-header">
+        <i class="fa fa-graduation-cap" aria-hidden="true"></i> Education
       </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <h4 class="list-group-item-heading">B.S. Computer Science</h4>
+          <p class="list-group-item-text">University Of Houston</p>
+        </li>
+        <li class="list-group-item">
+          <h4 class="list-group-item-heading">Sitecore C# Developer Certification</h4>
+          <p class="list-group-item-text">Sitecore</p>
+        </li>
+        <li class="list-group-item">
+          <h4 class="list-group-item-heading">Angular Certification</h4>
+          <p class="list-group-item-text">Angular School</p>
+        </li>
+      </ul>
     </div>
-  </div>
-  <div class="col-xl-4 top-buffer">
-    <div class="card">
-      <div class="card-block">
-        <h4 class="card-title"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Education</h4>
-        <div class="list-group">
-          <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">B.S. Computer Science</h4>
-            <p class="list-group-item-text">University Of Houston</p>
-          </a>
-          <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Sitecore C# Developer Certification</h4>
-            <p class="list-group-item-text">Sitecore</p>
-          </a>
-          <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Angular Certification</h4>
-            <p class="list-group-item-text">Angular School</p>
-          </a>
-        </div>
-      </div>
-    </div>
+
   </div>  
 </div>
 </form>

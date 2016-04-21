@@ -31,9 +31,23 @@ export class UserDetailComponent implements OnInit {
 		let username = this._routeParams.get('username');
 		this._userService.getUserByUsername(username.replace('_', '.')).then( user => {
 			this.uid = Object.keys(user.val())[0];
+
 			this.user = this._valuesPipe.transform(user.val())[0];
 			this.user.profileImageURL = this.user.profileImageURL + "?s=250";
-			this.userCopy = $.extend(true, {}, this.user);
+
+			this._userService.getSkills(this.uid).then( skills => {
+				this.user.skills = [];
+
+				let skillsObj = skills.val();
+				Object.keys(skillsObj).forEach((key) => {
+					this.user.skills.push({
+						key: key,
+						value: skillsObj[key]
+					});
+				});
+
+				this.userCopy = $.extend(true, {}, this.user);
+			});
 		});
 	} 
 

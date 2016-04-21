@@ -6,15 +6,15 @@ export class UserService {
 	constructor() { }
 
 	public getUser(uid: string) {
-		return FirebaseRef.child('/users').child(uid).once("value");
+		return FirebaseRef.child('users').child(uid).once('value');
 	}
 	
 	public getUserByUsername(username: string) {
 		let email = username + '@us.sogeti.com';
-		return FirebaseRef.child('/users').orderByChild('email').startAt(email).endAt(email + "\uf8ff").once("value");
+		return FirebaseRef.child('users').orderByChild('email').startAt(email).endAt(email + '\uf8ff').once('value');
 	}
 
-	public searchBioByUID(uid: string){
-		return FirebaseRef.child('/bio').child(uid).once("value");
+	public getSkills(uid: string) {
+		return FirebaseRef.child('skills').child(uid).once('value');
 	}
 }

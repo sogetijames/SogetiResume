@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
 						first: name[0],
 						last: name[1],
 						practice: '',
+						profileImageURL: authData.password.profileImageURL.replace("?d=retro","?s=250"),
 						status: {
 							description: '',
 							text: ''

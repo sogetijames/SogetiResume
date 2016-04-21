@@ -57,18 +57,15 @@ export class AppComponent {
 		private _currentUser: CurrentUser,
 		private _router: Router, 
 		private _userService: UserService, 
-		private _authenticationService: AuthenticationService) { 
+		private _authenticationService: AuthenticationService
+	) { 
+		if (FirebaseRef.getAuth()) {
+			this._currentUser.auth = FirebaseRef.getAuth();
+		}
 
 		FirebaseRef.onAuth( (authData: FirebaseAuthData) => {
 			if (authData != null) {
 				this._currentUser.auth = authData;
-
-				this._userService.getUser(authData.uid).then(
-					info => {
-						this._currentUser.info = info.val();
-						this._currentUser.info.username = this._currentUser.info.email.split('@')[0].replace('.', '_');
-					}
-				);
 			}
 		});
 	}
@@ -77,5 +74,5 @@ export class AppComponent {
 		this._authenticationService.logout();
 		this._currentUser.resetCurrentUser();
   		this._router.navigate(['Login']);
-	}	
+	}
 }

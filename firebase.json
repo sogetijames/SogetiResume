@@ -2,7 +2,11 @@
   "firebase": "dazzling-inferno-8835",
   "public": "public",
   "ignore": [
-    "firebase.json",
-    "**/.*"
-  ]
+	"firebase.json",
+	"**/.*"
+  ],
+  "rewrites": [{
+  	"source": "**",
+  	"destination": "/index.html"
+  	}]
 }

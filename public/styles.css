@@ -4,6 +4,22 @@ div {
     font-family: 'Oswald', sans-serif;
 }
 
+.red-font {
+    color: #b30000;
+}
+
+.black-font {
+    color: Black;
+}
+
+.green-font {
+    color: #008000;
+}
+
+.yellow-font {
+    color: Yellow;
+}
+
 .top-buffer {
 	margin-top: 20px;
 }
@@ -19,12 +35,6 @@ div {
 .profile-footer {
 	background-color: #b30000;
 	color: White;
-}
-
-.navbar-default .navbar-nav > .open > a, 
-.navbar-default .navbar-nav > .open > a:hover, 
-.navbar-default .navbar-nav > .open > a:focus {
-    background-color: transparent !important;
 }
 
 .logo-spinner {
@@ -53,18 +63,6 @@ div {
     color:#b30000;
 }
 
-.red-font {
-    color: #b30000;
-}
-
-.black-font {
-    color: Black;
-}
-
-.green-font {
-    color: #008000;
-}
-
 .card-link, .card-link:hover {
     color: Black;
     text-decoration: none;
@@ -76,6 +74,10 @@ div {
 
 .card-hover:hover {
     background-color: #e5e5e5;
+}
+
+.profile-image {
+    border: 5px solid #b30000; 
 }
 
 
@@ -120,6 +122,13 @@ div {
     color: #d9d9d9;
     background-color: #D5D5D5;
 }
+
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    background-color: transparent !important;
+}
+
 /* caret */
 .navbar-default .navbar-nav > .dropdown > a .caret {
     border-top-color: White;

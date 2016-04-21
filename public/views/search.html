@@ -6,13 +6,13 @@
 <div class="row top-buffer" *ngIf="searchResults.length > 0">
 	<div class="col-xl-2" *ngFor="#result of searchResults">
 		<a [routerLink]="['Profile', { username: result?.email?.split('@')[0].replace('.', '_') }]" class="card-link">
-			<div class="card card-hover" [ngClass]="{'red-profile': result?.status?.text == 'PTO', 'green-profile': result?.status?.text == 'ATO', 'yellow-profile': result?.status?.text == 'Project'}">
+			<div class="card card-hover text-xl-center" [ngClass]="{'red-profile': result?.status?.text == 'PTO', 'green-profile': result?.status?.text == 'ATO', 'yellow-profile': result?.status?.text == 'Project'}">
 				<div class="card-block">
 					<h4 class="card-title red-font">
-						<i class="fa fa-user" aria-hidden="true"></i> {{ result?.first + " " + result?.last }}
+						<img class="img-fluid img-rounded center-block" src="{{result?.profileImageURL}}" /> 
+						{{ result?.first + " " + result?.last }}
 					</h4>
-					<p class="card-text">{{ result?.unit }}</p>
-					<p class="card-text">{{ result?.title }}</p>
+					<p class="card-text">{{ result?.title }} <span class="red-font">|</span> {{ result?.unit }}</p>
 				</div>
 			</div>
 		</a>

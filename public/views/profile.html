@@ -8,6 +8,7 @@
   <div class="col-xl-8" *ngIf="!editable">
     <p>{{ user?.first + " " + user?.last  }}</p>
     <p>{{ user?.unit }}</p>
+    <p>{{ user?.practice }}</p>
     <p>{{ user?.title }}</p>
     <p>{{ user?.email }}</p>
   </div> 
@@ -16,17 +17,20 @@
 
     <fieldset class="form-group row">
       <div class="col-xl-6">
-        <input type="text" class="form-control" [(ngModel)]="user.first">
+        <input type="text" class="form-control" [(ngModel)]="user.first" placeholder="firstname">
       </div>
       <div class="col-xl-6">
-        <input type="text" class="form-control" [(ngModel)]="user.last">
+        <input type="text" class="form-control" [(ngModel)]="user.last" placeholder="lastname">
       </div>
     </fieldset>
     <fieldset class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="user.unit">
+      <input type="text" class="form-control" [(ngModel)]="user.unit" placeholder="unit">
     </fieldset>
     <fieldset class="form-group">
-      <input type="text" class="form-control" [(ngModel)]="user.title">
+      <input type="text" class="form-control" [(ngModel)]="user.practice" placeholder="practice">
+    </fieldset>
+    <fieldset class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="user.title" placeholder="title">
     </fieldset>
     <p>{{ user?.email }}</p>
   </div> 

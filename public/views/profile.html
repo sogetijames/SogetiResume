@@ -1,11 +1,11 @@
 <form>
 <div class="row" >
-  <div class="col-xl-2">
+  <div class="col-sm-2">
     <img class="img-fluid img-rounded" [ngClass]="{'red-profile': user?.status?.text == 'PTO', 'green-profile': user?.status?.text == 'ATO', 'yellow-profile': user?.status?.text == 'Project'}" src="{{user?.profileImageURL}}" />
     <a *ngIf="editable" target="_blank" href="https://en.gravatar.com/connect/">Change Gravatar</a>
   </div>
   <!-- Non Editable -->
-  <div class="col-xl-8" *ngIf="!editable">
+  <div class="col-sm-8" *ngIf="!editable">
     <p>{{ user?.first + " " + user?.last  }}</p>
     <p>{{ user?.unit }}</p>
     <p>{{ user?.practice }}</p>
@@ -14,7 +14,7 @@
     <p [ngClass]="{'red-font': user?.status?.text == 'PTO', 'green-font': user?.status?.text == 'ATO', 'yellow-font': user?.status?.text == 'Project'}">{{ user?.status?.text}} <span *ngIf="user?.status?.description!='' ">{{": " + user?.status?.description}}</span></p>
   </div> 
   <!-- Editable -->
-  <div class="col-xl-8" *ngIf="editable">
+  <div class="col-sm-8" *ngIf="editable">
 
     <fieldset class="form-group row">
       <div class="col-xl-6">
@@ -44,51 +44,61 @@
       </div>
     </fieldset>
   </div> 
-  <div class="col-xl-1">
+  <div class="col-sm-1">
     <button type="button" class="btn btn-link" (click)="clickEdit()" *ngIf="!editable && _currentUser.auth.uid == uid"><i class="fa fa-pencil-square-o black-font" aria-hidden="true"> Edit</i></button>
     <button type="button" class="btn btn-link" (click)="clickSave()" *ngIf="editable"><i class="fa fa-floppy-o green-font" aria-hidden="true"> Save</i></button>
     <button type="button" class="btn btn-link" (click)="clickCancel()" *ngIf="editable"><i class="fa fa-times red-font" aria-hidden="true"> Cancel</i></button>
   </div>
 </div>
 
+<!-- TAB NAV -->
+<ul class="nav nav-pills  bottom-buffer" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" href="" data-toggle="pill" data-target="#bio, #bio-editable" aria-controls="bio ,bio-editable"><i class="fa fa-book" aria-hidden="true"></i> Bio</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="" data-toggle="pill" data-target="#projects, #projects-editable" aria-controls="projects ,projects-editable"><i class="fa fa-folder-open" aria-hidden="true"></i> Projects</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="" data-toggle="pill" data-target="#skills, #skills-editable" aria-controls="skills ,skills-editable"><i class="fa fa-tasks" aria-hidden="true"></i> Skills</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="" data-toggle="pill" data-target="#education, #education-editable" aria-controls="education ,education-editable"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Education</a>
+  </li>
+</ul>
+
 <!-- Non editable -->
-<div class="card-deck-wrapper top-buffer" *ngIf="!editable">
-  <div class="card-deck">
-
+<div class="tab-content" *ngIf="!editable">
+  <div class="tab-pane active" id="bio" role="tabpanel">
     <div class="card">
-      <div class="card-header">
-        <i class="fa fa-book" aria-hidden="true"></i> Bio
-      </div>
       <div class="card-block">
         <p class="card-text">{{ user?.bio }}</p>
       </div>
     </div>
+  </div>
 
+  <div class="tab-pane" id="projects" role="tabpanel">
     <div class="card">
-      <div class="card-header">
-        <i class="fa fa-folder-open" aria-hidden="true"></i> Projects
-      </div>
       <div class="card-block">
-        <p class="card-text">{{ user?.bio }}</p>
+        <p class="card-text">This is where projects go</p>
       </div>
     </div>
+  </div>
 
-    <div class="card">
-      <div class="card-header">
-        <i class="fa fa-tasks" aria-hidden="true"></i> Skills
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item" *ngFor="#skill of user?.skills">
-          <h4 class="list-group-item-heading">{{ skill.key }}</h4>
-          <p class="list-group-item-text">{{ skill.value }}</p>
-        </li>
-      </ul>
+  <div class="tab-pane" id="skills" role="tabpanel">
+    <div class="col-md-2" *ngFor="#skill of user?.skills">
+        <div class="card card-hover text-xl-center">
+          <div class="card-block">
+            <h4 class="card-title red-font"></h4>
+            <p class="card-text">{{ skill?.key }}</p>
+            <p class="card-text">{{ skill?.value }}</p>
+          </div>
+        </div>
     </div>
+  </div>
 
+  <div class="tab-pane" id="education" role="tabpanel">
     <div class="card">
-      <div class="card-header">
-        <i class="fa fa-graduation-cap" aria-hidden="true"></i> Education
-      </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <h4 class="list-group-item-heading">B.S. Computer Science</h4>
@@ -104,36 +114,40 @@
         </li>
       </ul>
     </div>
-
-  </div>  
+  </div>
 </div>
 
-<!-- Editable -->
-<div class="card-deck-wrapper top-buffer" *ngIf="editable">
-  <div class="card-deck">
 
+
+<!-- Editable -->
+<div class="tab-content" *ngIf="editable">
+  <div class="tab-pane" id="bio-editable" role="tabpanel">
     <div class="card">
       <div class="card-header">
         <i class="fa fa-book" aria-hidden="true"></i> Bio
       </div>
       <div class="card-block">
-        <fieldset class="form-group">
+        <fieldset class="form-group" *ngIf="user != undefined">
           <textarea class="form-control" rows="3" [(ngModel)]="user.bio" ></textarea>
         </fieldset>
       </div>
     </div>
+  </div>
 
+  <div class="tab-pane" id="projects-editable" role="tabpanel">
     <div class="card">
       <div class="card-header">
         <i class="fa fa-folder-open" aria-hidden="true"></i> Projects
       </div>
       <div class="card-block">
         <fieldset class="form-group">
-          <textarea class="form-control" rows="3" [(ngModel)]="user.bio" ></textarea>
+          <textarea class="form-control" rows="3">This is where projects are edited</textarea>
         </fieldset>
       </div>
     </div>
+  </div>
 
+  <div class="tab-pane" id="skills-editable" role="tabpanel">
     <div class="card">
       <div class="card-header">
         <i class="fa fa-tasks" aria-hidden="true"></i> Skills
@@ -163,7 +177,9 @@
         </button>
       </div>
     </div>
+  </div>
 
+  <div class="tab-pane" id="education-editable" role="tabpanel">
     <div class="card">
       <div class="card-header">
         <i class="fa fa-graduation-cap" aria-hidden="true"></i> Education
@@ -183,7 +199,6 @@
         </li>
       </ul>
     </div>
-
-  </div>  
+  </div>
 </div>
 </form>

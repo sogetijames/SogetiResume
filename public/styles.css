@@ -141,3 +141,22 @@ div {
     border-bottom-color: White;
 }
 
+.nav-pills .open.nav-item .nav-link, 
+.nav-pills .open.nav-item .nav-link:focus, 
+.nav-pills .open.nav-item .nav-link:hover, 
+.nav-pills .active.nav-link, 
+.nav-pills .active.nav-link:focus, 
+.nav-pills .active.nav-link:hover {
+    background-color: #b30000;
+    border-color: #b30000; 
+    color: White;
+
+}
+
+a:focus, a:hover {
+    color: #b30000;
+}
+
+a {
+    color: #d9d9d9; 
+}

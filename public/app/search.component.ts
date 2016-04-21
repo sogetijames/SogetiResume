@@ -29,7 +29,7 @@ export class SearchComponent {
 		this.searchText = '';
 		this.searchResults = [];
 
-		FirebaseRef.child('users').orderByChild('email').on('value', (users) => {
+		FirebaseRef.child('users').orderByChild('active').equalTo(true).on('value', (users) => {
 			this.allUsers = this._valuesPipe.transform(users.val());
 			this.searchUsers(null);
 		});

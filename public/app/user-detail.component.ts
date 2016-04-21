@@ -1,4 +1,4 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {Router, RouteParams} from 'angular2/router';
 import {FirebaseRef} from './firebase-ref';
 import {CurrentUser} from './currentUser';
@@ -15,7 +15,7 @@ import {NgClass} from 'angular2/common';
 		ValuesPipe
 	]
 })
-export class UserDetailComponent implements OnInit {
+export class UserDetailComponent {
 	editable: boolean;
 	proficiencyArr: any[];
 	statusArr: any[];
@@ -56,12 +56,6 @@ export class UserDetailComponent implements OnInit {
 			});
 		});
 	} 
-
-	ngOnInit() {
-		if (!FirebaseRef.getAuth()) {
-			this._router.navigate(['Login']);
-		}
-	}	
 
 	clickEdit() {
 		this.editable = !this.editable;

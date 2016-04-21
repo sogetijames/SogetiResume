@@ -1,19 +1,17 @@
 <div class="row">
-	<div class="col-xl-4">
-		<input [(ngModel)]="searchText" class="form-control search" type="text" placeholder="Name" (keyup)="searchUsersByName($event)">
-	</div>
-	<div class="col-xl-4">
-		<input class="form-control search" type="text" placeholder="Unit" (keyup)="searchUsersByName($event)">
-	</div>
-	<div class="col-xl-4">
-		<input class="form-control search" type="text" placeholder="Title" (keyup)="searchUsersByName($event)">
+	<div class="col-xl-12">
+		<input [(ngModel)]="searchText" class="form-control search" type="text" placeholder="Search" (keyup)="searchUsersByName($event)">
 	</div>
 </div>
 <div class="row top-buffer" *ngIf="searchResults.length > 0">
 	<div class="col-xl-2" *ngFor="#result of searchResults">
 		<div class="card">
 			<div class="card-block">
-				<h4 class="card-title"><i class="fa fa-user" aria-hidden="true"></i> {{ result?.fullname }}</h4>
+				<h4 class="card-title">
+					<a [routerLink]="['Profile', { username: result?.email?.split('@')[0].replace('.', '_') }]">
+						<i class="fa fa-user" aria-hidden="true"></i> {{ result?.fullname }}
+					</a>
+				</h4>
 				<p class="card-text">{{ result?.unit }}</p>
 				<p class="card-text">{{ result?.title }}</p>
 			</div>

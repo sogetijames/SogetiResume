@@ -1,4 +1,5 @@
 import {Component,Input} from 'angular2/core';
+import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {FirebaseRef} from './firebase-ref';
 import {ValuesPipe, SearchPipe} from './values.pipe';
 import {UserService} from './user.service';
@@ -10,6 +11,9 @@ import {UserService} from './user.service';
 		UserService,
 		ValuesPipe,
 		SearchPipe
+	],
+	directives: [
+		ROUTER_DIRECTIVES
 	]
 })
 export class SearchComponent {
@@ -22,19 +26,16 @@ export class SearchComponent {
 		private _valuesPipe: ValuesPipe,
 		private _searchPipe: SearchPipe
 	) { 
-		FirebaseRef.child('users').orderByChild('email').on('value', (users) => {
-			this.allUsers = this._valuesPipe.transform(users.val());
-		});
-
 		this.searchText = '';
 		this.searchResults = [];
+
+		FirebaseRef.child('users').orderByChild('email').on('value', (users) => {
+			this.allUsers = this._valuesPipe.transform(users.val());
+			this.searchUsersByName(null);
+		});
 	}
 
 	searchUsersByName(event: any) {
-		if (this.searchText != '') {
-			this.searchResults = this._searchPipe.transform(this.allUsers, [this.searchText]);
-		} else {
-			this.searchResults = [];
-		}
+		this.searchResults = this._searchPipe.transform(this.allUsers, [this.searchText]);
 	}
 }

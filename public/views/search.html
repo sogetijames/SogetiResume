@@ -3,6 +3,78 @@
 		<input [(ngModel)]="searchText" class="form-control search" type="text" placeholder="Search" (keyup)="searchUsers($event)">
 	</div>
 </div>
+
+<div class="row top-buffer">
+	<div class="col-md-3">
+		<div class="input-group">
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Status
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" role="button" (click)="selectedStatus = 'Any'">Any Status</a>
+					<div role="separator" class="dropdown-divider"></div>
+					<a class="dropdown-item" role="button" *ngFor="#status of _constants?.statuses" (click)="selectedStatus = status">
+						{{ status }}
+					</a>
+				</div>
+			</div>
+			<input [(ngModel)]="selectedStatus" type="text" class="form-control" readonly="true">
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="input-group">
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Title
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" role="button" (click)="selectedTitle = 'Any'">Any Title</a>
+					<div role="separator" class="dropdown-divider"></div>
+					<a class="dropdown-item" role="button" *ngFor="#title of _constants?.titles" (click)="selectedTitle = title">
+						{{ title }}
+					</a>
+				</div>
+			</div>
+			<input [(ngModel)]="selectedTitle" type="text" class="form-control" readonly="true">
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="input-group">
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Practice
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" role="button" (click)="selectedPractice = 'Any'">Any Practice</a>
+					<div role="separator" class="dropdown-divider"></div>
+					<a class="dropdown-item" role="button" *ngFor="#practice of _constants?.practices" (click)="selectedPractice = practice">
+						{{ practice }}
+					</a>
+				</div>
+			</div>
+			<input [(ngModel)]="selectedPractice" type="text" class="form-control" readonly="true">
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="input-group">
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Unit
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" role="button" (click)="selectedUnit = 'Any'">Any Unit</a>
+					<div role="separator" class="dropdown-divider"></div>
+					<a class="dropdown-item" role="button" *ngFor="#unit of _constants?.units" (click)="selectedUnit = unit">
+						{{ unit }}
+					</a>
+				</div>
+			</div>
+			<input [(ngModel)]="selectedUnit" type="text" class="form-control" readonly="true">
+		</div>
+	</div>
+</div>
+
 <div class="row top-buffer" *ngIf="searchResults.length > 0">
 	<div class="col-xl-2" *ngFor="#result of searchResults">
 		<a [routerLink]="['Profile', { username: result?.email?.split('@')[0].replace('.', '_') }]" class="card-link">

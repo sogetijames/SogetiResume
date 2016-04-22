@@ -9,7 +9,7 @@ import {AuthenticationService} from './authentication.service';
 import {ValuesPipe} from './values.pipe';
 import {FirebaseRef} from './firebase-ref';
 import {SearchComponent} from './search.component';
-import {CurrentUser} from './currentUser';
+import {CurrentUser, Constants} from './currentUser';
 import {UserSettingsComponent} from './user-settings.component';
 
 @Component({
@@ -57,7 +57,8 @@ export class AppComponent {
 		private _currentUser: CurrentUser,
 		private _router: Router, 
 		private _userService: UserService, 
-		private _authenticationService: AuthenticationService
+		private _authenticationService: AuthenticationService,
+		private _constants: Constants
 	) { 
 		if (FirebaseRef.getAuth()) {
 			this._currentUser.auth = FirebaseRef.getAuth();
@@ -69,6 +70,14 @@ export class AppComponent {
 				this._currentUser.auth = authData;
 				this.setCurrentUserInfo(authData.uid);
 			}
+		});
+
+		FirebaseRef.child('constants').once('value', (dataSnapshot: FirebaseDataSnapshot) => {
+			let data = dataSnapshot.val();
+			this._constants.practices = Object.keys(data.practices);
+			this._constants.statuses = Object.keys(data.statuses);
+			this._constants.titles = Object.keys(data.titles);
+			this._constants.units = Object.keys(data.units);
 		});
 	}
 

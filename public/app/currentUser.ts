@@ -10,3 +10,11 @@ export class CurrentUser {
     	this.info = {};
 	}
 }
+
+@Injectable()
+export class Constants {
+	public practices: any = [];
+	public statuses: any = [];
+	public titles: any = [];
+	public units: any = [];
+}

@@ -51,7 +51,7 @@
   </div>
 </div>
 
-<!-- Tab Content -->
+<!-- Tab Nav -->
 <ul class="nav nav-pills top-buffer bottom-buffer" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" role="button" data-toggle="pill" data-target="#bio" aria-controls="bio">
@@ -77,13 +77,15 @@
 
 <!-- Tab Content -->
 <div class="tab-content">
+  
   <div class="tab-pane active" id="bio" role="tabpanel">
+    <!-- Not Editable -->
     <div class="card" *ngIf="!editable">
       <div class="card-block">
         <p class="card-text">{{ user?.bio }}</p>
       </div>
     </div>
-
+    <!-- Editable -->
     <div class="card" *ngIf="editable">
       <div class="card-block">
         <fieldset class="form-group" *ngIf="user != undefined">
@@ -94,12 +96,13 @@
   </div>
 
   <div class="tab-pane" id="projects" role="tabpanel">
+    <!-- Not Editable -->
     <div class="card" *ngIf="!editable">
       <div class="card-block">
         <p class="card-text">This is where projects go</p>
       </div>
     </div>
-
+    <!-- Editable -->
     <div class="card" *ngIf="editable">
       <div class="card-block">
         <fieldset class="form-group">
@@ -110,45 +113,56 @@
   </div>
 
   <div class="tab-pane" id="skills" role="tabpanel">
-    <div class="col-md-2" *ngIf="!editable" *ngFor="#skill of user?.skills">
-      <div class="card card-hover text-xl-center">
-        <div class="card-block">
-          <h4 class="card-title red-font"></h4>
-          <p class="card-text">{{ skill?.key }}</p>
-          <p class="card-text">{{ skill?.value }}</p>
+    <!-- Not Editable -->
+    <div *ngIf="!editable" >
+      <div class="col-md-2" *ngFor="#skill of user?.skills">
+        <div class="card card-hover text-xl-center">
+          <div class="card-block">
+            <h4 class="card-title red-font"></h4>
+            <p class="card-text">{{ skill?.key }}</p>
+            <p class="card-text">{{ skill?.value }}</p>
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="card" *ngIf="editable">
-      <ul class="list-group list-group-flush  text-xs-right">
-        <li class="list-group-item" *ngFor="#skill of user?.skills; #i = index">
-          <fieldset class="form-group row">
-            <div class="col-xl-5" style="padding: 2px;">
+    <!-- Editable -->
+    <div *ngIf="editable">
+      <div class="col-md-2" *ngFor="#skill of user?.skills; #i = index">
+        <div class="card text-xl-center">
+          <div class="card-header text-xs-right" style="padding:3px;">
+            <button type="button" class="btn btn-sm btn-secondary-outline" (click)="user.skills.splice(i, 1)">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="card-block" style="padding:5px;">
+            <fieldset class="form-group">
               <input type="text" class="form-control" [(ngModel)]="skill.key" placeholder="Skill">
-            </div>
-            <div class="col-xl-5" style="padding: 2px;">
-              <select [(ngModel)]="skill.value" class="form-control">
-                <option *ngFor="#proficiency of proficiencyArr" [value]="proficiency">{{ proficiency }}</option>
-              </select>
-            </div>
-            <div class="col-xl-1" style="padding: 2px;">
-              <button type="button" class="btn btn-secondary-outline" (click)="user.skills.splice(i, 1)">
-                <i class="fa fa-times" aria-hidden="true"></i>
-              </button>
-            </div>
-          </fieldset>
-        </li>
-      </ul>
-      <div class="card-block text-xs-right">
-        <button type="button" class="btn btn-danger-outline" (click)="user.skills.push( { key: '', value: '' } )">
-          <i class="fa fa-plus" aria-hidden="true"></i>
-        </button>
+            </fieldset>
+            <fieldset class="form-group">            
+                <select [(ngModel)]="skill.value" class="form-control">
+                  <option *ngFor="#proficiency of proficiencyArr" [value]="proficiency">{{ proficiency }}</option>
+                </select>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="card text-xl-center">
+          <div class="card-header" style="padding:6px;">
+            Add Skill
+          </div>
+          <div class="card-block" style="height:118px;">
+          <button style="width:100%;" type="button" class="btn btn-danger-outline btn-lg" (click)="user.skills.push( { key: '', value: '' } )">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="tab-pane" id="education" role="tabpanel">
+    <!-- Not Editable -->
     <div class="card" *ngIf="!editable">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
@@ -165,7 +179,7 @@
         </li>
       </ul>
     </div>
-
+    <!-- Editable -->
     <div class="card" *ngIf="editable">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">

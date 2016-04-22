@@ -22,6 +22,8 @@ export class UserDetailComponent {
 	uid: string;
 	user: any;
 	userCopy: any;
+	aTOz: string;
+	profUp: string;
 
 	constructor(
 		private _currentUser: CurrentUser,
@@ -30,6 +32,8 @@ export class UserDetailComponent {
 		private _router: Router,
 		private _valuesPipe: ValuesPipe
 	) {  
+		this.aTOz = "up";
+		this.profUp = "neutral";
 		this.editable = false;
 		this.proficiencyArr = ['Fundamental Awareness', 'Novice', 'Intermediate', 'Advanced', 'Expert'];
 		this.statusArr = ['ATO', 'Project', 'PTO'];
@@ -51,6 +55,28 @@ export class UserDetailComponent {
 						value: skillsObj[key]
 					});
 				});
+
+				//set proficiency sort numbers
+				for(var i = 0; i < this.user.skills.length; i++) {
+					switch (this.user.skills[i].value)
+					{
+					  case this.proficiencyArr[0] : 
+					    this.user.skills[i].valueNumber = 0; 
+					    break; 
+					  case this.proficiencyArr[1] : 
+					    this.user.skills[i].valueNumber = 1; 
+					    break; 
+			    	case this.proficiencyArr[2] : 
+					    this.user.skills[i].valueNumber = 2; 
+					    break; 
+			    	case this.proficiencyArr[3] : 
+					    this.user.skills[i].valueNumber = 3; 
+					    break; 
+			    	case this.proficiencyArr[4] : 
+					    this.user.skills[i].valueNumber = 4; 
+					    break; 
+					}
+				}
 
 				this.userCopy = $.extend(true, {}, this.user);
 			});
@@ -115,4 +141,72 @@ export class UserDetailComponent {
 		this.user = $.extend(true, {}, this.userCopy);
 		this.editable = !this.editable;
 	}
-}
+
+	sortSkills(sortType: string) {
+		let userSkills = this.user.skills;
+		if(userSkills.length > 0) {
+			var tempSkill = userSkills[0];
+			
+			if(sortType == "A-Z") {
+				this.aTOz = "up";
+				this.profUp = "neutral";
+				for (var i = userSkills.length - 1; i>=0; i--) {
+					for(var j = 1; j<=i; j++) {
+						if(userSkills[j-1].key.toLowerCase()>userSkills[j].key.toLowerCase()){
+				           var temp = userSkills[j-1];
+				           userSkills[j-1] = userSkills[j];
+				           userSkills[j] = temp;
+				        }
+					}
+				}
+			}
+				
+			if(sortType == "Z-A"){
+				this.aTOz = "down";
+				this.profUp = "neutral";
+				for (var i = userSkills.length - 1; i>=0; i--) {
+					for(var j = 1; j<=i; j++) {
+						if(userSkills[j-1].key.toLowerCase()<userSkills[j].key.toLowerCase()){
+				           var temp = userSkills[j-1];
+				           userSkills[j-1] = userSkills[j];
+				           userSkills[j] = temp;
+				        }
+					}
+				}	
+			}
+
+			if(sortType == "DOWN"){
+				this.aTOz = "neutral";
+				this.profUp = "down";
+				for (var i = userSkills.length - 1; i>=0; i--) {
+					for(var j = 1; j<=i; j++) {
+						if(userSkills[j-1].valueNumber<userSkills[j].valueNumber){
+				           var temp = userSkills[j-1];
+				           userSkills[j-1] = userSkills[j];
+				           userSkills[j] = temp;
+				        }
+					}
+				}	
+			}
+
+			if(sortType == "UP") {
+				this.aTOz = "neutral";
+				this.profUp = "up";
+				for (var i = userSkills.length - 1; i>=0; i--) {
+					for(var j = 1; j<=i; j++) {
+						if(userSkills[j-1].valueNumber>userSkills[j].valueNumber){
+				           var temp = userSkills[j-1];
+				           userSkills[j-1] = userSkills[j];
+				           userSkills[j] = temp;
+				        }
+					}
+				}
+			}
+
+
+
+		}
+		
+	  	
+	}
+}			

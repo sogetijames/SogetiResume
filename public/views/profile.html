@@ -113,6 +113,12 @@
   </div>
 
   <div class="tab-pane" id="skills" role="tabpanel">
+    <div class="col-md-12 bottom-buffer">
+      <button type="button" class="btn btn-primary btn-sm" *ngIf="aTOz == 'down' || aTOz == 'neutral'" (click)="sortSkills('A-Z')">Skill <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+      <button type="button" class="btn btn-primary btn-sm" *ngIf="aTOz == 'up' || aTOz == 'neutral'" (click)="sortSkills('Z-A')">Skill <i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+      <button type="button" class="btn btn-primary btn-sm" *ngIf="profUp == 'down' || profUp == 'neutral'" (click)="sortSkills('UP')">Proficiency <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+      <button type="button" class="btn btn-primary btn-sm" *ngIf="profUp == 'up' || profUp == 'neutral'" (click)="sortSkills('DOWN')">Proficiency <i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+    </div>
     <!-- Not Editable -->
     <div *ngIf="!editable" >
       <div class="col-md-2" *ngFor="#skill of user?.skills">

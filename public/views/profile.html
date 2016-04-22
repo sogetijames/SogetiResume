@@ -6,12 +6,15 @@
   </div>
   <!-- Non Editable -->
   <div class="col-sm-8" *ngIf="!editable">
-    <p>{{ user?.first + " " + user?.last  }}</p>
-    <p>{{ user?.unit }}</p>
-    <p>{{ user?.practice }}</p>
-    <p>{{ user?.title }}</p>
-    <p>{{ user?.email }}</p>
-    <p [ngClass]="{'red-font': user?.status?.text == 'PTO', 'green-font': user?.status?.text == 'ATO', 'yellow-font': user?.status?.text == 'Project'}">{{ user?.status?.text}} <span *ngIf="user?.status?.description!='' ">{{": " + user?.status?.description}}</span></p>
+    <h2 class="red-font">{{ user?.first + " " + user?.last  }} <small class="text-muted">{{ user?.email }}</small></h2>
+    <h5 class="top-buffer">
+      {{ user?.title }} 
+      <span class="red-font"> | </span>
+      {{ user?.practice }}
+      <span class="red-font"> | </span>
+      {{ user?.unit }}
+    </h5>
+    <p class="top-buffer" [ngClass]="{'red-font': user?.status?.text == 'PTO', 'green-font': user?.status?.text == 'ATO', 'yellow-font': user?.status?.text == 'Project'}">{{ user?.status?.text}} <span *ngIf="user?.status?.description!='' ">{{": " + user?.status?.description}}</span></p>
   </div> 
   <!-- Editable -->
   <div class="col-sm-8" *ngIf="editable">

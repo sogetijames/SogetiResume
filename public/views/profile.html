@@ -51,81 +51,40 @@
   </div>
 </div>
 
-<!-- TAB NAV -->
-<ul class="nav nav-pills  bottom-buffer" role="tablist">
+<!-- Tab Content -->
+<ul class="nav nav-pills top-buffer bottom-buffer" role="tablist">
   <li class="nav-item">
-    <a class="nav-link active" href="" data-toggle="pill" data-target="#bio, #bio-editable" aria-controls="bio ,bio-editable"><i class="fa fa-book" aria-hidden="true"></i> Bio</a>
+    <a class="nav-link active" role="button" data-toggle="pill" data-target="#bio" aria-controls="bio">
+      <i class="fa fa-book" aria-hidden="true"></i> Bio
+    </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="" data-toggle="pill" data-target="#projects, #projects-editable" aria-controls="projects ,projects-editable"><i class="fa fa-folder-open" aria-hidden="true"></i> Projects</a>
+    <a class="nav-link" role="button" data-toggle="pill" data-target="#projects" aria-controls="projects">
+      <i class="fa fa-folder-open" aria-hidden="true"></i> Projects
+    </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="" data-toggle="pill" data-target="#skills, #skills-editable" aria-controls="skills ,skills-editable"><i class="fa fa-tasks" aria-hidden="true"></i> Skills</a>
+    <a class="nav-link" role="button" data-toggle="pill" data-target="#skills" aria-controls="skills">
+      <i class="fa fa-tasks" aria-hidden="true"></i> Skills
+    </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="" data-toggle="pill" data-target="#education, #education-editable" aria-controls="education ,education-editable"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Education</a>
+    <a class="nav-link" role="button" data-toggle="pill" data-target="#education" aria-controls="education">
+      <i class="fa fa-graduation-cap" aria-hidden="true"></i> Education
+    </a>
   </li>
 </ul>
 
-<!-- Non editable -->
-<div class="tab-content" *ngIf="!editable">
+<!-- Tab Content -->
+<div class="tab-content">
   <div class="tab-pane active" id="bio" role="tabpanel">
-    <div class="card">
+    <div class="card" *ngIf="!editable">
       <div class="card-block">
         <p class="card-text">{{ user?.bio }}</p>
       </div>
     </div>
-  </div>
 
-  <div class="tab-pane" id="projects" role="tabpanel">
-    <div class="card">
-      <div class="card-block">
-        <p class="card-text">This is where projects go</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="tab-pane" id="skills" role="tabpanel">
-    <div class="col-md-2" *ngFor="#skill of user?.skills">
-        <div class="card card-hover text-xl-center">
-          <div class="card-block">
-            <h4 class="card-title red-font"></h4>
-            <p class="card-text">{{ skill?.key }}</p>
-            <p class="card-text">{{ skill?.value }}</p>
-          </div>
-        </div>
-    </div>
-  </div>
-
-  <div class="tab-pane" id="education" role="tabpanel">
-    <div class="card">
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <h4 class="list-group-item-heading">B.S. Computer Science</h4>
-          <p class="list-group-item-text">University Of Houston</p>
-        </li>
-        <li class="list-group-item">
-          <h4 class="list-group-item-heading">Sitecore C# Developer Certification</h4>
-          <p class="list-group-item-text">Sitecore</p>
-        </li>
-        <li class="list-group-item">
-          <h4 class="list-group-item-heading">Angular Certification</h4>
-          <p class="list-group-item-text">Angular School</p>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-
-
-<!-- Editable -->
-<div class="tab-content" *ngIf="editable">
-  <div class="tab-pane" id="bio-editable" role="tabpanel">
-    <div class="card">
-      <div class="card-header">
-        <i class="fa fa-book" aria-hidden="true"></i> Bio
-      </div>
+    <div class="card" *ngIf="editable">
       <div class="card-block">
         <fieldset class="form-group" *ngIf="user != undefined">
           <textarea class="form-control" rows="3" [(ngModel)]="user.bio" ></textarea>
@@ -134,11 +93,14 @@
     </div>
   </div>
 
-  <div class="tab-pane" id="projects-editable" role="tabpanel">
-    <div class="card">
-      <div class="card-header">
-        <i class="fa fa-folder-open" aria-hidden="true"></i> Projects
+  <div class="tab-pane" id="projects" role="tabpanel">
+    <div class="card" *ngIf="!editable">
+      <div class="card-block">
+        <p class="card-text">This is where projects go</p>
       </div>
+    </div>
+
+    <div class="card" *ngIf="editable">
       <div class="card-block">
         <fieldset class="form-group">
           <textarea class="form-control" rows="3">This is where projects are edited</textarea>
@@ -147,11 +109,18 @@
     </div>
   </div>
 
-  <div class="tab-pane" id="skills-editable" role="tabpanel">
-    <div class="card">
-      <div class="card-header">
-        <i class="fa fa-tasks" aria-hidden="true"></i> Skills
+  <div class="tab-pane" id="skills" role="tabpanel">
+    <div class="col-md-2" *ngIf="!editable" *ngFor="#skill of user?.skills">
+      <div class="card card-hover text-xl-center">
+        <div class="card-block">
+          <h4 class="card-title red-font"></h4>
+          <p class="card-text">{{ skill?.key }}</p>
+          <p class="card-text">{{ skill?.value }}</p>
+        </div>
       </div>
+    </div>
+
+    <div class="card" *ngIf="editable">
       <ul class="list-group list-group-flush  text-xs-right">
         <li class="list-group-item" *ngFor="#skill of user?.skills; #i = index">
           <fieldset class="form-group row">
@@ -179,11 +148,25 @@
     </div>
   </div>
 
-  <div class="tab-pane" id="education-editable" role="tabpanel">
-    <div class="card">
-      <div class="card-header">
-        <i class="fa fa-graduation-cap" aria-hidden="true"></i> Education
-      </div>
+  <div class="tab-pane" id="education" role="tabpanel">
+    <div class="card" *ngIf="!editable">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <h4 class="list-group-item-heading">B.S. Computer Science</h4>
+          <p class="list-group-item-text">University Of Houston</p>
+        </li>
+        <li class="list-group-item">
+          <h4 class="list-group-item-heading">Sitecore C# Developer Certification</h4>
+          <p class="list-group-item-text">Sitecore</p>
+        </li>
+        <li class="list-group-item">
+          <h4 class="list-group-item-heading">Angular Certification</h4>
+          <p class="list-group-item-text">Angular School</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card" *ngIf="editable">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <h4 class="list-group-item-heading">B.S. Computer Science</h4>

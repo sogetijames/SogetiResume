@@ -25,7 +25,7 @@ export class SearchComponent {
 	constructor(
 		private _userService: UserService,
 		private _valuesPipe: ValuesPipe,
-		private _searchPipe: SearchPipe,
+		private _searchPipe: SearchPipe
 	) { 
 		this.searchText = '';
 		this.searchResults = [];

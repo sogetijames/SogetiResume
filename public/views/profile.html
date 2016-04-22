@@ -1,11 +1,13 @@
-<form>
-<div class="row" >
+<form style="margin-bottom:50px;">
+<div class="row">
+  <!-- Image -->
   <div class="col-sm-2">
     <img class="img-fluid img-rounded" [ngClass]="{'red-profile': user?.status?.text == 'PTO', 'green-profile': user?.status?.text == 'ATO', 'yellow-profile': user?.status?.text == 'Project'}" src="{{user?.profileImageURL}}" />
     <a *ngIf="editable" target="_blank" href="https://en.gravatar.com/connect/">Change Gravatar</a>
   </div>
+
   <!-- Non Editable -->
-  <div class="col-sm-8" *ngIf="!editable">
+  <div class="col-sm-10" *ngIf="!editable">
     <h2 class="red-font">{{ user?.first + " " + user?.last  }} <small class="text-muted">{{ user?.email }}</small></h2>
     <h5 class="top-buffer">
       {{ user?.title }} 
@@ -16,9 +18,9 @@
     </h5>
     <p class="top-buffer" [ngClass]="{'red-font': user?.status?.text == 'PTO', 'green-font': user?.status?.text == 'ATO', 'yellow-font': user?.status?.text == 'Project'}">{{ user?.status?.text}} <span *ngIf="user?.status?.description!='' ">{{": " + user?.status?.description}}</span></p>
   </div> 
-  <!-- Editable -->
-  <div class="col-sm-8" *ngIf="editable">
 
+  <!-- Editable -->
+  <div class="col-sm-10" *ngIf="editable">
     <fieldset class="form-group row">
       <div class="col-xl-6">
         <input type="text" class="form-control" [(ngModel)]="user.first" placeholder="firstname">
@@ -46,12 +48,7 @@
         <input type="text" class="form-control" [(ngModel)]="user.status.description" placeholder="description (optional)">
       </div>
     </fieldset>
-  </div> 
-  <div class="col-sm-1">
-    <button type="button" class="btn btn-link" (click)="clickEdit()" *ngIf="!editable && _currentUser.auth.uid == uid"><i class="fa fa-pencil-square-o black-font" aria-hidden="true"> Edit</i></button>
-    <button type="button" class="btn btn-link" (click)="clickSave()" *ngIf="editable"><i class="fa fa-floppy-o green-font" aria-hidden="true"> Save</i></button>
-    <button type="button" class="btn btn-link" (click)="clickCancel()" *ngIf="editable"><i class="fa fa-times red-font" aria-hidden="true"> Cancel</i></button>
-  </div>
+  </div>   
 </div>
 
 <!-- Tab Nav -->
@@ -200,5 +197,32 @@
       </ul>
     </div>
   </div>
+</div>
+
+<!-- Footer -->
+<div class="row" *ngIf="_currentUser.auth.uid == uid">
+  <nav class="navbar navbar-fixed-bottom navbar-default">
+    <ul class="nav navbar-nav">
+      <li class="pull-xs-right" *ngIf="!editable">
+        <button type="button" class="btn btn-secondary" (click)="clickEdit()">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"> Edit</i>
+        </button>
+      </li>
+      <li class="pull-xs-right" *ngIf="editable">
+        <div class="btn-toolbar" role="toolbar">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-secondary red-font" (click)="clickCancel()">
+              <i class="fa fa-times" aria-hidden="true"> Cancel</i>
+            </button> 
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-secondary green-font" (click)="clickSave()">
+              <i class="fa fa-floppy-o" aria-hidden="true"> Save</i>
+            </button>
+          </div>
+        </div>        
+      </li>
+    </ul>
+  </nav>
 </div>
 </form>

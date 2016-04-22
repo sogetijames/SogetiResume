@@ -57,22 +57,22 @@
 <!-- Tab Nav -->
 <ul class="nav nav-pills top-buffer bottom-buffer" role="tablist">
   <li class="nav-item">
-    <a class="nav-link active" role="button" data-toggle="pill" data-target="#bio" aria-controls="bio">
+    <a class="nav-link red-font active" role="button" data-toggle="pill" data-target="#bio" aria-controls="bio">
       <i class="fa fa-book" aria-hidden="true"></i> Bio
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" role="button" data-toggle="pill" data-target="#projects" aria-controls="projects">
+    <a class="nav-link red-font" role="button" data-toggle="pill" data-target="#projects" aria-controls="projects">
       <i class="fa fa-folder-open" aria-hidden="true"></i> Projects
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" role="button" data-toggle="pill" data-target="#skills" aria-controls="skills">
+    <a class="nav-link red-font" role="button" data-toggle="pill" data-target="#skills" aria-controls="skills">
       <i class="fa fa-tasks" aria-hidden="true"></i> Skills
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" role="button" data-toggle="pill" data-target="#education" aria-controls="education">
+    <a class="nav-link red-font" role="button" data-toggle="pill" data-target="#education" aria-controls="education">
       <i class="fa fa-graduation-cap" aria-hidden="true"></i> Education
     </a>
   </li>
@@ -119,7 +119,7 @@
     <!-- Not Editable -->
     <div *ngIf="!editable" >
       <div class="col-md-2" *ngFor="#skill of user?.skills">
-        <div class="card text-xl-center" [ngClass]="{'awareness-skill': skill?.value == proficiencyArr[0], 'novice-skill': skill?.value == proficiencyArr[1], 'intermediate-skill': skill?.value == proficiencyArr[2], 'advanced-skill': skill?.value == proficiencyArr[3], 'expert-skill': skill?.value == proficiencyArr[4]}">
+        <div style="color: White;" class="card text-xl-center" [ngClass]="{'awareness-skill': skill?.value == proficiencyArr[0], 'novice-skill': skill?.value == proficiencyArr[1], 'intermediate-skill': skill?.value == proficiencyArr[2], 'advanced-skill': skill?.value == proficiencyArr[3], 'expert-skill': skill?.value == proficiencyArr[4]}">
           <div class="card-block">
             <h4 class="card-title red-font"></h4>
             <p class="card-text">{{ skill?.key }}</p>

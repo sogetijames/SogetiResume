@@ -135,12 +135,12 @@
     <div *ngIf="editable">
       <div class="col-md-2" *ngFor="#skill of user?.skills; #i = index">
         <div class="card text-xl-center">
-          <div class="card-header text-xs-right" style="padding:3px;">
+          <div class="card-header text-xs-right" style="padding:3px;" [ngClass]="{'awareness-skill': skill?.value == proficiencyArr[0], 'novice-skill': skill?.value == proficiencyArr[1], 'intermediate-skill': skill?.value == proficiencyArr[2], 'advanced-skill': skill?.value == proficiencyArr[3], 'expert-skill': skill?.value == proficiencyArr[4]}">
             <button type="button" class="btn btn-sm btn-secondary-outline" (click)="user.skills.splice(i, 1)">
               <i class="fa fa-times" aria-hidden="true"></i>
             </button>
           </div>
-          <div class="card-block" style="padding:5px;">
+          <div class="card-block" style="padding:5px;" [ngClass]="{'awareness-skill': skill?.value == proficiencyArr[0], 'novice-skill': skill?.value == proficiencyArr[1], 'intermediate-skill': skill?.value == proficiencyArr[2], 'advanced-skill': skill?.value == proficiencyArr[3], 'expert-skill': skill?.value == proficiencyArr[4]}">
             <fieldset class="form-group">
               <input type="text" class="form-control" [(ngModel)]="skill.key" placeholder="Skill">
             </fieldset>

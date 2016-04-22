@@ -1,7 +1,7 @@
 import {Component,Input} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {FirebaseRef} from './firebase-ref';
-import {ValuesPipe, SearchPipe} from './values.pipe';
+import {ValuesPipe, SearchPipe, FilterPipe} from './values.pipe';
 import {UserService} from './user.service';
 import {Constants} from './currentUser';
 
@@ -15,12 +15,16 @@ import {Constants} from './currentUser';
 	],
 	directives: [
 		ROUTER_DIRECTIVES
+	],
+	pipes: [
+		FilterPipe
 	]
 })
 export class SearchComponent {
 	usersObject: any;
 	skillsObject: any;
 	searchResults: any[];
+	filteredResults: any[];
 	searchText: string;
 	selectedStatus: any;
 	selectedTitle: any;
@@ -39,6 +43,7 @@ export class SearchComponent {
 		this.selectedPractice = 'Any';
 		this.selectedUnit = 'Any';
 		this.searchResults = [];
+		this.filteredResults = [];
 
 		FirebaseRef.on('value', (dataSnapshot) => {
 			let data = dataSnapshot.val();

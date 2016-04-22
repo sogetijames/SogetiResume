@@ -47,3 +47,37 @@ export class SearchPipe implements PipeTransform {
 		return retArray;
 	}
 }
+
+@Pipe({name: 'filter'})
+export class FilterPipe implements PipeTransform {
+	transform(value: any, args: any[]): Object[] {
+		let usersObject = value;
+		let filterObject = args[0];
+		let retArray = [];
+
+		if (usersObject != undefined && filterObject != undefined) {
+			Object.keys(usersObject).forEach((uid) => {
+				let filterKey = Object.keys(filterObject)[0];
+				let filterText = filterObject[filterKey];
+
+				if (filterText == 'Any') {
+					retArray.push(usersObject[uid]);
+				} else if (filterKey == 'status') {
+					if (usersObject[uid][filterKey]['text'].indexOf(filterObject[filterKey]) > -1 && 
+						retArray.indexOf(usersObject[uid]) == -1
+					) {
+						retArray.push(usersObject[uid]);
+					} 
+				} else {
+					if (usersObject[uid][filterKey].indexOf(filterObject[filterKey]) > -1 && 
+						retArray.indexOf(usersObject[uid]) == -1
+					) {
+						retArray.push(usersObject[uid]);
+					} 
+				}
+			});
+		}
+
+		return retArray;
+	}
+}

@@ -76,7 +76,11 @@
 </div>
 
 <div class="row top-buffer" *ngIf="searchResults.length > 0">
-	<div class="col-xl-2" *ngFor="#result of searchResults">
+	<div class="col-xl-2" *ngFor="#result of searchResults 
+									| filter:{'status':selectedStatus} 
+									| filter:{'title':selectedTitle}  
+									| filter:{'practice':selectedPractice}  
+									| filter:{'unit':selectedUnit} ">
 		<a [routerLink]="['Profile', { username: result?.email?.split('@')[0].replace('.', '_') }]" class="card-link">
 			<div class="card card-hover text-xl-center" [ngClass]="{'red-profile': result?.status?.text == 'PTO', 'green-profile': result?.status?.text == 'ATO', 'yellow-profile': result?.status?.text == 'Project'}">
 				<div class="card-block">

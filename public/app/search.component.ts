@@ -17,25 +17,31 @@ import {UserService} from './user.service';
 	]
 })
 export class SearchComponent {
-	allUsers: any;
+	usersObject: any;
+	skillsObject: any;
 	searchResults: any;
 	searchText: string;
 
 	constructor(
 		private _userService: UserService,
 		private _valuesPipe: ValuesPipe,
-		private _searchPipe: SearchPipe
+		private _searchPipe: SearchPipe,
 	) { 
 		this.searchText = '';
 		this.searchResults = [];
 
 		FirebaseRef.child('users').orderByChild('active').equalTo(true).on('value', (users) => {
-			this.allUsers = this._valuesPipe.transform(users.val());
-			this.searchUsers(null);
+			this.usersObject = users.val();
+		});
+
+		FirebaseRef.child('skills').on('value', (skills) => {
+			this.skillsObject = skills.val();
 		});
 	}
 
 	searchUsers(event: any) {
-		this.searchResults = this._searchPipe.transform(this.allUsers, [this.searchText]);
+		if (this.searchText != '') {
+			this.searchResults = this._searchPipe.transform(this.usersObject, [this.skillsObject, this.searchText]);
+		}
 	}
 }

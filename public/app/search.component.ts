@@ -30,18 +30,26 @@ export class SearchComponent {
 		this.searchText = '';
 		this.searchResults = [];
 
-		FirebaseRef.child('users').orderByChild('active').equalTo(true).on('value', (users) => {
-			this.usersObject = users.val();
-		});
+		FirebaseRef.on('value', (dataSnapshot) => {
+			let data = dataSnapshot.val();
 
-		FirebaseRef.child('skills').on('value', (skills) => {
-			this.skillsObject = skills.val();
+			Object.keys(data.users).forEach((key) => {
+				if (!data.users[key].active) {
+					delete data.users[key];
+				}
+			});
+
+			this.usersObject = data.users;
+			this.skillsObject = data.skills;
+			this.searchUsers(null);
 		});
 	}
 
 	searchUsers(event: any) {
 		if (this.searchText != '') {
 			this.searchResults = this._searchPipe.transform(this.usersObject, [this.skillsObject, this.searchText]);
+		} else {
+			this.searchResults = this._valuesPipe.transform(this.usersObject);
 		}
 	}
 }

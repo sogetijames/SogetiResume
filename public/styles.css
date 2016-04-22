@@ -4,6 +4,26 @@ div {
     font-family: 'Oswald', sans-serif;
 }
 
+/*Skill colors*/
+.awareness-skill {
+    background-color: #e5e5e5;
+}
+.novice-skill {
+    background-color: #00b8e6;
+}
+.intermediate-skill {
+    background-color: #cccc00;
+}
+.advanced-skill {
+    background-color: #cc7a00;
+}
+.expert-skill {
+    background-color: #b30000;
+}
+
+
+
+
 .red-profile {
     border: 5px solid #b30000;
 }
@@ -82,11 +102,6 @@ div {
     background-color: #e5e5e5;
 }
 
-.card-hover:hover {
-    background-color: #e5e5e5;
-}
-
-
 /* ------------------------------------Media------------------------------------ */
 @media (min-width: 979px) {
   ul.nav li.dropdown:hover > div.dropdown-menu {
@@ -158,5 +173,5 @@ a:focus, a:hover {
 }
 
 a {
-    color: #d9d9d9; 
+    color: #e5e5e5; 
 }

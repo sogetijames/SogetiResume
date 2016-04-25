@@ -70,6 +70,8 @@ export class AppComponent {
 				this.setCurrentUserInfo(authData.uid);
 			}
 		});
+
+		toastr.options.positionClass = "toast-top-right";		
 	}
 
 	onClickLogout() {

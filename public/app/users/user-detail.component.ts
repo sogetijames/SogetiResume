@@ -73,6 +73,11 @@ export class UserDetailComponent {
 		this.saveUserSkills();
 		this.userCopy = $.extend(true, {}, this.user);
 		this.editable = !this.editable;
+
+		this.sortSkillsNameAZ = true;
+		this.showSkillNameArrow = true;
+		this.showSkillProficiencyArrow = false;
+		this.user.skills.sort(this.dynamicSort('key'));
 	}
 
 	private saveUserInfo() {
@@ -93,9 +98,9 @@ export class UserDetailComponent {
 
 		userRef.update(userObj, (error) => {
 			if (error) {
-				console.error(error);
+				toastr.error('Error: ' + error);
 			} else {
-				console.log("User Info saved successfully.");
+				toastr.success('Profile Saved Successfully!');
 			}
 		});
 	}
@@ -111,9 +116,9 @@ export class UserDetailComponent {
 
 		skillsRef.set(skillsObj, (error) => {
 			if (error) {
-				console.error(error);
+				toastr.error('Error: ' + error);
 			} else {
-				console.log("User Skills saved successfully.");
+				toastr.success('Skills Saved Successfully!');
 			}
 		});
 	}

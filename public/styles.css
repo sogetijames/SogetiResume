@@ -4,6 +4,11 @@ div {
     font-family: 'Oswald', sans-serif;
 }
 
+/* Toastr Overwrite */
+.toast-top-right {
+    top: 66px;
+}
+
 /*Skill colors*/
 .awareness-skill, .awareness-skill > .card-header {
     background-color: #e5e5e5 !important;
@@ -21,9 +26,6 @@ div {
     background-color: #b30000 !important;
 }
 
-
-
-
 .red-profile {
     border: 5px solid #b30000;
 }
@@ -37,15 +39,12 @@ div {
 .red-font {
     color: #b30000;
 }
-
 .black-font {
     color: Black;
 }
-
 .green-font {
     color: #008000;
 }
-
 .yellow-font {
     color: #cccc00;
 }
@@ -53,7 +52,6 @@ div {
 .top-buffer {
 	margin-top: 20px;
 }
-
 .bottom-buffer {
     margin-bottom: 20px;
 }

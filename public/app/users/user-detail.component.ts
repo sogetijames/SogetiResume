@@ -98,7 +98,7 @@ export class UserDetailComponent {
 
 		userRef.update(userObj, (error) => {
 			if (error) {
-				toastr.error('Error: ' + error);
+				toastr.error(error);
 			} else {
 				toastr.success('Profile Saved Successfully!');
 			}
@@ -116,7 +116,7 @@ export class UserDetailComponent {
 
 		skillsRef.set(skillsObj, (error) => {
 			if (error) {
-				toastr.error('Error: ' + error);
+				toastr.error(error);
 			} else {
 				toastr.success('Skills Saved Successfully!');
 			}

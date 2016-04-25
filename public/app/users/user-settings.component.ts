@@ -50,15 +50,15 @@ export class UserSettingsComponent implements OnInit {
 		if (this.newPassword1 == this.newPassword2) {
 			this._authenticationService.changePassword(email, oldPassword, newPassword, (error: any) => {
 				if (error === null) {
-					console.log("Password changed successfully");
+					toastr.success("Password changed successfully!");
 				} else {
-					console.log("Error changing password:", error);
+					toastr.error(error);
 				}
+				this.resetPasswordFields();
 			});
 		} else {
-			console.log("New Passwords do not match.");
+			toastr.error('Error: Passwords do not match!');
+			this.resetPasswordFields();
 		}	
-		
-		this.resetPasswordFields();
 	}
 }

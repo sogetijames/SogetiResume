@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 					this._router.navigate(['Profile', { username: this.email.replace('.', '_') }]);
 				}, 
 				(error: any) => {
-					console.log(error);
+					toastr.error(error);
 				}
 			);
 		}
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
 			this._authenticationService.createUser(email, this.password, 
 				(error: any, authData: FirebaseAuthData) => {
 					if (error) {
-						console.log(error);
+						toastr.error(error);
 					} else {
 						FirebaseRef.child('/users').child(authData.uid).update({
 							active: true,

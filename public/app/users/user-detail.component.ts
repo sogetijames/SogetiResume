@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
 import {NgClass} from 'angular2/common';
 import {Router, RouteParams} from 'angular2/router';
-import {CurrentUser, FirebaseRef, Constants} from '../shared/shared';
+import {CurrentUser, FirebaseRef, FirebaseData} from '../shared/shared';
 import {ValuesPipe} from '../shared/pipe';
 import {UserService} from './user.service';
 
@@ -32,7 +32,7 @@ export class UserDetailComponent {
 		private _routeParams: RouteParams,
 		private _router: Router,
 		private _valuesPipe: ValuesPipe,
-		private _constants: Constants
+		private _firebaseData: FirebaseData
 	) {
 		this.editable = false;
 

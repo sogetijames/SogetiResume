@@ -1,6 +1,6 @@
-import {Component,Input} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
-import {Constants, FirebaseData} from '../shared/shared';
+import {FirebaseData} from '../shared/shared';
 import {ValuesPipe, SearchPipe, FilterPipe} from '../shared/pipe';
 
 @Component({
@@ -15,9 +15,12 @@ import {ValuesPipe, SearchPipe, FilterPipe} from '../shared/pipe';
 	],
 	pipes: [
 		FilterPipe
+	],
+	viewBindings: [
+		FirebaseData
 	]
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
 	searchResults: any[];
 	searchText: string;
 	selectedStatus: any;
@@ -26,20 +29,21 @@ export class SearchComponent {
 	selectedUnit: any;
 	showFilterRow: boolean;
 
-	constructor(
-		private _valuesPipe: ValuesPipe,
-		private _searchPipe: SearchPipe,
-		private _constants: Constants,
-		private _firebaseData: FirebaseData
-	) { 
+	ngOnInit() {
 		this.searchText = '';
 		this.selectedStatus = '';
 		this.selectedTitle = '';
 		this.selectedPractice = '';
 		this.selectedUnit = '';
-		this.showFilterRow = false;
+		this.showFilterRow = false;	
+	}
 
-		this.searchResults = this._valuesPipe.transform(this._firebaseData.users);
+	constructor(
+		private _valuesPipe: ValuesPipe,
+		private _searchPipe: SearchPipe,
+		private _firebaseData: FirebaseData 
+	) { 
+		this.searchResults = this._valuesPipe.transform(this._firebaseData.users);			
 	}
 
 	resetFilters() {

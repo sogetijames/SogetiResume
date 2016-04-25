@@ -14,12 +14,14 @@ export class CurrentUser {
 }
 
 @Injectable()
-export class Constants {
+export class FirebaseData {
 	public practices: any;
 	public statuses: any;
 	public titles: any;
 	public units: any;
 	public proficiency: any;
+	public users: any;
+	public skills: any;
 
 	constructor() {
 		FirebaseRef.child('constants').once('value', (dataSnapshot: FirebaseDataSnapshot) => {
@@ -30,26 +32,21 @@ export class Constants {
 			this.units = Object.keys(data.units);
 			this.proficiency = data.proficiency;
 		});
-	}
-}
 
-@Injectable()
-export class FirebaseData {
-	public users: Object;
-	public skills: Object;
+		FirebaseRef.child('users').on('value', (usersSnapshot: FirebaseDataSnapshot) => {
+			let users = usersSnapshot.val();
 
-	constructor() {
-		FirebaseRef.on('value', (dataSnapshot) => {
-			let data = dataSnapshot.val();
-
-			Object.keys(data.users).forEach((key) => {
-				if (!data.users[key].active) {
-					delete data.users[key];
+			Object.keys(users).forEach((key) => {
+				if (!users[key].active) {
+					delete users[key];
 				}
 			});
 
-			this.users = data.users;
-			this.skills = data.skills;
+			this.users = users;
+		});
+
+		FirebaseRef.child('skills').on('value', (skillsSnapshot: FirebaseDataSnapshot) => {
+			this.skills = skillsSnapshot.val();
 		});
 	}
 }

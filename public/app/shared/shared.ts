@@ -1,5 +1,7 @@
 import {Injectable} from "angular2/core";
 
+export var FirebaseRef: Firebase = new Firebase('https://dazzling-inferno-8835.firebaseio.com');
+
 @Injectable()
 export class CurrentUser {
     public auth: any = {};

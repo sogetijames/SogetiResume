@@ -1,15 +1,12 @@
 import {Component} from 'angular2/core';
 import {Router, RouteParams} from 'angular2/router';
-import {FirebaseRef} from './firebase-ref';
-import {CurrentUser} from './currentUser';
+import {CurrentUser, FirebaseRef} from '../shared/shared';
+import {ValuesPipe} from '../shared/pipe';
 import {UserService} from './user.service';
-import {ValuesPipe} from './values.pipe';
-import {NgClass} from 'angular2/common';
 
 @Component({
 	selector: 'user-detail',
-	templateUrl: '../views/profile.html',
-  directives: [NgClass],
+	templateUrl: '../../views/user-detail.component.html',
 	providers: [ 
 		UserService,
 		ValuesPipe

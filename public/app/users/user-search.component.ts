@@ -1,13 +1,12 @@
 import {Component,Input} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
-import {FirebaseRef} from './firebase-ref';
-import {ValuesPipe, SearchPipe, FilterPipe} from './values.pipe';
+import {CurrentUser, Constants, FirebaseRef} from '../shared/shared';
+import {ValuesPipe, SearchPipe, FilterPipe} from '../shared/pipe';
 import {UserService} from './user.service';
-import {Constants} from './currentUser';
 
 @Component({
 	selector: 'search',
-	templateUrl: "../views/search.html",
+	templateUrl: "../../views/user-search.component.html",
 	providers: [ 
 		UserService,
 		ValuesPipe,

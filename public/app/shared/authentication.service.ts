@@ -1,5 +1,5 @@
 import {Injectable, Inject} from 'angular2/core';
-import {FirebaseRef} from './firebase-ref';
+import {FirebaseRef} from './shared';
 
 @Injectable()
 export class AuthenticationService {

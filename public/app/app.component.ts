@@ -1,16 +1,16 @@
 import {Component} from 'angular2/core';
 import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 import {Observable} from 'rxjs/Observable';
-import {LoginComponent} from './login.component';
-import {UserDetailComponent} from './user-detail.component';
-import {FooterComponent} from './footer.component';
-import {UserService} from './user.service';
-import {AuthenticationService} from './authentication.service';
-import {ValuesPipe} from './values.pipe';
-import {FirebaseRef} from './firebase-ref';
-import {SearchComponent} from './search.component';
-import {CurrentUser, Constants} from './currentUser';
-import {UserSettingsComponent} from './user-settings.component';
+
+import {CurrentUser, Constants, FirebaseRef} from './shared/shared';
+import {AuthenticationService} from './shared/authentication.service';
+import {ValuesPipe} from './shared/pipe';
+
+import {UserDetailComponent} from './users/user-detail.component';
+import {LoginComponent} from './users/user-login.component';
+import {SearchComponent} from './users/user-search.component';
+import {UserSettingsComponent} from './users/user-settings.component';
+import {UserService} from './users/user.service';
 
 @Component({
 	selector: 'my-app',
@@ -19,10 +19,9 @@ import {UserSettingsComponent} from './user-settings.component';
 		UserService,
 		AuthenticationService
 	],
-	templateUrl: "../views/nav.html",
+	templateUrl: "../views/app.component.html",
 	directives: [
-		ROUTER_DIRECTIVES, 
-		FooterComponent
+		ROUTER_DIRECTIVES
 	],
 	pipes: [
 		ValuesPipe

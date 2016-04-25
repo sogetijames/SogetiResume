@@ -1,12 +1,11 @@
 import {Component, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
-import {FirebaseRef} from './firebase-ref';
-import {CurrentUser} from './currentUser';
+import {CurrentUser, FirebaseRef} from '../shared/shared';
 import {UserService} from './user.service';
 
 @Component({
 	selector: 'user-settings',
-	templateUrl: '../views/settings.html',
+	templateUrl: '../../views/user-settings.component.html',
 	providers: [ 
 		UserService
 	],

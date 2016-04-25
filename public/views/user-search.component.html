@@ -1,77 +1,54 @@
-<div class="row">
-	<div class="col-xl-12">
-		<input [(ngModel)]="searchText" class="form-control search" type="text" placeholder="Search" (keyup)="searchUsers($event)">
-	</div>
-</div>
-
 <div class="row top-buffer">
-	<div class="col-md-3">
-		<div class="input-group">
-			<div class="input-group-btn">
-				<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Status
-				</button>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" role="button" (click)="selectedStatus = 'Any'">Any Status</a>
-					<div role="separator" class="dropdown-divider"></div>
-					<a class="dropdown-item" role="button" *ngFor="#status of _constants?.statuses" (click)="selectedStatus = status">
-						{{ status }}
-					</a>
-				</div>
+	<div class="col-xl-12">
+		<form>
+			<div class="row">
+				<div class="col-xs-12 col-xl-12 bottom-buffer">
+					<div class="input-group">
+						<input [(ngModel)]="searchText" class="form-control search" type="text" placeholder="Search" (keyup)="searchUsers($event)">
+						<span class="input-group-btn">
+							<button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#filterRow" (click)="showFilterRow = !showFilterRow">
+								Filter <i class="fa" [ngClass]="{'fa-caret-square-o-down': !showFilterRow, 'fa-caret-square-o-up': showFilterRow}" aria-hidden="true"></i>
+							</button>
+						</span>
+					</div>				
+				</div>				
 			</div>
-			<input [(ngModel)]="selectedStatus" type="text" class="form-control" readonly="true">
-		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="input-group">
-			<div class="input-group-btn">
-				<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Title
-				</button>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" role="button" (click)="selectedTitle = 'Any'">Any Title</a>
-					<div role="separator" class="dropdown-divider"></div>
-					<a class="dropdown-item" role="button" *ngFor="#title of _constants?.titles" (click)="selectedTitle = title">
-						{{ title }}
-					</a>
+			<div id="filterRow" class="collapse">
+				<div class="card">
+					<div class="card-header" style="padding:5px;margin:0;">
+						<div class="row">
+							<div class="col-xs-12 col-xl-3">
+								<select [(ngModel)]="selectedStatus" class="form-control">
+									<option [value]="''">Any Status</option>
+									<option *ngFor="#status of _constants?.statuses">{{ status }}</option>
+								</select>
+							</div>
+							<div class="col-xs-12 col-xl-3 bottom-buffer">
+								<select [(ngModel)]="selectedTitle" class="form-control">
+									<option [value]="''">Any Title</option>
+									<option *ngFor="#title of _constants?.titles">{{ title }}</option>
+								</select>
+							</div>
+							<div class="col-xs-12 col-xl-3 bottom-buffer">
+								<select [(ngModel)]="selectedPractice" class="form-control">
+									<option [value]="''">Any Practice</option>
+									<option *ngFor="#practice of _constants?.practices">{{ practice }}</option>
+								</select>
+							</div>
+							<div class="col-xs-12 col-xl-2 bottom-buffer">
+								<select [(ngModel)]="selectedUnit" class="form-control">
+									<option [value]="''">Any Unit</option>
+									<option *ngFor="#unit of _constants?.units">{{ unit }}</option>
+								</select>
+							</div>
+							<div class="col-xs-12 col-xl-1 bottom-buffer text-xl-right">
+								<button type="button" class="btn btn-danger-outline" (click)="resetFilters()">Reset</button>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-			<input [(ngModel)]="selectedTitle" type="text" class="form-control" readonly="true">
-		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="input-group">
-			<div class="input-group-btn">
-				<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Practice
-				</button>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" role="button" (click)="selectedPractice = 'Any'">Any Practice</a>
-					<div role="separator" class="dropdown-divider"></div>
-					<a class="dropdown-item" role="button" *ngFor="#practice of _constants?.practices" (click)="selectedPractice = practice">
-						{{ practice }}
-					</a>
-				</div>
-			</div>
-			<input [(ngModel)]="selectedPractice" type="text" class="form-control" readonly="true">
-		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="input-group">
-			<div class="input-group-btn">
-				<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Unit
-				</button>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" role="button" (click)="selectedUnit = 'Any'">Any Unit</a>
-					<div role="separator" class="dropdown-divider"></div>
-					<a class="dropdown-item" role="button" *ngFor="#unit of _constants?.units" (click)="selectedUnit = unit">
-						{{ unit }}
-					</a>
-				</div>
-			</div>
-			<input [(ngModel)]="selectedUnit" type="text" class="form-control" readonly="true">
-		</div>
+			</div>			
+		</form>
 	</div>
 </div>
 

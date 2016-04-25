@@ -60,7 +60,7 @@ export class FilterPipe implements PipeTransform {
 				let filterKey = Object.keys(filterObject)[0];
 				let filterText = filterObject[filterKey];
 
-				if (filterText == 'Any') {
+				if (filterText == '') {
 					retArray.push(usersObject[uid]);
 				} else if (filterKey == 'status') {
 					if (usersObject[uid][filterKey]['text'].indexOf(filterObject[filterKey]) > -1 && 

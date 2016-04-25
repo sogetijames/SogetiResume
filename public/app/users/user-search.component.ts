@@ -24,6 +24,7 @@ export class SearchComponent {
 	selectedTitle: any;
 	selectedPractice: any;
 	selectedUnit: any;
+	showFilterRow: boolean;
 
 	constructor(
 		private _valuesPipe: ValuesPipe,
@@ -32,10 +33,21 @@ export class SearchComponent {
 		private _firebaseData: FirebaseData
 	) { 
 		this.searchText = '';
-		this.selectedStatus = 'Any';
-		this.selectedTitle = 'Any';
-		this.selectedPractice = 'Any';
-		this.selectedUnit = 'Any';
+		this.selectedStatus = '';
+		this.selectedTitle = '';
+		this.selectedPractice = '';
+		this.selectedUnit = '';
+		this.showFilterRow = false;
+
+		this.searchResults = this._valuesPipe.transform(this._firebaseData.users);
+	}
+
+	resetFilters() {
+		this.searchText = '';
+		this.selectedStatus = '';
+		this.selectedTitle = '';
+		this.selectedPractice = '';
+		this.selectedUnit = '';
 
 		this.searchResults = this._valuesPipe.transform(this._firebaseData.users);
 	}

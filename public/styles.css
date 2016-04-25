@@ -118,11 +118,14 @@ div {
     border-color: #b30000;
 }
 /* title */
-.navbar-default .navbar-brand {
+.navbar-default .navbar-brand,
+.navbar-default .navbar-toggler {
     color: White;
 }
 .navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-toggler:hover,
+.navbar-default .navbar-toggler:hover  {
     color: #d9d9d9;
 }
 /* link */

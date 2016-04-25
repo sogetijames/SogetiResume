@@ -1,14 +1,12 @@
 import {Component,Input} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
-import {CurrentUser, Constants, FirebaseRef} from '../shared/shared';
+import {Constants, FirebaseData} from '../shared/shared';
 import {ValuesPipe, SearchPipe, FilterPipe} from '../shared/pipe';
-import {UserService} from './user.service';
 
 @Component({
 	selector: 'search',
 	templateUrl: "../../views/user-search.component.html",
 	providers: [ 
-		UserService,
 		ValuesPipe,
 		SearchPipe
 	],
@@ -20,10 +18,7 @@ import {UserService} from './user.service';
 	]
 })
 export class SearchComponent {
-	usersObject: any;
-	skillsObject: any;
 	searchResults: any[];
-	filteredResults: any[];
 	searchText: string;
 	selectedStatus: any;
 	selectedTitle: any;
@@ -31,39 +26,26 @@ export class SearchComponent {
 	selectedUnit: any;
 
 	constructor(
-		private _userService: UserService,
 		private _valuesPipe: ValuesPipe,
 		private _searchPipe: SearchPipe,
-		private _constants: Constants
+		private _constants: Constants,
+		private _firebaseData: FirebaseData
 	) { 
+		this.searchResults = [];
 		this.searchText = '';
 		this.selectedStatus = 'Any';
 		this.selectedTitle = 'Any';
 		this.selectedPractice = 'Any';
 		this.selectedUnit = 'Any';
-		this.searchResults = [];
-		this.filteredResults = [];
 
-		FirebaseRef.on('value', (dataSnapshot) => {
-			let data = dataSnapshot.val();
-
-			Object.keys(data.users).forEach((key) => {
-				if (!data.users[key].active) {
-					delete data.users[key];
-				}
-			});
-
-			this.usersObject = data.users;
-			this.skillsObject = data.skills;
-			this.searchUsers(null);
-		});
+		this.searchUsers(null);
 	}
 
 	searchUsers(event: any) {
 		if (this.searchText != '') {
-			this.searchResults = this._searchPipe.transform(this.usersObject, [this.skillsObject, this.searchText]);
+			this.searchResults = this._searchPipe.transform(this._firebaseData.users, [this._firebaseData.skills, this.searchText]);
 		} else {
-			this.searchResults = this._valuesPipe.transform(this.usersObject);
+			this.searchResults = this._valuesPipe.transform(this._firebaseData.users);
 		}
 	}
 }

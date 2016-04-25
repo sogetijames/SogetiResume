@@ -1,6 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {CurrentUser, FirebaseRef} from '../shared/shared';
+import {AuthenticationService} from '../shared/authentication.service';
 import {UserService} from './user.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class UserSettingsComponent implements OnInit {
 
 	constructor(
 		private _currentUser: CurrentUser,
-		private _router: Router
+		private _router: Router,
+		private _authenticationService: AuthenticationService
 	) { } 
 
 	ngOnInit() {
@@ -41,12 +43,12 @@ export class UserSettingsComponent implements OnInit {
 	}
 
 	changePassword() {
+		let email = this._currentUser.auth.password.email;
+		let oldPassword = this.oldPassword;
+		let newPassword = this.newPassword1;
+
 		if (this.newPassword1 == this.newPassword2) {
-			FirebaseRef.changePassword({
-				email       : this._currentUser.auth.password.email,
-	  			oldPassword : this.oldPassword,
-	  			newPassword : this.newPassword1
-	  		}, (error: any) => {
+			this._authenticationService.changePassword(email, oldPassword, newPassword, (error: any) => {
 				if (error === null) {
 					console.log("Password changed successfully");
 				} else {

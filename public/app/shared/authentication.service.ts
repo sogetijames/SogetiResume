@@ -13,6 +13,16 @@ export class AuthenticationService {
 		});
 	}
 
+	public changePassword(email: string, oldPassword: string, newPassword: string, callback) {
+		FirebaseRef.changePassword({
+			email       : email,
+  			oldPassword : oldPassword,
+  			newPassword : newPassword
+  		}, (error: any) => { 
+  			callback(error);
+  		});
+	}
+
 	public login(email: string, password: string) {
 		return FirebaseRef.authWithPassword({
 			email: email,

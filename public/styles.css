@@ -172,8 +172,9 @@ div {
 
 a:focus, a:hover {
     color: #b30000;
+    text-decoration: none;
 }
 
 a {
-    color: #e5e5e5; 
+    color: #ccc; 
 }

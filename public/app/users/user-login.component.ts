@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
 			this._authenticationService.createUser(email, this.password, 
 				(error: any, authData: FirebaseAuthData) => {
 					if (error) {
+						this.password = '';
 						toastr.error(error);
 					} else {
 						FirebaseRef.child('/users').child(authData.uid).update({
@@ -71,5 +72,28 @@ export class LoginComponent implements OnInit {
 				}
 			);
 		}		
+	}
+
+	onClickResetPassword() {
+		if (this.email != '') {
+			let email = this.email.toLowerCase() + "@us.sogeti.com";
+			
+			FirebaseRef.resetPassword({email: email}, (error) => {
+				if (error) {
+					switch (error.code) {
+						case "":
+							toastr.error('The specified user account does not exist.');
+							break;						
+						default:
+							toastr.error(error);
+							break;
+					}
+				} else {
+					toastr.info('Password reset email sent successfully!');
+				}
+			});
+		} else {
+			toastr.error('No email specified!');
+		}
 	}
 }

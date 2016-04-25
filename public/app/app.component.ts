@@ -36,13 +36,13 @@ import {UserService} from './users/user.service';
 	{
 		path: '/login',
 		name: 'Login',
-		component: LoginComponent,
-		useAsDefault: true
+		component: LoginComponent
 	},
 	{
 		path: '/search',
 		name: 'Search',
-		component: SearchComponent
+		component: SearchComponent,
+		useAsDefault: true
 	},
 	{
 		path: '/settings',

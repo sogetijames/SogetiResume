@@ -108,6 +108,10 @@ div {
 }
 
 /* ------------------------------------Boostrap Overwrite------------------------------------ */
+.navbar-default .navbar-nav > li > a.btn-secondary-outline:hover,
+.navbar-default .navbar-nav > li > a.btn-secondary-outline:focus {
+    color: #b30000;
+}
 /* navbar */
 .navbar-default {
     background-color: #b30000;

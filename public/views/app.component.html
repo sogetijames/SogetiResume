@@ -4,16 +4,10 @@
       &#9776;
     </button>
     <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
-      <a class="navbar-brand" [routerLink]="['Login']" *ngIf="!_currentUser.auth.uid">
-        <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Sogeti Resume
-      </a>
-      <a class="navbar-brand" [routerLink]="['Profile', { username: _currentUser.info?.username }]" *ngIf="_currentUser.auth.uid">
+      <a class="navbar-brand" [routerLink]="['Search']">
         <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Sogeti Resume
       </a>
       <ul class="nav navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['Search']"><i class="fa fa-search" aria-hidden="true"></i> Search</a>
-        </li>
         <li class="pull-xs-right dropdown" *ngIf="_currentUser.auth.uid">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             {{ _currentUser?.info?.first + " " + _currentUser?.info?.last }} <span class="caret"></span>
@@ -30,6 +24,9 @@
               <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
             </a>
           </div>
+        </li>
+        <li class="pull-xs-right" *ngIf="!_currentUser.auth.uid">
+          <a class="btn btn-secondary-outline" role="button" [routerLink]="['Login']">Login</a>
         </li>
       </ul>
     </div>

@@ -1,12 +1,16 @@
 import {Component} from 'angular2/core';
+import {NgClass} from 'angular2/common';
 import {Router, RouteParams} from 'angular2/router';
-import {CurrentUser, FirebaseRef} from '../shared/shared';
+import {CurrentUser, FirebaseRef, Constants} from '../shared/shared';
 import {ValuesPipe} from '../shared/pipe';
 import {UserService} from './user.service';
 
 @Component({
 	selector: 'user-detail',
 	templateUrl: '../../views/user-detail.component.html',
+	directives: [
+		NgClass
+	],
 	providers: [ 
 		UserService,
 		ValuesPipe
@@ -14,26 +18,28 @@ import {UserService} from './user.service';
 })
 export class UserDetailComponent {
 	editable: boolean;
-	proficiencyArr: any[];
-	statusArr: any[];
 	uid: string;
 	user: any;
 	userCopy: any;
-	aTOz: string;
-	profUp: string;
+	sortSkillsNameAZ: boolean;
+	sortSkillsProficiencyAZ: boolean;
+	showSkillNameArrow: boolean;
+	showSkillProficiencyArrow: boolean;
 
 	constructor(
 		private _currentUser: CurrentUser,
 		private _userService: UserService, 
 		private _routeParams: RouteParams,
 		private _router: Router,
-		private _valuesPipe: ValuesPipe
-	) {  
-		this.aTOz = "up";
-		this.profUp = "neutral";
+		private _valuesPipe: ValuesPipe,
+		private _constants: Constants
+	) {
 		this.editable = false;
-		this.proficiencyArr = ['Fundamental Awareness', 'Novice', 'Intermediate', 'Advanced', 'Expert'];
-		this.statusArr = ['ATO', 'Project', 'PTO'];
+
+		this.sortSkillsNameAZ = true;
+		this.sortSkillsProficiencyAZ = true;
+		this.showSkillNameArrow = true;
+		this.showSkillProficiencyArrow = false;
 
 		let username = this._routeParams.get('username');
 		this._userService.getUserByUsername(username.replace('_', '.')).then( user => {
@@ -52,28 +58,6 @@ export class UserDetailComponent {
 						value: skillsObj[key]
 					});
 				});
-
-				//set proficiency sort numbers
-				for(var i = 0; i < this.user.skills.length; i++) {
-					switch (this.user.skills[i].value)
-					{
-					  case this.proficiencyArr[0] : 
-					    this.user.skills[i].valueNumber = 0; 
-					    break; 
-					  case this.proficiencyArr[1] : 
-					    this.user.skills[i].valueNumber = 1; 
-					    break; 
-			    	case this.proficiencyArr[2] : 
-					    this.user.skills[i].valueNumber = 2; 
-					    break; 
-			    	case this.proficiencyArr[3] : 
-					    this.user.skills[i].valueNumber = 3; 
-					    break; 
-			    	case this.proficiencyArr[4] : 
-					    this.user.skills[i].valueNumber = 4; 
-					    break; 
-					}
-				}
 
 				this.userCopy = $.extend(true, {}, this.user);
 			});
@@ -139,71 +123,49 @@ export class UserDetailComponent {
 		this.editable = !this.editable;
 	}
 
-	sortSkills(sortType: string) {
-		let userSkills = this.user.skills;
-		if(userSkills.length > 0) {
-			var tempSkill = userSkills[0];
-			
-			if(sortType == "A-Z") {
-				this.aTOz = "up";
-				this.profUp = "neutral";
-				for (var i = userSkills.length - 1; i>=0; i--) {
-					for(var j = 1; j<=i; j++) {
-						if(userSkills[j-1].key.toLowerCase()>userSkills[j].key.toLowerCase()){
-				           var temp = userSkills[j-1];
-				           userSkills[j-1] = userSkills[j];
-				           userSkills[j] = temp;
-				        }
-					}
-				}
-			}
-				
-			if(sortType == "Z-A"){
-				this.aTOz = "down";
-				this.profUp = "neutral";
-				for (var i = userSkills.length - 1; i>=0; i--) {
-					for(var j = 1; j<=i; j++) {
-						if(userSkills[j-1].key.toLowerCase()<userSkills[j].key.toLowerCase()){
-				           var temp = userSkills[j-1];
-				           userSkills[j-1] = userSkills[j];
-				           userSkills[j] = temp;
-				        }
-					}
-				}	
-			}
-
-			if(sortType == "DOWN"){
-				this.aTOz = "neutral";
-				this.profUp = "down";
-				for (var i = userSkills.length - 1; i>=0; i--) {
-					for(var j = 1; j<=i; j++) {
-						if(userSkills[j-1].valueNumber<userSkills[j].valueNumber){
-				           var temp = userSkills[j-1];
-				           userSkills[j-1] = userSkills[j];
-				           userSkills[j] = temp;
-				        }
-					}
-				}	
-			}
-
-			if(sortType == "UP") {
-				this.aTOz = "neutral";
-				this.profUp = "up";
-				for (var i = userSkills.length - 1; i>=0; i--) {
-					for(var j = 1; j<=i; j++) {
-						if(userSkills[j-1].valueNumber>userSkills[j].valueNumber){
-				           var temp = userSkills[j-1];
-				           userSkills[j-1] = userSkills[j];
-				           userSkills[j] = temp;
-				        }
-					}
-				}
-			}
-
-
-
+	toggleSortSkillsByName() {
+		if (this.showSkillProficiencyArrow) {
+			this.sortSkillsNameAZ = true; 
+		} else {
+			this.sortSkillsNameAZ = !this.sortSkillsNameAZ; 
 		}
-		
-	  	
+
+		this.showSkillNameArrow = true;
+		this.showSkillProficiencyArrow = false;
+
+		if (this.sortSkillsNameAZ) {
+			this.user.skills.sort(this.dynamicSort('key'));
+		} else {
+			this.user.skills.sort(this.dynamicSort('-key'));
+		}
+	}
+
+	toggleSortSkillsByProficiency() {
+		if (this.showSkillNameArrow) {
+			this.sortSkillsProficiencyAZ = true; 
+		} else {
+			this.sortSkillsProficiencyAZ = !this.sortSkillsProficiencyAZ; 
+		}
+
+		this.showSkillNameArrow = false;
+		this.showSkillProficiencyArrow = true;		
+
+		if (this.sortSkillsProficiencyAZ) {
+			this.user.skills.sort(this.dynamicSort('value'));
+		} else {
+			this.user.skills.sort(this.dynamicSort('-value'));
+		}
+	}
+
+	dynamicSort(property) {
+	    var sortOrder = 1;
+	    if(property[0] === "-") {
+	        sortOrder = -1;
+	        property = property.substr(1);
+	    }
+	    return function (a,b) {
+	        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+	        return result * sortOrder;
+	    }
 	}
 }			

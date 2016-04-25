@@ -5,20 +5,20 @@ div {
 }
 
 /*Skill colors*/
-.awareness-skill {
-    background-color: #e5e5e5;
+.awareness-skill, .awareness-skill > .card-header {
+    background-color: #e5e5e5 !important;
 }
-.novice-skill {
-    background-color: #00b8e6;
+.novice-skill, .novice-skill > .card-header {
+    background-color: #00b8e6 !important;
 }
-.intermediate-skill {
-    background-color: #cccc00;
+.intermediate-skill, .intermediate-skill > .card-header {
+    background-color: #cccc00 !important;
 }
-.advanced-skill {
-    background-color: #cc7a00;
+.advanced-skill, .advanced-skill > .card-header {
+    background-color: #cc7a00 !important;
 }
-.expert-skill {
-    background-color: #b30000;
+.expert-skill, .expert-skill > .card-header {
+    background-color: #b30000 !important;
 }
 
 

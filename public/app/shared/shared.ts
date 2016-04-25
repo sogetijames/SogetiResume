@@ -19,6 +19,7 @@ export class Constants {
 	public statuses: any;
 	public titles: any;
 	public units: any;
+	public proficiency: any;
 
 	constructor() {
 		FirebaseRef.child('constants').once('value', (dataSnapshot: FirebaseDataSnapshot) => {
@@ -27,6 +28,7 @@ export class Constants {
 			this.statuses = Object.keys(data.statuses);
 			this.titles = Object.keys(data.titles);
 			this.units = Object.keys(data.units);
+			this.proficiency = data.proficiency;
 		});
 	}
 }

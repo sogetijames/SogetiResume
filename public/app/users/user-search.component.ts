@@ -31,14 +31,13 @@ export class SearchComponent {
 		private _constants: Constants,
 		private _firebaseData: FirebaseData
 	) { 
-		this.searchResults = [];
 		this.searchText = '';
 		this.selectedStatus = 'Any';
 		this.selectedTitle = 'Any';
 		this.selectedPractice = 'Any';
 		this.selectedUnit = 'Any';
 
-		this.searchUsers(null);
+		this.searchResults = this._valuesPipe.transform(this._firebaseData.users);
 	}
 
 	searchUsers(event: any) {

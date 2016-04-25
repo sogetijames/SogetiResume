@@ -21,6 +21,8 @@ import {ValuesPipe, SearchPipe, FilterPipe} from '../shared/pipe';
 	]
 })
 export class SearchComponent implements OnInit {
+	firebaseUsers: any;
+	firebaseSkills: any;
 	searchResults: any[];
 	searchText: string;
 	selectedStatus: any;
@@ -36,6 +38,7 @@ export class SearchComponent implements OnInit {
 		this.selectedPractice = '';
 		this.selectedUnit = '';
 		this.showFilterRow = false;	
+		this.searchResults = [];
 	}
 
 	constructor(
@@ -43,7 +46,22 @@ export class SearchComponent implements OnInit {
 		private _searchPipe: SearchPipe,
 		private _firebaseData: FirebaseData 
 	) { 
-		this.searchResults = this._valuesPipe.transform(this._firebaseData.users);			
+		this._firebaseData.getUsers().then((usersSnapshot) => {
+			let users = usersSnapshot.val();
+
+			Object.keys(users).forEach((key) => {
+				if (!users[key].active) {
+					delete users[key];
+				}
+			});
+
+			this.firebaseUsers = users;
+			this.searchResults = this._valuesPipe.transform(this.firebaseUsers);
+		});
+
+		this._firebaseData.getSkills().then((skillsSnapshot) => {
+			this.firebaseSkills = skillsSnapshot.val();
+		});
 	}
 
 	resetFilters() {
@@ -53,14 +71,14 @@ export class SearchComponent implements OnInit {
 		this.selectedPractice = '';
 		this.selectedUnit = '';
 
-		this.searchResults = this._valuesPipe.transform(this._firebaseData.users);
+		this.searchResults = this._valuesPipe.transform(this.firebaseUsers);
 	}
 
 	searchUsers(event: any) {
 		if (this.searchText != '') {
-			this.searchResults = this._searchPipe.transform(this._firebaseData.users, [this._firebaseData.skills, this.searchText]);
+			this.searchResults = this._searchPipe.transform(this.firebaseUsers, [this.firebaseSkills, this.searchText]);
 		} else {
-			this.searchResults = this._valuesPipe.transform(this._firebaseData.users);
+			this.searchResults = this._valuesPipe.transform(this.firebaseUsers);
 		}
 	}
 }

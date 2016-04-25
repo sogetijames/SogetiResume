@@ -20,33 +20,23 @@ export class FirebaseData {
 	public titles: any;
 	public units: any;
 	public proficiency: any;
-	public users: any;
-	public skills: any;
 
 	constructor() {
 		FirebaseRef.child('constants').once('value', (dataSnapshot: FirebaseDataSnapshot) => {
 			let data = dataSnapshot.val();
 			this.practices = Object.keys(data.practices);
+			this.proficiency = data.proficiency;
 			this.statuses = Object.keys(data.statuses);
 			this.titles = Object.keys(data.titles);
 			this.units = Object.keys(data.units);
-			this.proficiency = data.proficiency;
 		});
+	}
 
-		FirebaseRef.child('users').on('value', (usersSnapshot: FirebaseDataSnapshot) => {
-			let users = usersSnapshot.val();
+	public getUsers() {
+		return FirebaseRef.child('users').once('value');
+	}
 
-			Object.keys(users).forEach((key) => {
-				if (!users[key].active) {
-					delete users[key];
-				}
-			});
-
-			this.users = users;
-		});
-
-		FirebaseRef.child('skills').on('value', (skillsSnapshot: FirebaseDataSnapshot) => {
-			this.skills = skillsSnapshot.val();
-		});
+	public getSkills() {
+		return FirebaseRef.child('skills').once('value');
 	}
 }

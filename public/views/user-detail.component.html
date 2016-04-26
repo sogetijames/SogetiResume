@@ -64,22 +64,22 @@
 	<!-- Tab Nav -->
 	<ul class="nav nav-pills top-buffer bottom-buffer" role="tablist">
 		<li class="nav-item">
-			<a class="nav-link red-font active" role="button" data-toggle="pill" data-target="#bio" aria-controls="bio">
+			<a (click)="openSection = 'Bio'" class="nav-link red-font active" role="button" data-toggle="pill" data-target="#bio" aria-controls="bio">
 				<i class="fa fa-book" aria-hidden="true"></i> Bio
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link red-font" role="button" data-toggle="pill" data-target="#projects" aria-controls="projects">
+			<a (click)="openSection = 'Projects'" class="nav-link red-font" role="button" data-toggle="pill" data-target="#projects" aria-controls="projects">
 				<i class="fa fa-folder-open" aria-hidden="true"></i> Projects
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link red-font" role="button" data-toggle="pill" data-target="#skills" aria-controls="skills">
+			<a (click)="openSection = 'Skills'" class="nav-link red-font" role="button" data-toggle="pill" data-target="#skills" aria-controls="skills">
 				<i class="fa fa-tasks" aria-hidden="true"></i> Skills
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link red-font" role="button" data-toggle="pill" data-target="#education" aria-controls="education">
+			<a (click)="openSection = 'Education'" class="nav-link red-font" role="button" data-toggle="pill" data-target="#education" aria-controls="education">
 				<i class="fa fa-graduation-cap" aria-hidden="true"></i> Education
 			</a>
 		</li>
@@ -96,29 +96,57 @@
 				</div>
 			</div>
 			<!-- Editable -->
-			<div class="card" *ngIf="editable">
-				<div class="card-block">
-					<fieldset class="form-group">
-						<textarea class="form-control" rows="3" [(ngModel)]="user.bio" ></textarea>
-					</fieldset>
-				</div>
-			</div>
+			<fieldset class="form-group" *ngIf="editable">
+				<textarea class="form-control" rows="3" [(ngModel)]="user.bio" ></textarea>
+			</fieldset>
 		</div>
 
 		<!-- User Projects -->
 		<div class="tab-pane" id="projects" role="tabpanel">
 			<!-- Not Editable -->
-			<div class="card" *ngIf="!editable">
-				<div class="card-block">
-					<p class="card-text">This is where projects go</p>
+			<div *ngIf="!editable && user?.projects?.length > 0">
+				<div class="col-xl-4" *ngFor="#project of user?.projects">
+					<div class="card">
+						<div class="card-block">
+							<h4 class="card-title red-font">
+								{{ project.client }} <small class="text-muted">{{ project.project }}</small>
+							</h4>
+							<p class="card-text">{{ project.description }}</p>
+							<p class="card-text"><small>{{ project.skills.join(', ') }}</small></p>								
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- Editable -->
-			<div class="card" *ngIf="editable">
-				<div class="card-block">
-					<fieldset class="form-group">
-						<textarea class="form-control" rows="3">This is where projects are edited</textarea>
-					</fieldset>
+			<div *ngIf="editable">
+				<div class="col-xl-4" *ngFor="#project of user?.projects; #k = index">
+					<div class="card">
+						<div class="card-header text-xs-right" style="padding:3px;">
+							<button type="button" class="btn btn-sm btn-secondary" (click)="user.projects.splice(k, 1)">
+								<i class="fa fa-times" aria-hidden="true"></i>
+							</button>
+						</div>
+						<div class="card-block" style="padding:5px;">
+							<fieldset class="form-group">
+								<input type="text" class="form-control" [(ngModel)]="project.client" placeholder="Client">
+							</fieldset>
+							<fieldset class="form-group">
+								<input type="text" class="form-control" [(ngModel)]="project.project" placeholder="Project Name">
+							</fieldset>
+							<fieldset class="form-group">
+								<textarea class="form-control" rows="3" [(ngModel)]="project.description" placeholder="Description"></textarea>
+							</fieldset>
+							<fieldset>
+								<button *ngFor="#skill of user?.skills" type="button" class="btn btn-sm"
+								[ngClass]="{ 
+									'project-skills-btn-outline':  project.skills.indexOf(skill.key) == -1,
+									'project-skills-btn':  project.skills.indexOf(skill.key) > -1  
+								}" (click)="toggleSkillOnProject(project, skill.key)">
+									{{ skill.key }}
+								</button>
+							</fieldset>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -180,18 +208,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-2">
-					<div class="card text-xl-center">
-						<div class="card-header" style="padding:6px;">
-							Add Skill
-						</div>
-						<div class="card-block" style="height:118px;">
-							<button style="width:100%;" type="button" class="btn btn-danger-outline btn-lg" (click)="user.skills.push( { key: '', value: '' } )">
-								<i class="fa fa-plus" aria-hidden="true"></i>
-							</button>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 
@@ -210,25 +226,20 @@
 			</div>
 			<!-- Editable -->
 			<div *ngIf="editable">
-				<div class="col-xl-3" *ngFor="#education of user?.educations">
+				<div class="col-xl-3" *ngFor="#education of user?.educations; #j = index">
 					<div class="card">
-						<fieldset class="form-group">
-							<input type="text" class="form-control" [(ngModel)]="education.title" placeholder="Title">
-						</fieldset>
-						<fieldset class="form-group">
-							<textarea class="form-control" rows="3" [(ngModel)]="education.description" placeholder="Description"></textarea>
-						</fieldset>
-					</div>
-				</div>
-				<div class="col-xl-2">
-					<div class="card text-xl-center">
-						<div class="card-header" style="padding:6px;">
-							Add Education
-						</div>
-						<div class="card-block" style="height:118px;">
-							<button style="width:100%;" type="button" class="btn btn-danger-outline btn-lg" (click)="user.educations.push( { title: '', description: '' } )">
-								<i class="fa fa-plus" aria-hidden="true"></i>
+						<div class="card-header text-xs-right" style="padding:3px;">
+							<button type="button" class="btn btn-sm btn-secondary" (click)="user.educations.splice(j, 1)">
+								<i class="fa fa-times" aria-hidden="true"></i>
 							</button>
+						</div>
+						<div class="card-block" style="padding:5px;">
+							<fieldset class="form-group">
+								<input type="text" class="form-control" [(ngModel)]="education.title" placeholder="Title">
+							</fieldset>
+							<fieldset class="form-group">
+								<textarea class="form-control" rows="3" [(ngModel)]="education.description" placeholder="Description"></textarea>
+							</fieldset>
 						</div>
 					</div>
 				</div>
@@ -240,6 +251,28 @@
 	<div class="row" *ngIf="_currentUser.auth.uid == uid">
 		<nav class="navbar navbar-fixed-bottom navbar-default">
 			<ul class="nav navbar-nav">
+				<!-- Add Project Button -->
+				<li class="pull-xs-left" *ngIf="editable && openSection == 'Projects'">
+					<button type="button" class="btn btn-secondary" (click)="user.projects.push( { client: '', project: '', description: '', skills: [] } )">
+						<i class="fa fa-plus" aria-hidden="true"> Add Project</i>
+					</button>
+				</li>
+
+				<!-- Add Skill Button -->
+				<li class="pull-xs-left" *ngIf="editable && openSection == 'Skills'">
+					<button type="button" class="btn btn-secondary" (click)="user.skills.push( { key: '', value: '' } )">
+						<i class="fa fa-plus" aria-hidden="true"> Add Skill</i>
+					</button>
+				</li>	
+
+				<!-- Add Education Button -->
+				<li class="pull-xs-left" *ngIf="editable && openSection == 'Education'">
+					<button type="button" class="btn btn-secondary" (click)="user.educations.push( { title: '', description: '' } )">
+						<i class="fa fa-plus" aria-hidden="true"> Add Education</i>
+					</button>
+				</li>			 
+
+				<!-- Edit/Save/Cancel Buttons -->
 				<li class="pull-xs-right" *ngIf="!editable">
 					<button type="button" class="btn btn-secondary" (click)="clickEdit()">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"> Edit</i>

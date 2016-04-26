@@ -4,6 +4,20 @@ div {
     font-family: 'Oswald', sans-serif;
 }
 
+.project-skills-btn,
+.project-skills-btn:hover {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d9534f;
+}
+
+.project-skills-btn-outline,
+.project-skills-btn-outline:hover {
+    color: #d9534f;
+    background-color: #fff;
+    border-color: #d9534f;
+}
+
 /* Toastr Overwrite */
 .toast-top-right {
     top: 66px;

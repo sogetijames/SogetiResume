@@ -25,6 +25,7 @@ export class UserDetailComponent {
 	sortSkillsProficiencyAZ: boolean;
 	showSkillNameArrow: boolean;
 	showSkillProficiencyArrow: boolean;
+	openSection: string;
 
 	constructor(
 		private _currentUser: CurrentUser,
@@ -35,6 +36,7 @@ export class UserDetailComponent {
 		private _firebaseData: FirebaseData
 	) {
 		this.editable = false;
+		this.openSection = 'Bio';
 
 		this.sortSkillsNameAZ = true;
 		this.sortSkillsProficiencyAZ = true;
@@ -49,9 +51,11 @@ export class UserDetailComponent {
 
 			this.user = data[this.uid];
 			this.user.profileImageURL = this.user.profileImageURL.replace('http://', 'https://') + "?s=250";
+			this.user.projects = [];
 			this.user.skills = [];
 			this.user.educations = [];
 
+			this.getUserProjects();
 			this.getUserSkills();
 			this.getUserEducations();			
 		});
@@ -63,6 +67,7 @@ export class UserDetailComponent {
 
 	clickSave() {
 		this.saveUserInfo();
+		this.saveUserProjects();
 		this.saveUserSkills();
 		this.saveUserEducations();
 
@@ -112,6 +117,22 @@ export class UserDetailComponent {
 		} else {
 			this.user.skills.sort(this.dynamicSort('-value'));
 		}
+	}
+
+	toggleSkillOnProject(project, skill) {
+		let index = project.skills.indexOf(skill);
+		if (index == -1) {
+			project.skills.push(skill);
+		} else {
+			project.skills.splice(index, 1);
+		}
+	}
+
+	private getUserProjects() {
+		this._userService.getDataForUidOnce('projects', this.uid).then( projects => {
+			this.user.projects = projects.val();
+			this.userCopy = $.extend(true, {}, this.user);
+		});
 	}
 
 	private getUserSkills() {
@@ -169,6 +190,18 @@ export class UserDetailComponent {
 				toastr.error('Error saving Info!', error);
 			} else {
 				toastr.success('Info Saved Successfully!');
+			}
+		});
+	}
+
+	private saveUserProjects() {
+		let projectsRef = FirebaseRef.child('projects').child(this.uid);
+
+		projectsRef.set(this.user.projects, (error) => {
+			if (error) {
+				toastr.error('Error saving Projects!', error);
+			} else {
+				toastr.success('Projects Saved Successfully!');
 			}
 		});
 	}

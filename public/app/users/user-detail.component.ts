@@ -130,7 +130,12 @@ export class UserDetailComponent {
 
 	private getUserProjects() {
 		this._userService.getDataForUidOnce('projects', this.uid).then( projects => {
-			this.user.projects = projects.val();
+			let projectsObject = projects.val();
+
+			if (projectsObject != undefined) {
+				this.user.projects = projects.val();
+			}	
+					
 			this.userCopy = $.extend(true, {}, this.user);
 		});
 	}

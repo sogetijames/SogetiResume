@@ -10,7 +10,7 @@ export class UserService {
 	}
 	
 	public getUserByUsername(username: string) {
-		let email = username + '@us.sogeti.com';
+		let email = username.toLowerCase() + '@us.sogeti.com';
 		return FirebaseRef.child('users').orderByChild('email').startAt(email).endAt(email + '\uf8ff').once('value');
 	}
 

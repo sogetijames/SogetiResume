@@ -32,11 +32,7 @@ export class FirebaseData {
 		});
 	}
 
-	public getUsers() {
-		return FirebaseRef.child('users').once('value');
-	}
-
-	public getSkills() {
-		return FirebaseRef.child('skills').once('value');
+	public getDataOnce(child: string) {
+		return FirebaseRef.child(child).once('value');
 	}
 }

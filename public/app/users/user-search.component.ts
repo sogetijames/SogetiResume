@@ -46,7 +46,7 @@ export class SearchComponent implements OnInit {
 		private _searchPipe: SearchPipe,
 		private _firebaseData: FirebaseData 
 	) { 
-		this._firebaseData.getUsers().then((usersSnapshot) => {
+		this._firebaseData.getDataOnce('users').then((usersSnapshot) => {
 			let users = usersSnapshot.val();
 
 			Object.keys(users).forEach((key) => {
@@ -59,7 +59,7 @@ export class SearchComponent implements OnInit {
 			this.searchResults = this._valuesPipe.transform(this.firebaseUsers);
 		});
 
-		this._firebaseData.getSkills().then((skillsSnapshot) => {
+		this._firebaseData.getDataOnce('skills').then((skillsSnapshot) => {
 			this.firebaseSkills = skillsSnapshot.val();
 		});
 	}

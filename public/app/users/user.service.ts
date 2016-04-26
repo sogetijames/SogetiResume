@@ -5,7 +5,7 @@ import {FirebaseRef} from '../shared/shared';
 export class UserService {
 	constructor() { }
 
-	public getUser(uid: string) {
+	public getUserByUid(uid: string) {
 		return FirebaseRef.child('users').child(uid).once('value');
 	}
 	
@@ -14,7 +14,7 @@ export class UserService {
 		return FirebaseRef.child('users').orderByChild('email').startAt(email).endAt(email + '\uf8ff').once('value');
 	}
 
-	public getSkills(uid: string) {
-		return FirebaseRef.child('skills').child(uid).once('value');
+	public getDataForUidOnce(child: string, uid: string) {
+		return FirebaseRef.child(child).child(uid).once('value');
 	}
 }

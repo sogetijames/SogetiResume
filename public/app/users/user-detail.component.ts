@@ -43,24 +43,17 @@ export class UserDetailComponent {
 
 		let username = this._routeParams.get('username');
 		this._userService.getUserByUsername(username.replace('_', '.')).then( user => {
-			this.uid = Object.keys(user.val())[0];
+			let data = user.val();
 
-			this.user = this._valuesPipe.transform(user.val())[0];
-			this.user.profileImageURL = this.user.profileImageURL + "?s=250";
+			this.uid = Object.keys(data)[0];
 
-			this._userService.getSkills(this.uid).then( skills => {
-				this.user.skills = [];
+			this.user = data[this.uid];
+			this.user.profileImageURL = this.user.profileImageURL.replace('http://', 'https://') + "?s=250";
+			this.user.skills = [];
+			this.user.educations = [];
 
-				let skillsObj = skills.val();
-				Object.keys(skillsObj).forEach((key) => {
-					this.user.skills.push({
-						key: key,
-						value: skillsObj[key]
-					});
-				});
-
-				this.userCopy = $.extend(true, {}, this.user);
-			});
+			this.getUserSkills();
+			this.getUserEducations();			
 		});
 	} 
 
@@ -71,6 +64,8 @@ export class UserDetailComponent {
 	clickSave() {
 		this.saveUserInfo();
 		this.saveUserSkills();
+		this.saveUserEducations();
+
 		this.userCopy = $.extend(true, {}, this.user);
 		this.editable = !this.editable;
 
@@ -78,49 +73,6 @@ export class UserDetailComponent {
 		this.showSkillNameArrow = true;
 		this.showSkillProficiencyArrow = false;
 		this.user.skills.sort(this.dynamicSort('key'));
-	}
-
-	private saveUserInfo() {
-		let userRef = FirebaseRef.child('users');
-		let userObj = {};
-
-		userObj[this._currentUser.auth.uid + '/bio'] = this.user.bio;
-		userObj[this._currentUser.auth.uid + '/first'] = this.user.first;
-		userObj[this._currentUser.auth.uid + '/last'] = this.user.last;
-		userObj[this._currentUser.auth.uid + '/title'] = this.user.title;
-		userObj[this._currentUser.auth.uid + '/unit'] = this.user.unit;
-		userObj[this._currentUser.auth.uid + '/practice'] = this.user.practice;
-		userObj[this._currentUser.auth.uid + '/status/text'] = this.user.status.text;
-		if (this.user.status.text == 'ATO') {
-			this.user.status.description = '';
-		} 
-		userObj[this._currentUser.auth.uid + '/status/description'] = this.user.status.description;
-
-		userRef.update(userObj, (error) => {
-			if (error) {
-				toastr.error(error);
-			} else {
-				toastr.success('Profile Saved Successfully!');
-			}
-		});
-	}
-
-	private saveUserSkills() {
-		let skillsRef = FirebaseRef.child('skills').child(this._currentUser.auth.uid);
-		let usrSkills = this.user.skills;
-		let skillsObj = {};
-
-		for (var i = 0; i < usrSkills.length; i++) {
-			skillsObj[usrSkills[i].key] = usrSkills[i].value;
-		}
-
-		skillsRef.set(skillsObj, (error) => {
-			if (error) {
-				toastr.error(error);
-			} else {
-				toastr.success('Skills Saved Successfully!');
-			}
-		});
 	}
 
 	clickCancel() {
@@ -162,7 +114,102 @@ export class UserDetailComponent {
 		}
 	}
 
-	dynamicSort(property) {
+	private getUserSkills() {
+		this._userService.getDataForUidOnce('skills', this.uid).then( skills => {
+			let skillsObject = skills.val();
+
+			if (skillsObject != undefined) {
+				Object.keys(skillsObject).forEach((key) => {
+					this.user.skills.push({
+						key: key,
+						value: skillsObject[key]
+					});
+				});				
+			}
+
+			this.userCopy = $.extend(true, {}, this.user);
+		});
+	}
+
+	private getUserEducations() {
+		this._userService.getDataForUidOnce('educations', this.uid).then( educations => {
+			let educationsObject = educations.val();
+
+			if (educationsObject != undefined){
+				Object.keys(educationsObject).forEach((key) => {
+					this.user.educations.push({
+						title: key,
+						description: educationsObject[key]
+					});
+				});
+			}
+
+			this.userCopy = $.extend(true, {}, this.user);		
+		});
+	}
+
+	private saveUserInfo() {
+		let userRef = FirebaseRef.child('users').child(this.uid);
+		let userObj = {};
+
+		userObj['bio'] = this.user.bio;
+		userObj['first'] = this.user.first;
+		userObj['last'] = this.user.last;
+		userObj['title'] = this.user.title;
+		userObj['unit'] = this.user.unit;
+		userObj['practice'] = this.user.practice;
+		userObj['status/text'] = this.user.status.text;
+		if (this.user.status.text == 'ATO') {
+			this.user.status.description = '';
+		} 
+		userObj['status/description'] = this.user.status.description;
+
+		userRef.update(userObj, (error) => {
+			if (error) {
+				toastr.error('Error saving Info!', error);
+			} else {
+				toastr.success('Info Saved Successfully!');
+			}
+		});
+	}
+
+	private saveUserSkills() {
+		let skillsObject = {};
+		let skillsRef = FirebaseRef.child('skills').child(this.uid);
+		let skills = this.user.skills;
+
+		for (var i = 0; i < skills.length; i++) {
+			skillsObject[skills[i].key] = skills[i].value;
+		}
+
+		skillsRef.set(skillsObject, (error) => {
+			if (error) {
+				toastr.error('Error saving Skills!', error);
+			} else {
+				toastr.success('Skills Saved Successfully!');
+			}
+		});
+	}
+
+	private saveUserEducations() {
+		let educationObject = {};
+		let educationRef = FirebaseRef.child('educations').child(this.uid);
+		let educations = this.user.educations;
+
+		for (var i = 0; i < educations.length; i++) {
+			educationObject[educations[i].title] = educations[i].description;
+		}
+
+		educationRef.set(educationObject, (error) => {
+			if (error) {
+				toastr.error('Error saving Education!', error);
+			} else {
+				toastr.success('Education Saved Successfully!');
+			}
+		});
+	}
+
+	private dynamicSort(property) {
 	    var sortOrder = 1;
 	    if(property[0] === "-") {
 	        sortOrder = -1;

@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
 	}
 
 	private setCurrentUserInfo(uid: string) {
-		this._userService.getUser(uid).then(info => {
+		this._userService.getUserByUid(uid).then(info => {
 			this._currentUser.info = info.val();
 			this._currentUser.info.username = this._currentUser.info.email.split('@')[0].replace('.', '_');
 		});

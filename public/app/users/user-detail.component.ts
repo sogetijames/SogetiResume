@@ -216,7 +216,13 @@ export class UserDetailComponent {
 	        property = property.substr(1);
 	    }
 	    return function (a,b) {
-	        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+	    	var result: any;
+	    	if (typeof a[property] === 'string') {
+	    		result = (a[property].toUpperCase() < b[property].toUpperCase()) ? -1 : (a[property].toUpperCase() > b[property].toUpperCase()) ? 1 : 0;
+
+	    	} else {
+	    		result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+	    	}
 	        return result * sortOrder;
 	    }
 	}

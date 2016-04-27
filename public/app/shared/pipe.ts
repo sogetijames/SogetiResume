@@ -38,8 +38,8 @@ export class SearchPipe implements PipeTransform {
 				}
 
 				if (skillsObject[uid] != undefined) {
-					Object.keys(skillsObject[uid]).forEach(function(skill) {
-						if (skill.toUpperCase().indexOf(searchText) > -1 && retArray.indexOf(usersObject[uid]) == -1) {
+					Object.keys(skillsObject[uid]).forEach(function(index) {
+						if (skillsObject[uid][index]['name'].toUpperCase().indexOf(searchText) > -1 && retArray.indexOf(usersObject[uid]) == -1) {
 							retArray.push(usersObject[uid]);
 						}
 					});					

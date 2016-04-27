@@ -1,5 +1,5 @@
 import {Component, OnInit} from 'angular2/core';
-import {NgClass} from 'angular2/common';
+import {NgClass, DatePipe} from 'angular2/common';
 import {Router, RouteParams} from 'angular2/router';
 import {CurrentUser, FirebaseRef, FirebaseData} from '../shared/shared';
 import {ValuesPipe} from '../shared/pipe';
@@ -13,7 +13,8 @@ import {UserService} from './user.service';
 	],
 	providers: [ 
 		UserService,
-		ValuesPipe
+		ValuesPipe,
+		DatePipe
 	]
 })
 export class UserDetailComponent implements OnInit {
@@ -38,7 +39,7 @@ export class UserDetailComponent implements OnInit {
 		let username = this._routeParams.get('username');
 		this._userService.getUserDetails(username, (userObject) => {
 			this.user = userObject;
-			this.userCopy = Object.assign({}, this.user);
+			this.userCopy = $.extend(true, {}, this.user);
 		});
 	}
 
@@ -48,7 +49,8 @@ export class UserDetailComponent implements OnInit {
 		private _routeParams: RouteParams,
 		private _router: Router,
 		private _valuesPipe: ValuesPipe,
-		private _firebaseData: FirebaseData) { } 
+		private _firebaseData: FirebaseData,
+		private _datePipe: DatePipe) { } 
 
 	clickEdit() {
 		this.editable = !this.editable;
@@ -85,9 +87,9 @@ export class UserDetailComponent implements OnInit {
 		this.showSkillProficiencyArrow = false;
 
 		if (this.sortSkillsNameAZ) {
-			this.user.skills.sort(this.dynamicSort('key'));
+			this.user.skills.sort(this.dynamicSort('name'));
 		} else {
-			this.user.skills.sort(this.dynamicSort('-key'));
+			this.user.skills.sort(this.dynamicSort('-name'));
 		}
 	}
 
@@ -102,9 +104,9 @@ export class UserDetailComponent implements OnInit {
 		this.showSkillProficiencyArrow = true;		
 
 		if (this.sortSkillsProficiencyAZ) {
-			this.user.skills.sort(this.dynamicSort('value'));
+			this.user.skills.sort(this.dynamicSort('proficiency'));
 		} else {
-			this.user.skills.sort(this.dynamicSort('-value'));
+			this.user.skills.sort(this.dynamicSort('-proficiency'));
 		}
 	}
 
@@ -115,6 +117,11 @@ export class UserDetailComponent implements OnInit {
 		} else {
 			project.skills.splice(index, 1);
 		}
+	}
+
+	formatDate(dateStr: string) {
+		let date = new Date(dateStr);
+		return this._datePipe.transform(date, ['mediumDate']);
 	}
 
 	private dynamicSort(property) {

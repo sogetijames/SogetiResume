@@ -4,6 +4,13 @@ div {
     font-family: 'Oswald', sans-serif;
 }
 
+i.fa {
+    line-height: inherit;
+}
+span.fa-icon-label {
+    vertical-align: middle;
+}
+
 .project-skills-btn,
 .project-skills-btn:hover {
     color: #fff;

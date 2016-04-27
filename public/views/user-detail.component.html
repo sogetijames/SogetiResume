@@ -65,22 +65,22 @@
 	<ul class="nav nav-pills top-buffer bottom-buffer" role="tablist">
 		<li class="nav-item">
 			<a (click)="openSection = 'Bio'" class="nav-link red-font active" role="button" data-toggle="pill" data-target="#bio" aria-controls="bio">
-				<i class="fa fa-book" aria-hidden="true"></i> Bio
+				<i class="fa fa-book" aria-hidden="true"></i><span class="fa-icon-label"> Bio</span> 
 			</a>
 		</li>
 		<li class="nav-item">
 			<a (click)="openSection = 'Projects'" class="nav-link red-font" role="button" data-toggle="pill" data-target="#projects" aria-controls="projects">
-				<i class="fa fa-folder-open" aria-hidden="true"></i> Projects
+				<i class="fa fa-folder-open" aria-hidden="true"></i><span class="fa-icon-label"> Projects</span> 
 			</a>
 		</li>
 		<li class="nav-item">
 			<a (click)="openSection = 'Skills'" class="nav-link red-font" role="button" data-toggle="pill" data-target="#skills" aria-controls="skills">
-				<i class="fa fa-tasks" aria-hidden="true"></i> Skills
+				<i class="fa fa-tasks" aria-hidden="true"></i><span class="fa-icon-label"> Skills</span> 
 			</a>
 		</li>
 		<li class="nav-item">
 			<a (click)="openSection = 'Education'" class="nav-link red-font" role="button" data-toggle="pill" data-target="#education" aria-controls="education">
-				<i class="fa fa-graduation-cap" aria-hidden="true"></i> Education
+				<i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="fa-icon-label"> Education</span> 
 			</a>
 		</li>
 	</ul>
@@ -269,40 +269,40 @@
 				<!-- Add Project Button -->
 				<li class="pull-xs-left" *ngIf="editable && openSection == 'Projects'">
 					<button type="button" class="btn btn-secondary" (click)="user.projects.push( { client: '', project: '', description: '', skills: [] } )">
-						<i class="fa fa-plus" aria-hidden="true"> Add Project</i>
+						<i class="fa fa-plus" aria-hidden="true"></i><span class="fa-icon-label"> Add Project</span> 
 					</button>
 				</li>
 
 				<!-- Add Skill Button -->
 				<li class="pull-xs-left" *ngIf="editable && openSection == 'Skills'">
 					<button type="button" class="btn btn-secondary" (click)="user.skills.push( { name: '', proficiency: '' } )">
-						<i class="fa fa-plus" aria-hidden="true"> Add Skill</i>
+						<i class="fa fa-plus" aria-hidden="true"></i><span class="fa-icon-label"> Add Skill</span> 
 					</button>
 				</li>	
 
 				<!-- Add Education Button -->
 				<li class="pull-xs-left" *ngIf="editable && openSection == 'Education'">
 					<button type="button" class="btn btn-secondary" (click)="user.educations.push( { title: '', description: '' } )">
-						<i class="fa fa-plus" aria-hidden="true"> Add Education</i>
+						<i class="fa fa-plus" aria-hidden="true"></i><span class="fa-icon-label"> Add Education</span> 
 					</button>
 				</li>			 
 
 				<!-- Edit/Save/Cancel Buttons -->
 				<li class="pull-xs-right" *ngIf="!editable">
 					<button type="button" class="btn btn-secondary" (click)="clickEdit()">
-						<i class="fa fa-pencil-square-o" aria-hidden="true"> Edit</i>
+						<i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="fa-icon-label"> Edit</span> 
 					</button>
 				</li>
 				<li class="pull-xs-right" *ngIf="editable">
 					<div class="btn-toolbar" role="toolbar">
 						<div class="btn-group" role="group">
 							<button type="button" class="btn btn-secondary red-font" (click)="clickCancel()">
-								<i class="fa fa-times" aria-hidden="true"> Cancel</i>
+								<i class="fa fa-times" aria-hidden="true"></i><span class="fa-icon-label"> Cancel</span> 
 							</button> 
 						</div>
 						<div class="btn-group" role="group">
 							<button type="button" class="btn btn-secondary green-font" (click)="clickSave()">
-								<i class="fa fa-floppy-o" aria-hidden="true"> Save</i>
+								<i class="fa fa-floppy-o" aria-hidden="true"></i><span class="fa-icon-label"> Save</span> 
 							</button>
 						</div>
 					</div>

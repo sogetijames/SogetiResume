@@ -6,8 +6,8 @@
 					<div class="input-group">
 						<input [(ngModel)]="searchText" class="form-control search" type="text" placeholder="Search" (keyup)="searchUsers($event)">
 						<span class="input-group-btn">
-							<button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#filterRow" (click)="showFilterRow = !showFilterRow">
-								Filter <i class="fa" [ngClass]="{'fa-caret-square-o-down': !showFilterRow, 'fa-caret-square-o-up': showFilterRow}" aria-hidden="true"></i>
+							<button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#filterRow" (click)="showFilterRow = !showFilterRow" style="    padding: 5px 10px;">
+							 	<span class="fa-icon-label">Filter </span><i class="fa" [ngClass]="{'fa-caret-square-o-down': !showFilterRow, 'fa-caret-square-o-up': showFilterRow}" aria-hidden="true"></i>
 							</button>
 						</span>
 					</div>				

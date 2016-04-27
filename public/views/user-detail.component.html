@@ -1,4 +1,4 @@
-<form style="margin-bottom:50px;">
+<form style="margin-bottom:50px;" *ngIf="user">
 	<div class="row">
 		<!-- Image -->
 		<div class="col-sm-2">
@@ -139,10 +139,10 @@
 							<fieldset>
 								<button *ngFor="#skill of user?.skills" type="button" class="btn btn-sm"
 								[ngClass]="{ 
-									'project-skills-btn-outline':  project.skills.indexOf(skill.key) == -1,
-									'project-skills-btn':  project.skills.indexOf(skill.key) > -1  
-								}" (click)="toggleSkillOnProject(project, skill.key)">
-									{{ skill.key }}
+									'project-skills-btn-outline':  project.skills.indexOf(skill.name) == -1,
+									'project-skills-btn':  project.skills.indexOf(skill.name) > -1  
+								}" (click)="toggleSkillOnProject(project, skill.name)">
+									{{ skill.name }}
 								</button>
 							</fieldset>
 						</div>
@@ -167,15 +167,15 @@
 				<div class="col-xl-2" *ngFor="#skill of user?.skills">
 					<div style="color: White;" class="card text-xl-center" 
 					[ngClass]="{
-						'awareness-skill': skill?.value == 0, 
-						'novice-skill': skill?.value == 1, 
-						'intermediate-skill': skill?.value == 2, 
-						'advanced-skill': skill?.value == 3, 
-						'expert-skill': skill?.value == 4
+						'awareness-skill': skill?.proficiency == 0, 
+						'novice-skill': skill?.proficiency == 1, 
+						'intermediate-skill': skill?.proficiency == 2, 
+						'advanced-skill': skill?.proficiency == 3, 
+						'expert-skill': skill?.proficiency == 4
 					}">
 						<div class="card-block">
-							<p class="card-text">{{ skill?.key }}</p>
-							<p class="card-text">{{ _firebaseData.proficiency[skill?.value] }}</p>
+							<p class="card-text">{{ skill?.name }}</p>
+							<p class="card-text">{{ _firebaseData.proficiency[skill?.proficiency] }}</p>
 						</div>
 					</div>
 				</div>
@@ -185,11 +185,11 @@
 				<div class="col-xl-2" *ngFor="#skill of user?.skills; #i = index">
 					<div class="card text-xl-center" 
 					[ngClass]="{
-						'awareness-skill': skill?.value == 0, 
-						'novice-skill': skill?.value == 1, 
-						'intermediate-skill': skill?.value == 2, 
-						'advanced-skill': skill?.value == 3, 
-						'expert-skill': skill?.value == 4
+						'awareness-skill': skill?.proficiency == 0, 
+						'novice-skill': skill?.proficiency == 1, 
+						'intermediate-skill': skill?.proficiency == 2, 
+						'advanced-skill': skill?.proficiency == 3, 
+						'expert-skill': skill?.proficiency == 4
 					}">
 						<div class="card-header text-xs-right" style="padding:3px;">
 							<button type="button" class="btn btn-sm btn-secondary" (click)="user.skills.splice(i, 1)">
@@ -198,10 +198,10 @@
 						</div>
 						<div class="card-block" style="padding:5px;">
 							<fieldset class="form-group">
-								<input type="text" class="form-control" [(ngModel)]="skill.key" placeholder="Skill">
+								<input type="text" class="form-control" [(ngModel)]="skill.name" placeholder="Skill">
 							</fieldset>
 							<fieldset class="form-group">            
-								<select [(ngModel)]="skill.value" class="form-control">
+								<select [(ngModel)]="skill.proficiency" class="form-control">
 									<option *ngFor="#proficiency of _firebaseData.proficiency; #i = index" [value]="i">{{ proficiency }}</option>
 								</select>
 							</fieldset>
@@ -248,7 +248,7 @@
 	</div>
 
 	<!-- Footer -->
-	<div class="row" *ngIf="_currentUser.auth.uid == uid">
+	<div class="row" *ngIf="_currentUser.auth.uid == user?.uid">
 		<nav class="navbar navbar-fixed-bottom navbar-default">
 			<ul class="nav navbar-nav">
 				<!-- Add Project Button -->
@@ -260,7 +260,7 @@
 
 				<!-- Add Skill Button -->
 				<li class="pull-xs-left" *ngIf="editable && openSection == 'Skills'">
-					<button type="button" class="btn btn-secondary" (click)="user.skills.push( { key: '', value: '' } )">
+					<button type="button" class="btn btn-secondary" (click)="user.skills.push( { name: '', proficiency: '' } )">
 						<i class="fa fa-plus" aria-hidden="true"> Add Skill</i>
 					</button>
 				</li>	

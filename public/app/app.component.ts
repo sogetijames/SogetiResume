@@ -11,6 +11,8 @@ import {SearchComponent} from './users/user-search.component';
 import {UserSettingsComponent} from './users/user-settings.component';
 import {UserService} from './users/user.service';
 
+import {AdminComponent} from './admin/admin.component'
+
 @Component({
 	selector: 'my-app',
 	providers: [
@@ -44,6 +46,11 @@ import {UserService} from './users/user.service';
 		path: '/settings',
 		name: 'Settings',
 		component: UserSettingsComponent
+	},
+	{
+		path: '/admin',
+		name: 'Admin',
+		component: AdminComponent
 	}
 ])
 export class AppComponent implements OnInit {

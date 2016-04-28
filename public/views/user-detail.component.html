@@ -69,22 +69,22 @@
 			<ul class="nav nav-pills top-buffer bottom-buffer" role="tablist">
 				<li class="nav-item">
 					<a (click)="openSection = 'Bio'" class="nav-link red-font active" role="button" data-toggle="pill" data-target="#bio" aria-controls="bio">
-						<i class="fa fa-book" aria-hidden="true"></i><span class="fa-icon-label hidden-sm-down"> Bio</span> 
+						<i class="fa fa-book"></i><span class="fa-icon-label hidden-sm-down"> Bio</span> 
 					</a>
 				</li>
 				<li class="nav-item">
 					<a (click)="openSection = 'Projects'" class="nav-link red-font" role="button" data-toggle="pill" data-target="#projects" aria-controls="projects">
-						<i class="fa fa-folder-open" aria-hidden="true"></i><span class="fa-icon-label hidden-sm-down"> Projects</span> 
+						<i class="fa fa-folder-open"></i><span class="fa-icon-label hidden-sm-down"> Projects</span> 
 					</a>
 				</li>
 				<li class="nav-item">
 					<a (click)="openSection = 'Skills'" class="nav-link red-font" role="button" data-toggle="pill" data-target="#skills" aria-controls="skills">
-						<i class="fa fa-tasks" aria-hidden="true"></i><span class="fa-icon-label hidden-sm-down"> Skills</span> 
+						<i class="fa fa-tasks"></i><span class="fa-icon-label hidden-sm-down"> Skills</span> 
 					</a>
 				</li>
 				<li class="nav-item">
 					<a (click)="openSection = 'Education'" class="nav-link red-font" role="button" data-toggle="pill" data-target="#education" aria-controls="education">
-						<i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="fa-icon-label hidden-sm-down"> Education</span> 
+						<i class="fa fa-graduation-cap"></i><span class="fa-icon-label hidden-sm-down"> Education</span> 
 					</a>
 				</li>
 			</ul>
@@ -148,7 +148,7 @@
 					<div class="card">
 						<div class="card-header text-xs-right" style="padding:3px;">
 							<button type="button" class="btn btn-sm btn-secondary" (click)="user.projects.splice(k, 1)">
-								<i class="fa fa-times" aria-hidden="true"></i>
+								<i class="fa fa-times"></i>
 							</button>
 						</div>
 						<div class="card-block" style="padding:5px;">
@@ -197,10 +197,10 @@
 			<!-- Sorting Buttons -->
 			<div class="col-xl-12" style="margin-bottom:10px;">
 				<button type="button" class="btn sogeti-btn-outline btn-sm" (click)="toggleSortSkillsByName()">
-					Skill <i *ngIf="showSkillNameArrow" class="fa" [ngClass]="{ 'fa-arrow-down': sortSkillsNameAZ, 'fa-arrow-up': !sortSkillsNameAZ }" aria-hidden="true"></i>
+					Skill <i *ngIf="showSkillNameArrow" class="fa" [ngClass]="{ 'fa-sort-asc': sortSkillsNameAZ, 'fa-sort-desc': !sortSkillsNameAZ }" aria-hidden="true"></i>
 				</button>
 				<button type="button" class="btn sogeti-btn-outline btn-sm" (click)="toggleSortSkillsByProficiency()">
-					Proficiency <i *ngIf="showSkillProficiencyArrow" class="fa" [ngClass]="{ 'fa-arrow-down': sortSkillsProficiencyAZ, 'fa-arrow-up': !sortSkillsProficiencyAZ }" aria-hidden="true"></i>
+					Proficiency <i *ngIf="showSkillProficiencyArrow" class="fa" [ngClass]="{ 'fa-sort-asc': sortSkillsProficiencyAZ, 'fa-sort-desc': !sortSkillsProficiencyAZ }" aria-hidden="true"></i>
 				</button>
 			</div>
 			<!-- Not Editable -->
@@ -234,7 +234,7 @@
 					}">
 						<div class="card-header text-xs-right sogeti-card-header-skill">
 							<button type="button" class="btn btn-sm btn-secondary" (click)="user.skills.splice(i, 1)">
-								<i class="fa fa-times" aria-hidden="true"></i>
+								<i class="fa fa-times"></i>
 							</button>
 						</div>
 						<div class="card-block sogeti-card-block-skill">
@@ -277,7 +277,7 @@
 					<div class="card">
 						<div class="card-header text-xs-right" style="padding:3px;">
 							<button type="button" class="btn btn-sm btn-secondary" (click)="user.educations.splice(j, 1)">
-								<i class="fa fa-times" aria-hidden="true"></i>
+								<i class="fa fa-times"></i>
 							</button>
 						</div>
 						<div class="card-block" style="padding:5px;">
@@ -301,40 +301,40 @@
 				<!-- Add Project Button -->
 				<li class="pull-xs-left" *ngIf="editable && openSection == 'Projects'">
 					<button type="button" class="btn btn-secondary" (click)="user.projects.push( { client: '', project: '', description: '', skills: [] } )">
-						<i class="fa fa-plus" aria-hidden="true"></i><span class="fa-icon-label hidden-sm-down"> Add Project</span> 
+						<i class="fa fa-plus"></i><span class="fa-icon-label hidden-sm-down"> Add Project</span> 
 					</button>
 				</li>
 
 				<!-- Add Skill Button -->
 				<li class="pull-xs-left" *ngIf="editable && openSection == 'Skills'">
 					<button type="button" class="btn btn-secondary" (click)="user.skills.push( { name: '', proficiency: '' } )">
-						<i class="fa fa-plus" aria-hidden="true"></i><span class="fa-icon-label hidden-sm-down"> Add Skill</span> 
+						<i class="fa fa-plus"></i><span class="fa-icon-label hidden-sm-down"> Add Skill</span> 
 					</button>
 				</li>	
 
 				<!-- Add Education Button -->
 				<li class="pull-xs-left" *ngIf="editable && openSection == 'Education'">
 					<button type="button" class="btn btn-secondary" (click)="user.educations.push( { title: '', description: '' } )">
-						<i class="fa fa-plus" aria-hidden="true"></i><span class="fa-icon-label hidden-sm-down"> Add Education</span> 
+						<i class="fa fa-plus"></i><span class="fa-icon-label hidden-sm-down"> Add Education</span> 
 					</button>
 				</li>			 
 
 				<!-- Edit/Save/Cancel Buttons -->
 				<li class="pull-xs-right" *ngIf="!editable">
 					<button type="button" class="btn btn-secondary" (click)="clickEdit()">
-						<i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="fa-icon-label hidden-sm-down"> Edit</span> 
+						<i class="fa fa-pencil-square-o"></i><span class="fa-icon-label hidden-sm-down"> Edit</span> 
 					</button>
 				</li>
 				<li class="pull-xs-right" *ngIf="editable">
 					<div class="btn-toolbar" role="toolbar">
 						<div class="btn-group" role="group">
 							<button type="button" class="btn btn-secondary red-font" (click)="clickCancel()">
-								<i class="fa fa-times" aria-hidden="true"></i><span class="fa-icon-label hidden-sm-down"> Cancel</span> 
+								<i class="fa fa-times"></i><span class="fa-icon-label hidden-sm-down"> Cancel</span> 
 							</button> 
 						</div>
 						<div class="btn-group" role="group">
 							<button type="button" class="btn btn-secondary green-font" (click)="clickSave()">
-								<i class="fa fa-floppy-o" aria-hidden="true"></i><span class="fa-icon-label hidden-sm-down"> Save</span> 
+								<i class="fa fa-floppy-o"></i><span class="fa-icon-label hidden-sm-down"> Save</span> 
 							</button>
 						</div>
 					</div>

@@ -11,6 +11,19 @@ span.fa-icon-label {
     vertical-align: middle;
 }
 
+.admin-table tr:first-child > td {
+    padding-top: .75rem;
+}
+.admin-table td {
+    border-top: transparent;
+    padding-top: 0;
+}
+.admin-icon-td {
+    width: 15px;
+    padding-right: 0 !important;
+    vertical-align: middle !important;
+}
+
 .sogeti-btn {
     color: #fff;
     background-color: #b30000;
@@ -32,7 +45,12 @@ span.fa-icon-label {
     border: 1px solid #b30000;
 }
 .sogeti-card-header {
-    background-color: ;
+    color: White;
+    background-color: #b30000;
+    padding: 10px;
+}
+.sogeti-card-block {
+    padding: 10px;
 }
 .sogeti-card-header-skill {
     padding: 3px; 

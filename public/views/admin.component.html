@@ -1,0 +1,115 @@
+<form>
+	<div class="row">
+		<div class="col-xl-12">
+			<div class="card-deck-wrapper">
+				<div class="card-deck">
+
+					<!-- Practices -->
+					<div class="card">
+						<div class="card-header">
+							Practices
+							<i style="float:right;" role="button" class="fa fa-plus green-font" (click)="_firebaseData.practices.push('')"></i>				
+						</div>
+						<table class="table admin-table" *ngIf="_firebaseData.practices">
+							<tbody>
+								<tr *ngFor="#practice of _firebaseData.practices; #i = index">
+									<td class="admin-icon-td red-font">
+										<i role="button" class="fa fa-times" (click)="_firebaseData.practices.splice(i, 1)"></i>
+									</td>
+									<td>
+										<input type="text" class="form-control" [(ngModel)]="_firebaseData.practices[i]" placeholder="Practice">
+									</td>
+								</tr>	
+							</tbody>					
+						</table>
+					</div>
+				
+					<!-- Proficiency -->
+					<div class="card">
+						<div class="card-header">Proficiency</div>
+						<div class="card-block sogeti-card-block" *ngIf="_firebaseData.proficiency">
+							<p class="card-text" *ngFor="#prof of _firebaseData.proficiency; #j = index">
+								<input type="text" class="form-control" [(ngModel)]="_firebaseData.proficiency[j]" placeholder="Proficiency">
+							</p>
+						</div>
+					</div>
+
+					<!-- Statuses -->
+					<div class="card">
+						<div class="card-header">Statuses</div>
+						<div class="card-block sogeti-card-block" *ngIf="_firebaseData.statuses">
+							<p class="card-text" *ngFor="#status of _firebaseData.statuses; #k = index">
+								<input type="text" class="form-control" [(ngModel)]="_firebaseData.statuses[k]" placeholder="Status">
+							</p>
+						</div>
+					</div>
+
+					<!-- Titles -->
+					<div class="card">
+						<div class="card-header">Titles</div>
+						<div class="card-block sogeti-card-block" *ngIf="_firebaseData.titles">
+							<p class="card-text" *ngFor="#title of _firebaseData.titles; #l = index">
+								<input type="text" class="form-control" [(ngModel)]="_firebaseData.titles[l]" placeholder="Title">								
+							</p>
+						</div>
+					</div>					
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row top-buffer">
+		<div class="col-xl-12">
+			<div class="card-deck-wrapper">
+				<div class="card-deck">
+
+					<!-- Units Content -->
+					<div class="card">
+						<div class="card-header"><i class="fa fa-building" aria-hidden="true"></i> Units</div>
+						<div class="card-block sogeti-card-block row" *ngIf="_firebaseData.units">
+							<div class="col-xl-4 bottom-buffer" *ngFor="#unit of _firebaseData.units; #m = index">
+								<input type="text" class="form-control" [(ngModel)]="_firebaseData.units[m]" placeholder="Unit">	
+							</div>
+						</div>
+					</div>
+
+					<!-- Users Content -->
+					<div class="card">
+						<div class="card-header"><i class="fa fa-users" aria-hidden="true"></i> Users</div>
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>First</th>
+										<th>Last</th>
+										<th>Active</th>	
+										<th>Admin</th>	
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="#user of users; #n = index">
+										<td>{{ user.first }}</td>
+										<td>{{ user.last }}</td>
+										<td>
+											<label class="c-input c-checkbox">
+												<input type="checkbox" [(ngModel)]="user.active">
+												<span class="c-indicator"></span>
+											</label>
+										</td>
+										<td>
+											<label class="c-input c-checkbox">
+												<input type="checkbox" [(ngModel)]="user.admin">
+												<span class="c-indicator"></span>
+											</label>
+										</td>
+									</tr>	
+								</tbody>					
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>		
+		</div>
+	</div>
+</form>

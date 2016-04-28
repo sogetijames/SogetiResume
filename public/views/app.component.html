@@ -8,7 +8,7 @@
         <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Sogeti Resume
       </a>
       <ul class="nav navbar-nav">
-        <li class="pull-xs-right dropdown" *ngIf="_currentUser.auth.uid">
+        <li class="pull-xs-right dropdown" *ngIf="_currentUser.auth.uid && _currentUser.info.first">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             {{ _currentUser?.info?.first + " " + _currentUser?.info?.last }} <span class="caret"></span>
           </a>
@@ -19,6 +19,10 @@
             <a class="dropdown-item" [routerLink]="['Settings']">
               <i class="fa fa-cog" aria-hidden="true"></i> <span class="fa-icon-label"> Settings</span>
             </a>
+            <div class="dropdown-divider" *ngIf="_currentUser.info.admin"></div>
+            <a class="dropdown-item" [routerLink]="['Admin']" *ngIf="_currentUser.info.admin">
+              <i class="fa fa-tachometer" aria-hidden="true"></i> <span class="fa-icon-label"> Admin Dashboard</span>
+            </a>            
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" (click)="onClickLogout()" href="#">
               <i class="fa fa-sign-out" aria-hidden="true"></i> <span class="fa-icon-label"> Logout</span>

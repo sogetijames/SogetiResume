@@ -59,7 +59,7 @@
 									| filter:{'practice':selectedPractice}  
 									| filter:{'unit':selectedUnit} ">
 		<a [routerLink]="['Profile', { username: result?.email?.split('@')[0].replace('.', '_') }]" class="card-link">
-			<div class="card card-hover text-xl-center" [ngClass]="{'red-profile': result?.status?.text == 'PTO', 'green-profile': result?.status?.text == 'ATO', 'yellow-profile': result?.status?.text == 'Project'}">
+			<div class="card card-hover text-xs-center" [ngClass]="{'red-profile': result?.status?.text == 'PTO', 'green-profile': result?.status?.text == 'ATO', 'yellow-profile': result?.status?.text == 'Project'}">
 				<div class="card-block">
 					<h4 class="card-title red-font">
 						<img class="img-fluid img-rounded center-block" src="{{ result?.profileImageURL.replace('http://', 'https://') }}" /> 

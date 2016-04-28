@@ -35,17 +35,20 @@ export class UserService {
 			let skillsPromise = this.getDataForUidOnce('skills', uid);
 
 			Promise.all([educationsPromise, projectsPromise, skillsPromise]).then((dataSnapshot) => {
-				let educationsObject = dataSnapshot[0].val();
+				let educationSnapshot: any = dataSnapshot[0]; 
+				let educationsObject = educationSnapshot.val();
 				if (educationsObject != undefined) {
 					userObject.educations = educationsObject;
 				}
 
-				let projectsObject = dataSnapshot[1].val();
+				let projectsSnapshot: any = dataSnapshot[1];
+				let projectsObject = projectsSnapshot.val();
 				if (projectsObject != undefined) {
 					userObject.projects = projectsObject;
 				}
 
-				let skillsObject = dataSnapshot[2].val();
+				let skillsSnapshot: any = dataSnapshot[2];
+				let skillsObject = skillsSnapshot.val();
 				if (skillsObject != undefined) {
 					userObject.skills = skillsObject;
 				}

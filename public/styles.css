@@ -11,20 +11,36 @@ span.fa-icon-label {
     vertical-align: middle;
 }
 
-.project-skills-btn,
-.project-skills-btn:hover {
+.sogeti-btn {
     color: #fff;
-    background-color: #d9534f;
-    border-color: #d9534f;
+    background-color: #b30000;
+    border-color: #b30000;
 }
-
-.project-skills-btn-outline,
-.project-skills-btn-outline:hover {
-    color: #d9534f;
+.sogeti-btn:hover {
+    color: #e5e5e5;
+}
+.sogeti-btn-outline {
+    color: #b30000;
     background-color: #fff;
-    border-color: #d9534f;
+    border-color: #b30000;
+}
+.sogeti-btn-outline:hover {
+    background-color: #e5e5e5;
 }
 
+.sogeti-card {
+    border: 1px solid #b30000;
+}
+.sogeti-card-header {
+    background-color: ;
+}
+.sogeti-card-header-skill {
+    padding: 3px; 
+    border-bottom: none;
+}
+.sogeti-card-block-skill {
+    padding: 3px; 
+}
 /* Toastr Overwrite */
 .toast-top-right {
     top: 66px;
@@ -68,6 +84,21 @@ span.fa-icon-label {
 }
 .yellow-font {
     color: #cccc00;
+}
+
+.profile-section-header {
+    margin-top: -22px;
+}
+.profile-section-header-card {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+}
+.profile-section-header-card-block {
+    font-size: 1.75rem;
+    color: #b30000;
+    padding: 5px 10px;
 }
 
 .top-buffer {

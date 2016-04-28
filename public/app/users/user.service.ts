@@ -25,7 +25,7 @@ export class UserService {
 			let userObject = data[uid];
 
 			userObject.uid = uid;
-			userObject.profileImageURL = userObject.profileImageURL.replace('http://', 'https://') + "?s=250";
+			userObject.profileImageURL = userObject.profileImageURL.replace('http://', 'https://') + "?s=256";
 			userObject.educations = [];
 			userObject.projects = [];
 			userObject.skills = [];

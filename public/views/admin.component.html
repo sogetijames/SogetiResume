@@ -149,9 +149,11 @@
 				</div>
 				<!-- Not Editable -->
 				<div class="scrolling-table-large" *ngIf="!editable">
-					<div class="card-block sogeti-card-block row" *ngIf="!editable">
-						<div class="col-xl-4 bottom-buffer" *ngFor="#unit of _firebaseData.units?.sort(dynamicSort('name'))">
-							{{ unit.name }}	
+					<div class="card-block sogeti-card-block" *ngIf="!editable">
+						<div clsss="row">
+							<div class="col-xl-4 bottom-buffer remove-padding-left" *ngFor="#unit of _firebaseData.units?.sort(dynamicSort('name'))">
+								{{ unit.name }}	
+							</div>
 						</div>
 					</div>
 				</div>	

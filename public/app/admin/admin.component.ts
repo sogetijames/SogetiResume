@@ -18,6 +18,7 @@ export class AdminComponent implements OnInit {
 	editable: boolean;
 	newConstants: any;
 	dynamicSort: any;
+	sortUsersBy: string;
 
 	ngOnInit() {
 		if (!this._currentUser.info.admin) {
@@ -30,7 +31,7 @@ export class AdminComponent implements OnInit {
 
 		this.editable = false;
 		this.newConstants = {};
-
+		this.sortUsersBy = 'first';
 		this.dynamicSort = dynamicSort;
 	}
 
@@ -64,6 +65,14 @@ export class AdminComponent implements OnInit {
 		});
 
 		this.editable = false;
+	}
+
+	clickSortUsersBy(newSortByString: string) {
+		if (this.sortUsersBy == newSortByString) {
+			this.sortUsersBy = '-' + newSortByString;
+		} else {
+			this.sortUsersBy = newSortByString;
+		}
 	}
 
 	toggleUserStatus(userIndex: number, userStatus: string) {

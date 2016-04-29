@@ -156,14 +156,50 @@
 							<table class="table table-hover">
 								<thead>
 									<tr>
-										<th>First</th>
-										<th>Last</th>
-										<th class="admin-table-cell-center">Active</th>	
-										<th class="admin-table-cell-center">Admin</th>	
+										<th>
+											<span role="button" class="fa-icon-label" (click)="clickSortUsersBy('first')">First </span>
+											<i  
+												class="fa" 
+												[ngClass]="{ 
+													'fa-sort-asc': sortUsersBy == 'first', 
+													'fa-sort-desc': sortUsersBy == '-first' 
+												}">
+											</i>
+										</th>
+										<th>
+											<span role="button" class="fa-icon-label" (click)="clickSortUsersBy('last')">Last </span>
+											<i  
+												class="fa" 
+												[ngClass]="{ 
+													'fa-sort-asc': sortUsersBy == 'last', 
+													'fa-sort-desc': sortUsersBy == '-last' 
+												}">
+											</i>
+										</th>
+										<th class="admin-table-cell-center">
+											<span role="button" class="fa-icon-label" (click)="clickSortUsersBy('active')">Active </span>
+											<i  
+												class="fa" 
+												[ngClass]="{ 
+													'fa-sort-asc': sortUsersBy == 'active', 
+													'fa-sort-desc': sortUsersBy == '-active' 
+												}">
+											</i>
+										</th>	
+										<th class="admin-table-cell-center">
+											<span role="button" class="fa-icon-label" (click)="clickSortUsersBy('admin')">Admin </span>
+											<i  
+												class="fa" 
+												[ngClass]="{ 
+													'fa-sort-asc': sortUsersBy == 'admin', 
+													'fa-sort-desc': sortUsersBy == '-admin' 
+												}">
+											</i>
+										</th>	
 									</tr>
 								</thead>
 								<tbody>
-									<tr *ngFor="#user of users; #n = index">
+									<tr *ngFor="#user of users.sort(dynamicSort(sortUsersBy)); #n = index">
 										<td>{{ user.first }}</td>
 										<td>{{ user.last }}</td>
 										<td class="admin-table-cell-center">

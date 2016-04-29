@@ -27,6 +27,12 @@ import {AdminComponent} from './admin/admin.component'
 })
 @RouteConfig([
 	{
+		path: '/',
+		name: 'Search',
+		component: SearchComponent,
+		useAsDefault: true
+	},
+	{
 		path: '/profile/:username',
 		name: 'Profile',
 		component: UserDetailComponent
@@ -46,11 +52,9 @@ import {AdminComponent} from './admin/admin.component'
 		name: 'Admin',
 		component: AdminComponent
 	},
-	{
-		path: '/',
-		name: 'Search',
-		component: SearchComponent,
-		useAsDefault: true
+	{ 
+		path: '/**', 
+		redirectTo: ['Search'] 
 	}
 ])
 export class AppComponent implements OnInit {

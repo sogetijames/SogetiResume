@@ -1,4 +1,4 @@
-<form style="margin-bottom:150px;" *ngIf="user">
+<form style="margin-bottom:75px;" *ngIf="user">
 	<!-- Profile Image/Info -->
 	<div class="row">
 		<div class="col-md-2 hidden-sm-down">
@@ -51,12 +51,12 @@
 				</select>
 			</fieldset>
 			<fieldset class="form-group row">
-				<div class="col-xs-3">
+				<div class="col-xs-4">
 					<select [(ngModel)]="user.status.text" class="form-control">
 						<option *ngFor="#status of _firebaseData.statuses" [value]="status.name">{{ status.name }}</option>
 					</select>
 				</div>
-				<div class="col-xs-9" *ngIf="user.status.text != 'ATO'">
+				<div class="col-xs-8" *ngIf="user.status.text != 'ATO'">
 					<input type="text" class="form-control" [(ngModel)]="user.status.description" placeholder="description (optional)">
 				</div>
 			</fieldset>
@@ -104,7 +104,7 @@
 			<!-- Not Editable -->
 			<div class="col-xl-12">
 				<div class="card sogeti-card" *ngIf="!editable">
-					<div class="card-block">
+					<div class="card-block sogeti-card-block">
 						<p class="card-text">{{ user?.bio }}</p>
 					</div>
 				</div>
@@ -127,17 +127,25 @@
 			<div *ngIf="!editable && user?.projects?.length > 0">
 				<div class="col-xl-4" *ngFor="#project of user?.projects.sort(dynamicSort('startdate'))">
 					<div class="card sogeti-card">
-						<div class="card-block">
+						<div class="card-block sogeti-card-block">
 							<h4 class="card-title red-font">
 								{{ project.client }} <small class="text-muted">{{ project.project }}</small>
 							</h4>
-							<p class="card-text">{{ project.description }}</p>
-							<p class="card-text">
-								{{ formatDate(project.startdate)
-									+ ' - ' + 
-								   formatDate(project.enddate) }}
-							</p>
-							<p class="card-text"><small>{{ project.skills.join(', ') }}</small></p>								
+							<p class="card-text">{{ project.description }}</p>								
+						</div>
+						<div class="card-block sogeti-card-block">
+							<div class="row">
+								<div class="col-xs-6">
+									<small class="text-muted">{{ project.skills.join(', ') }}</small>
+								</div>
+								<div class="col-xs-6 text-xs-right">
+									<small class="text-muted">
+									{{ formatDate(project.startdate)
+										+ ' - ' + 
+									   formatDate(project.enddate) }}
+								    </small>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -151,7 +159,7 @@
 								<i class="fa fa-times"></i>
 							</button>
 						</div>
-						<div class="card-block" style="padding:5px;">
+						<div class="card-block sogeti-card-block" style="padding:5px;">
 							<fieldset class="form-group">
 								<input type="text" class="form-control" [(ngModel)]="project.client" placeholder="Client">
 							</fieldset>
@@ -264,7 +272,7 @@
 			<div *ngIf="!editable && user?.educations?.length > 0">
 				<div class="col-xl-3" *ngFor="#education of user?.educations">
 					<div class="card sogeti-card">
-						<div class="card-block">
+						<div class="card-block sogeti-card-block">
 							<h4 class="card-title red-font">{{ education.title }}</h4>
 							<p class="card-text">{{ education.description }}</p>
 						</div>
@@ -280,7 +288,7 @@
 								<i class="fa fa-times"></i>
 							</button>
 						</div>
-						<div class="card-block" style="padding:5px;">
+						<div class="card-block sogeti-card-block" style="padding:5px;">
 							<fieldset class="form-group">
 								<input type="text" class="form-control" [(ngModel)]="education.title" placeholder="Title">
 							</fieldset>

@@ -11,6 +11,19 @@ span.fa-icon-label {
     vertical-align: middle;
 }
 
+.scrolling-table-small {
+  height: 220px;
+  overflow-y: scroll;
+}
+.scrolling-table-large {
+  height: 320px;
+  overflow-y: scroll;
+}
+
+.card th {
+    border-top: transparent;
+}
+
 .admin-table tr:first-child > td {
     padding-top: .75rem;
 }

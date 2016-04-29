@@ -23,6 +23,9 @@ span.fa-icon-label {
     padding-right: 0 !important;
     vertical-align: middle !important;
 }
+.admin-table-cell-center {
+    text-align: center;
+}
 
 .sogeti-btn {
     color: #fff;

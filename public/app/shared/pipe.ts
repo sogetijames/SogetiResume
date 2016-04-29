@@ -7,6 +7,7 @@ export class ValuesPipe implements PipeTransform {
 
         if (value != undefined && value != null) {
             Object.keys(value).forEach(function(key) {
+            	value[key].uid = key;
                 dataArr.push(value[key]);
             });
         }

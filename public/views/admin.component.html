@@ -1,4 +1,4 @@
-<form>
+<form style="margin-bottom:150px;" *ngIf="_firebaseData.practices">
 	<div class="row">
 		<div class="col-xl-12">
 			<div class="card-deck-wrapper">
@@ -8,16 +8,23 @@
 					<div class="card">
 						<div class="card-header">
 							Practices
-							<i style="float:right;" role="button" class="fa fa-plus green-font" (click)="_firebaseData.practices.push('')"></i>				
+							<i *ngIf="editable" style="float:right;" role="button" class="fa fa-plus green-font" (click)="newConstants?.practices.push({name:''})"></i>				
 						</div>
-						<table class="table admin-table" *ngIf="_firebaseData.practices">
+						<!-- Not Editable -->
+						<div class="card-block" *ngIf="!editable">
+							<p class="card-text" *ngFor="#practice of _firebaseData.practices">
+								{{ practice.name }}
+							</p>
+						</div>
+						<!-- Editable -->
+						<table class="table admin-table" *ngIf="editable">
 							<tbody>
-								<tr *ngFor="#practice of _firebaseData.practices; #i = index">
+								<tr *ngFor="#practice of newConstants?.practices; #i = index">
 									<td class="admin-icon-td red-font">
-										<i role="button" class="fa fa-times" (click)="_firebaseData.practices.splice(i, 1)"></i>
+										<i role="button" class="fa fa-times" (click)="newConstants?.practices.splice(i, 1)"></i>
 									</td>
 									<td>
-										<input type="text" class="form-control" [(ngModel)]="_firebaseData.practices[i]" placeholder="Practice">
+										<input type="text" class="form-control" [(ngModel)]="practice.name" placeholder="Practice">
 									</td>
 								</tr>	
 							</tbody>					
@@ -26,32 +33,83 @@
 				
 					<!-- Proficiency -->
 					<div class="card">
-						<div class="card-header">Proficiency</div>
-						<div class="card-block sogeti-card-block" *ngIf="_firebaseData.proficiency">
-							<p class="card-text" *ngFor="#prof of _firebaseData.proficiency; #j = index">
-								<input type="text" class="form-control" [(ngModel)]="_firebaseData.proficiency[j]" placeholder="Proficiency">
+						<div class="card-header">
+							Proficiency
+							<i *ngIf="editable" style="float:right;" role="button" class="fa fa-plus green-font" (click)="newConstants?.proficiency.push({name:''})"></i>				
+						</div>
+						<!-- Not Editable -->
+						<div class="card-block" *ngIf="!editable">
+							<p class="card-text" *ngFor="#proficiency of _firebaseData.proficiency">
+								{{ proficiency.name }}
 							</p>
 						</div>
+						<!-- Editable -->
+						<table class="table admin-table" *ngIf="editable">
+							<tbody>
+								<tr *ngFor="#proficiency of newConstants?.proficiency; #i = index">
+									<td class="admin-icon-td red-font">
+										<i role="button" class="fa fa-times" (click)="newConstants?.proficiency.splice(i, 1)"></i>
+									</td>
+									<td>
+										<input type="text" class="form-control" [(ngModel)]="proficiency.name" placeholder="Proficiency">
+									</td>
+								</tr>	
+							</tbody>					
+						</table>
 					</div>
 
 					<!-- Statuses -->
 					<div class="card">
-						<div class="card-header">Statuses</div>
-						<div class="card-block sogeti-card-block" *ngIf="_firebaseData.statuses">
-							<p class="card-text" *ngFor="#status of _firebaseData.statuses; #k = index">
-								<input type="text" class="form-control" [(ngModel)]="_firebaseData.statuses[k]" placeholder="Status">
+						<div class="card-header">
+							Statuses
+							<i *ngIf="editable" style="float:right;" role="button" class="fa fa-plus green-font" (click)="newConstants?.statuses.push({name:''})"></i>				
+						</div>
+						<!-- Not Editable -->
+						<div class="card-block" *ngIf="!editable">
+							<p class="card-text" *ngFor="#statuses of _firebaseData.statuses">
+								{{ statuses.name }}
 							</p>
 						</div>
+						<!-- Editable -->
+						<table class="table admin-table" *ngIf="editable">
+							<tbody>
+								<tr *ngFor="#status of newConstants?.statuses; #i = index">
+									<td class="admin-icon-td red-font">
+										<i role="button" class="fa fa-times" (click)="newConstants?.statuses.splice(i, 1)"></i>
+									</td>
+									<td>
+										<input type="text" class="form-control" [(ngModel)]="status.name" placeholder="Status">
+									</td>
+								</tr>	
+							</tbody>					
+						</table>
 					</div>
 
 					<!-- Titles -->
 					<div class="card">
-						<div class="card-header">Titles</div>
-						<div class="card-block sogeti-card-block" *ngIf="_firebaseData.titles">
-							<p class="card-text" *ngFor="#title of _firebaseData.titles; #l = index">
-								<input type="text" class="form-control" [(ngModel)]="_firebaseData.titles[l]" placeholder="Title">								
+						<div class="card-header">
+							Titles
+							<i *ngIf="editable" style="float:right;" role="button" class="fa fa-plus green-font" (click)="newConstants?.titles.push({name:''})"></i>				
+						</div>
+						<!-- Not Editable -->
+						<div class="card-block" *ngIf="!editable">
+							<p class="card-text" *ngFor="#title of _firebaseData.titles">
+								{{ title.name }}
 							</p>
 						</div>
+						<!-- Editable -->
+						<table class="table admin-table" *ngIf="editable">
+							<tbody>
+								<tr *ngFor="#title of newConstants?.titles; #i = index">
+									<td class="admin-icon-td red-font">
+										<i role="button" class="fa fa-times" (click)="newConstants?.titles.splice(i, 1)"></i>
+									</td>
+									<td>
+										<input type="text" class="form-control" [(ngModel)]="title.name" placeholder="Title">
+									</td>
+								</tr>	
+							</tbody>					
+						</table>
 					</div>					
 
 				</div>
@@ -66,12 +124,29 @@
 
 					<!-- Units Content -->
 					<div class="card">
-						<div class="card-header"><i class="fa fa-building" aria-hidden="true"></i> Units</div>
-						<div class="card-block sogeti-card-block row" *ngIf="_firebaseData.units">
-							<div class="col-xl-4 bottom-buffer" *ngFor="#unit of _firebaseData.units; #m = index">
-								<input type="text" class="form-control" [(ngModel)]="_firebaseData.units[m]" placeholder="Unit">	
+						<div class="card-header">
+							<i class="fa fa-building" aria-hidden="true"></i> Units
+							<i *ngIf="editable" style="float:right;" role="button" class="fa fa-plus green-font" (click)="newConstants?.units.push({name:''})"></i>				
+						</div>
+						<!-- Not Editable -->
+						<div class="card-block sogeti-card-block row" *ngIf="!editable">
+							<div class="col-xl-4 bottom-buffer" *ngFor="#unit of _firebaseData.units.sort(dynamicSort('name'))">
+								{{ unit.name }}	
 							</div>
 						</div>
+						<!-- Editable -->
+						<table class="table admin-table" *ngIf="editable">
+							<tbody>
+								<tr *ngFor="#unit of newConstants?.units; #i = index">
+									<td class="admin-icon-td red-font">
+										<i role="button" class="fa fa-times" (click)="newConstants?.units.splice(i, 1)"></i>
+									</td>
+									<td>
+										<input type="text" class="form-control" [(ngModel)]="unit.name" placeholder="Unit">
+									</td>
+								</tr>	
+							</tbody>					
+						</table>
 					</div>
 
 					<!-- Users Content -->
@@ -83,23 +158,23 @@
 									<tr>
 										<th>First</th>
 										<th>Last</th>
-										<th>Active</th>	
-										<th>Admin</th>	
+										<th class="admin-table-cell-center">Active</th>	
+										<th class="admin-table-cell-center">Admin</th>	
 									</tr>
 								</thead>
 								<tbody>
 									<tr *ngFor="#user of users; #n = index">
 										<td>{{ user.first }}</td>
 										<td>{{ user.last }}</td>
-										<td>
+										<td class="admin-table-cell-center">
 											<label class="c-input c-checkbox">
-												<input type="checkbox" [(ngModel)]="user.active">
+												<input type="checkbox" [(ngModel)]="user.active" (click)="toggleUserStatus(n, 'active')">
 												<span class="c-indicator"></span>
 											</label>
 										</td>
-										<td>
+										<td class="admin-table-cell-center">
 											<label class="c-input c-checkbox">
-												<input type="checkbox" [(ngModel)]="user.admin">
+												<input type="checkbox" [(ngModel)]="user.admin" (click)="toggleUserStatus(n, 'admin')">
 												<span class="c-indicator"></span>
 											</label>
 										</td>
@@ -111,5 +186,32 @@
 				</div>
 			</div>		
 		</div>
+	</div>
+
+	<!-- Footer -->
+	<div class="row">
+		<nav class="navbar navbar-fixed-bottom navbar-default">
+			<ul class="nav navbar-nav">		 
+				<li class="pull-xs-right" *ngIf="!editable">
+					<button type="button" class="btn btn-secondary" (click)="clickEdit()">
+						<i class="fa fa-pencil-square-o"></i><span class="fa-icon-label hidden-sm-down"> Edit</span> 
+					</button>
+				</li>
+				<li class="pull-xs-right" *ngIf="editable">
+					<div class="btn-toolbar" role="toolbar">
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-secondary red-font" (click)="clickCancel()">
+								<i class="fa fa-times"></i><span class="fa-icon-label hidden-sm-down"> Cancel</span> 
+							</button> 
+						</div>
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-secondary green-font" (click)="clickSave()">
+								<i class="fa fa-floppy-o"></i><span class="fa-icon-label hidden-sm-down"> Save</span> 
+							</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</nav>
 	</div>
 </form>

@@ -27,12 +27,6 @@ import {AdminComponent} from './admin/admin.component'
 })
 @RouteConfig([
 	{
-		path: '/',
-		name: 'Search',
-		component: SearchComponent,
-		useAsDefault: true
-	},
-	{
 		path: '/profile/:username',
 		name: 'Profile',
 		component: UserDetailComponent
@@ -51,6 +45,12 @@ import {AdminComponent} from './admin/admin.component'
 		path: '/admin',
 		name: 'Admin',
 		component: AdminComponent
+	},
+	{
+		path: '/',
+		name: 'Search',
+		component: SearchComponent,
+		useAsDefault: true
 	}
 ])
 export class AppComponent implements OnInit {
@@ -82,7 +82,7 @@ export class AppComponent implements OnInit {
 	}
 
 	private setCurrentUserInfo(uid: string) {
-		this._userService.getUserByUid(uid).then(info => {
+		FirebaseRef.child('users').child(uid).on('value', info => {
 			this._currentUser.info = info.val();
 			this._currentUser.info.username = this._currentUser.info.email.split('@')[0].replace('.', '_');
 		});

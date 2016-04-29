@@ -1,7 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {NgClass, DatePipe} from 'angular2/common';
 import {Router, RouteParams} from 'angular2/router';
-import {CurrentUser, FirebaseRef, FirebaseData} from '../shared/shared';
+import {CurrentUser, FirebaseRef, FirebaseData, dynamicSort} from '../shared/shared';
 import {ValuesPipe} from '../shared/pipe';
 import {UserService} from './user.service';
 
@@ -26,6 +26,7 @@ export class UserDetailComponent implements OnInit {
 	showSkillNameArrow: boolean;
 	showSkillProficiencyArrow: boolean;
 	openSection: string;
+	dynamicSort: any;
 
 	ngOnInit() {
 		this.editable = false;
@@ -41,6 +42,8 @@ export class UserDetailComponent implements OnInit {
 			this.user = userObject;
 			this.userCopy = $.extend(true, {}, this.user);
 		});
+
+		this.dynamicSort = dynamicSort;
 	}
 
 	constructor(
@@ -122,23 +125,5 @@ export class UserDetailComponent implements OnInit {
 	formatDate(dateStr: string) {
 		let date = new Date(dateStr);
 		return this._datePipe.transform(date, ['mediumDate']);
-	}
-
-	private dynamicSort(property) {
-	    var sortOrder = 1;
-	    if(property[0] === "-") {
-	        sortOrder = -1;
-	        property = property.substr(1);
-	    }
-	    return function (a,b) {
-	    	var result: any;
-	    	if (typeof a[property] === 'string') {
-	    		result = (a[property].toUpperCase() < b[property].toUpperCase()) ? -1 : (a[property].toUpperCase() > b[property].toUpperCase()) ? 1 : 0;
-
-	    	} else {
-	    		result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-	    	}
-	        return result * sortOrder;
-	    }
 	}
 }			

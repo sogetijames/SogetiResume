@@ -222,7 +222,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="#user of users.sort(dynamicSort(sortUsersBy)); #n = index">
+								<tr *ngFor="#user of users?.sort(dynamicSort(sortUsersBy)); #n = index">
 									<td>{{ user.first }}</td>
 									<td>{{ user.last }}</td>
 									<td class="admin-table-cell-center">

@@ -1,6 +1,5 @@
 <form style="margin-bottom:75px;" *ngIf="_firebaseData.practices">
 	<div class="row">
-
 		<!-- Practices -->
 		<div class="col-xl-3">
 			<div class="card">
@@ -21,7 +20,7 @@
 					<table class="table admin-table">
 						<tbody>
 							<tr *ngFor="#practice of newConstants?.practices; #i = index">
-								<td class="admin-icon-td red-font">
+								<td class="admin-icon-td remove-padding-right red-font">
 									<i role="button" class="fa fa-times" (click)="newConstants?.practices.splice(i, 1)"></i>
 								</td>
 								<td>
@@ -54,11 +53,17 @@
 					<table class="table admin-table">
 						<tbody>
 							<tr *ngFor="#proficiency of newConstants?.proficiency; #i = index">
-								<td class="admin-icon-td red-font">
+								<td class="admin-icon-td remove-padding-right red-font">
 									<i role="button" class="fa fa-times" (click)="newConstants?.proficiency.splice(i, 1)"></i>
 								</td>
 								<td>
 									<input type="text" class="form-control" [(ngModel)]="proficiency.name" placeholder="Proficiency">
+								</td>
+								<td class="admin-icon-td remove-padding-left">
+									<i *ngIf="i > 0" role="button" class="fa fa-arrow-up" (click)="swapArrayElements(newConstants.proficiency, i, i-1)"></i>
+								</td>
+								<td class="admin-icon-td remove-padding-left">
+									<i *ngIf="i < newConstants.proficiency.length - 1" role="button" class="fa fa-arrow-down" (click)="swapArrayElements(newConstants.proficiency, i, i+1)"></i>
 								</td>
 							</tr>	
 						</tbody>					
@@ -87,7 +92,7 @@
 					<table class="table admin-table">
 						<tbody>
 							<tr *ngFor="#status of newConstants?.statuses; #i = index">
-								<td class="admin-icon-td red-font">
+								<td class="admin-icon-td remove-padding-right red-font">
 									<i role="button" class="fa fa-times" (click)="newConstants?.statuses.splice(i, 1)"></i>
 								</td>
 								<td>
@@ -120,7 +125,7 @@
 					<table class="table admin-table">
 						<tbody>
 							<tr *ngFor="#title of newConstants?.titles; #i = index">
-								<td class="admin-icon-td red-font">
+								<td class="admin-icon-td remove-padding-right red-font">
 									<i role="button" class="fa fa-times" (click)="newConstants?.titles.splice(i, 1)"></i>
 								</td>
 								<td>
@@ -132,11 +137,9 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 
 	<div class="row top-buffer">
-
 		<!-- Units Content -->
 		<div class="col-xl-6">
 			<div class="card">
@@ -147,7 +150,7 @@
 				<!-- Not Editable -->
 				<div class="scrolling-table-large" *ngIf="!editable">
 					<div class="card-block sogeti-card-block row" *ngIf="!editable">
-						<div class="col-xl-4 bottom-buffer" *ngFor="#unit of _firebaseData.units.sort(dynamicSort('name'))">
+						<div class="col-xl-4 bottom-buffer" *ngFor="#unit of _firebaseData.units?.sort(dynamicSort('name'))">
 							{{ unit.name }}	
 						</div>
 					</div>
@@ -157,7 +160,7 @@
 					<table class="table admin-table scrolling-table">
 						<tbody>
 							<tr *ngFor="#unit of newConstants?.units; #i = index">
-								<td class="admin-icon-td red-font">
+								<td class="admin-icon-td remove-padding-right red-font">
 									<i role="button" class="fa fa-times" (click)="newConstants?.units.splice(i, 1)"></i>
 								</td>
 								<td>
@@ -244,7 +247,6 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 
 	<!-- Footer -->

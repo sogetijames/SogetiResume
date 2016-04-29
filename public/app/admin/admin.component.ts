@@ -75,6 +75,12 @@ export class AdminComponent implements OnInit {
 		}
 	}
 
+	swapArrayElements(array, indexA, indexB) {
+		let temp = array[indexA];
+		array[indexA] = array[indexB];
+		array[indexB] = temp;
+	}
+
 	toggleUserStatus(userIndex: number, userStatus: string) {
 		let user = this.users[userIndex];
 		let fullname = user.first + ' ' + user.last;

@@ -4,6 +4,13 @@ div {
     font-family: 'Oswald', sans-serif;
 }
 
+.remove-padding-left {
+    padding-left: 0 !important;
+}
+.remove-padding-right {
+    padding-right: 0 !important;
+}
+
 i.fa {
     line-height: inherit;
 }
@@ -33,7 +40,6 @@ span.fa-icon-label {
 }
 .admin-icon-td {
     width: 15px;
-    padding-right: 0 !important;
     vertical-align: middle !important;
 }
 .admin-table-cell-center {

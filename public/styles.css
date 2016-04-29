@@ -17,8 +17,21 @@ i.fa {
 span.fa-icon-label {
     vertical-align: middle;
 }
+/*900px*/
+@media only screen and (max-width: 1199px) {
+    .scrolling-table-small,
+    .scrolling-table-large { 
+        height: auto !important;
+    }
+    .scrolling-table-small { 
+        max-height: 220px;
+    }
+    .scrolling-table-large {
+        max-height: 320px;
+    }
+}
 
-.scrolling-table-small {
+.scrolling-table-small { 
   height: 220px;
   overflow-y: scroll;
 }

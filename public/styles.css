@@ -173,6 +173,9 @@ div {
 .admin-table-cell-center {
     text-align: center;
 }
+.admin-card-block-hover:hover {
+    background-color: #e5e5e5;
+}
 
 /* ------------------------------Search Page Cards----------------------------- */
 .card-link, .card-link:hover {
@@ -203,9 +206,6 @@ span.fa-icon-label {
     .scrolling-table-small,
     .scrolling-table-large { 
         height: auto !important;
-    }
-    .scrolling-table-small { 
-        max-height: 220px;
     }
     .scrolling-table-large {
         max-height: 320px;

@@ -9,10 +9,8 @@
 				</div>
 				<!-- Not Editable -->
 				<div class="scrolling-table-small" *ngIf="!editable">
-					<div class="card-block sogeti-card-block">
-						<p class="card-text" *ngFor="#practice of _firebaseData.practices">
-							{{ practice.name }}
-						</p>
+					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="#practice of _firebaseData.practices">
+						{{ practice.name }}
 					</div>
 				</div>
 				<!-- Editable -->
@@ -42,10 +40,8 @@
 				</div>
 				<!-- Not Editable -->
 				<div class="scrolling-table-small" *ngIf="!editable">
-					<div class="card-block sogeti-card-block">
-						<p class="card-text" *ngFor="#proficiency of _firebaseData.proficiency">
-							{{ proficiency.name }}
-						</p>
+					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="#proficiency of _firebaseData.proficiency">
+						{{ proficiency.name }}
 					</div>
 				</div>
 				<!-- Editable -->
@@ -81,10 +77,8 @@
 				</div>
 				<!-- Not Editable -->
 				<div class="scrolling-table-small" *ngIf="!editable">
-					<div class="card-block sogeti-card-block">
-						<p class="card-text" *ngFor="#statuses of _firebaseData.statuses">
-							{{ statuses.name }}
-						</p>
+					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="#statuses of _firebaseData.statuses">
+						{{ statuses.name }}
 					</div>
 				</div>
 				<!-- Editable -->
@@ -114,10 +108,8 @@
 				</div>
 				<!-- Not Editable -->
 				<div class="scrolling-table-small" *ngIf="!editable">
-					<div class="card-block sogeti-card-block">
-						<p class="card-text" *ngFor="#title of _firebaseData.titles">
-							{{ title.name }}
-						</p>
+					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="#title of _firebaseData.titles">
+						{{ title.name }}
 					</div>
 				</div>
 				<!-- Editable -->

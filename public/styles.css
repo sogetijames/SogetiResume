@@ -4,61 +4,6 @@ div {
     font-family: 'Oswald', sans-serif;
 }
 
-.remove-padding-left {
-    padding-left: 0 !important;
-}
-.remove-padding-right {
-    padding-right: 0 !important;
-}
-
-i.fa {
-    line-height: inherit;
-}
-span.fa-icon-label {
-    vertical-align: middle;
-}
-/*900px*/
-@media only screen and (max-width: 1199px) {
-    .scrolling-table-small,
-    .scrolling-table-large { 
-        height: auto !important;
-    }
-    .scrolling-table-small { 
-        max-height: 220px;
-    }
-    .scrolling-table-large {
-        max-height: 320px;
-    }
-}
-
-.scrolling-table-small { 
-  height: 220px;
-  overflow-y: scroll;
-}
-.scrolling-table-large {
-  height: 320px;
-  overflow-y: scroll;
-}
-
-.card th {
-    border-top: transparent;
-}
-
-.admin-table tr:first-child > td {
-    padding-top: .75rem;
-}
-.admin-table td {
-    border-top: transparent;
-    padding-top: 0;
-}
-.admin-icon-td {
-    width: 15px;
-    vertical-align: middle !important;
-}
-.admin-table-cell-center {
-    text-align: center;
-}
-
 .sogeti-btn {
     color: #fff;
     background-color: #b30000;
@@ -140,7 +85,7 @@ span.fa-icon-label {
 }
 
 .profile-section-header {
-    margin-top: -22px;
+    margin-top: -24px;
 }
 .profile-section-header-card {
     border-top-left-radius: 0;
@@ -152,6 +97,10 @@ span.fa-icon-label {
     font-size: 1.75rem;
     color: #b30000;
     padding: 5px 10px;
+}
+.profile-footer {
+    background-color: #b30000;
+    color: White;
 }
 
 .top-buffer {
@@ -165,10 +114,6 @@ span.fa-icon-label {
 	width: 100%;
 }
 
-.profile-footer {
-	background-color: #b30000;
-	color: White;
-}
 
 .logo-spinner {
     width: 100px;
@@ -196,6 +141,40 @@ span.fa-icon-label {
     color:#b30000;
 }
 
+/* ------------------------------Admin Page------------------------------ */
+.remove-padding-left {
+    padding-left: 0 !important;
+}
+.remove-padding-right {
+    padding-right: 0 !important;
+}
+.scrolling-table-small { 
+  height: 220px;
+  overflow-y: scroll;
+}
+.scrolling-table-large {
+  height: 320px;
+  overflow-y: scroll;
+}
+.card th {
+    border-top: transparent;
+}
+.admin-table tr:first-child > td {
+    padding-top: .75rem;
+}
+.admin-table td {
+    border-top: transparent;
+    padding-top: 0;
+}
+.admin-icon-td {
+    width: 15px;
+    vertical-align: middle !important;
+}
+.admin-table-cell-center {
+    text-align: center;
+}
+
+/* ------------------------------Search Page Cards----------------------------- */
 .card-link, .card-link:hover {
     color: Black;
     text-decoration: none;
@@ -205,6 +184,14 @@ span.fa-icon-label {
     background-color: #e5e5e5;
 }
 
+/* ----------------------------Font Awesome Overwrite--------------------------- */
+i.fa {
+    line-height: inherit;
+}
+span.fa-icon-label {
+    vertical-align: middle;
+}
+
 /* ------------------------------------Media------------------------------------ */
 @media (min-width: 979px) {
   ul.nav li.dropdown:hover > div.dropdown-menu {
@@ -212,7 +199,20 @@ span.fa-icon-label {
   }
 }
 
-/* ------------------------------------Boostrap Overwrite------------------------------------ */
+@media only screen and (max-width: 1199px) {
+    .scrolling-table-small,
+    .scrolling-table-large { 
+        height: auto !important;
+    }
+    .scrolling-table-small { 
+        max-height: 220px;
+    }
+    .scrolling-table-large {
+        max-height: 320px;
+    }
+}
+
+/* ------------------------------Boostrap Overwrite----------------------------- */
 .navbar-default .navbar-nav > li > a.btn-secondary-outline:hover,
 .navbar-default .navbar-nav > li > a.btn-secondary-outline:focus {
     color: #b30000;

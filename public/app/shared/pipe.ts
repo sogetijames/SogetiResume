@@ -56,7 +56,7 @@ export class SearchPipe implements PipeTransform {
 export class FilterPipe implements PipeTransform {
 	transform(value: any, args: any[]): Object[] {
 		let usersObject = value;
-		let filterObject = args[0];
+		let filterObject = args;
 		let retArray = [];
 
 		if (usersObject != undefined && filterObject != undefined) {

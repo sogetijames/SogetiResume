@@ -37,23 +37,23 @@
 			</fieldset>
 			<fieldset class="form-group">
 				<select [(ngModel)]="user.unit" class="form-control">
-					<option *ngFor="#unit of _firebaseData.units" [value]="unit.name">{{ unit.name }}</option>
+					<option *ngFor="let unit of _firebaseData.units" [value]="unit.name">{{ unit.name }}</option>
 				</select>
 			</fieldset>
 			<fieldset class="form-group">
 				<select [(ngModel)]="user.practice" class="form-control">
-					<option *ngFor="#practice of _firebaseData.practices" [value]="practice.name">{{ practice.name }}</option>
+					<option *ngFor="let practice of _firebaseData.practices" [value]="practice.name">{{ practice.name }}</option>
 				</select>
 			</fieldset>
 			<fieldset class="form-group">
 				<select [(ngModel)]="user.title" class="form-control">
-					<option *ngFor="#title of _firebaseData.titles" [value]="title.name">{{ title.name }}</option>
+					<option *ngFor="let title of _firebaseData.titles" [value]="title.name">{{ title.name }}</option>
 				</select>
 			</fieldset>
 			<fieldset class="form-group row">
 				<div class="col-xs-4">
 					<select [(ngModel)]="user.status.text" class="form-control">
-						<option *ngFor="#status of _firebaseData.statuses" [value]="status.name">{{ status.name }}</option>
+						<option *ngFor="let status of _firebaseData.statuses" [value]="status.name">{{ status.name }}</option>
 					</select>
 				</div>
 				<div class="col-xs-8" *ngIf="user.status.text != 'ATO'">
@@ -125,7 +125,7 @@
 
 			<!-- Not Editable -->
 			<div *ngIf="!editable && user?.projects?.length > 0">
-				<div class="col-xl-4" *ngFor="#project of user?.projects.sort(dynamicSort('startdate'))">
+				<div class="col-xl-4" *ngFor="let project of user?.projects.sort(dynamicSort('startdate'))">
 					<div class="card sogeti-card">
 						<div class="card-block sogeti-card-block">
 							<h4 class="card-title red-font">
@@ -152,7 +152,7 @@
 			</div>
 			<!-- Editable -->
 			<div *ngIf="editable">
-				<div class="col-xl-4" *ngFor="#project of user?.projects; #k = index">
+				<div class="col-xl-4" *ngFor="let project of user?.projects; let k = index">
 					<div class="card">
 						<div class="card-header text-xs-right" style="padding:3px;">
 							<button type="button" class="btn btn-sm btn-secondary" (click)="user.projects.splice(k, 1)">
@@ -180,7 +180,7 @@
 								</div>
 							</fieldset>
 							<fieldset class="form-group">
-								<button *ngFor="#skill of user?.skills" type="button" class="btn btn-sm"
+								<button *ngFor="let skill of user?.skills" type="button" class="btn btn-sm"
 								[ngClass]="{ 
 									'sogeti-btn-outline':  project.skills.indexOf(skill.name) == -1,
 									'sogeti-btn':  project.skills.indexOf(skill.name) > -1  
@@ -213,7 +213,7 @@
 			</div>
 			<!-- Not Editable -->
 			<div *ngIf="!editable" >
-				<div class="col-xl-2" *ngFor="#skill of user?.skills">
+				<div class="col-xl-2" *ngFor="let skill of user?.skills">
 					<div style="color: White;" class="card text-xl-center" 
 					[ngClass]="{
 						'awareness-skill': skill?.proficiency == 0, 
@@ -231,7 +231,7 @@
 			</div>
 			<!-- Editable -->
 			<div *ngIf="editable">
-				<div class="col-xl-2" *ngFor="#skill of user?.skills; #i = index">
+				<div class="col-xl-2" *ngFor="let skill of user?.skills; let i = index">
 					<div class="card text-xl-center" 
 					[ngClass]="{
 						'awareness-skill': skill?.proficiency == 0, 
@@ -251,7 +251,7 @@
 							</fieldset>
 							<fieldset class="form-group">            
 								<select [(ngModel)]="skill.proficiency" class="form-control">
-									<option *ngFor="#proficiency of _firebaseData.proficiency; #i = index" [value]="i">{{ proficiency.name }}</option>
+									<option *ngFor="let proficiency of _firebaseData.proficiency; let i = index" [value]="i">{{ proficiency.name }}</option>
 								</select>
 							</fieldset>
 						</div>
@@ -270,7 +270,7 @@
 
 			<!-- Not Editable -->
 			<div *ngIf="!editable && user?.educations?.length > 0">
-				<div class="col-xl-3" *ngFor="#education of user?.educations">
+				<div class="col-xl-3" *ngFor="let education of user?.educations">
 					<div class="card sogeti-card">
 						<div class="card-block sogeti-card-block">
 							<h4 class="card-title red-font">{{ education.title }}</h4>
@@ -281,7 +281,7 @@
 			</div>
 			<!-- Editable -->
 			<div *ngIf="editable">
-				<div class="col-xl-3" *ngFor="#education of user?.educations; #j = index">
+				<div class="col-xl-3" *ngFor="let education of user?.educations; let j = index">
 					<div class="card">
 						<div class="card-header text-xs-right" style="padding:3px;">
 							<button type="button" class="btn btn-sm btn-secondary" (click)="user.educations.splice(j, 1)">

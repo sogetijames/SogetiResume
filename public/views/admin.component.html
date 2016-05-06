@@ -9,7 +9,7 @@
 				</div>
 				<!-- Not Editable -->
 				<div class="scrolling-table-small" *ngIf="!editable">
-					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="#practice of _firebaseData.practices">
+					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="let practice of _firebaseData.practices">
 						{{ practice.name }}
 					</div>
 				</div>
@@ -17,7 +17,7 @@
 				<div class="scrolling-table-small" *ngIf="editable">
 					<table class="table admin-table">
 						<tbody>
-							<tr *ngFor="#practice of newConstants?.practices; #i = index">
+							<tr *ngFor="let practice of newConstants?.practices; let i = index">
 								<td class="admin-icon-td remove-padding-right red-font">
 									<i role="button" class="fa fa-times" (click)="newConstants?.practices.splice(i, 1)"></i>
 								</td>
@@ -40,7 +40,7 @@
 				</div>
 				<!-- Not Editable -->
 				<div class="scrolling-table-small" *ngIf="!editable">
-					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="#proficiency of _firebaseData.proficiency">
+					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="let proficiency of _firebaseData.proficiency">
 						{{ proficiency.name }}
 					</div>
 				</div>
@@ -48,7 +48,7 @@
 				<div class="scrolling-table-small" *ngIf="editable">
 					<table class="table admin-table">
 						<tbody>
-							<tr *ngFor="#proficiency of newConstants?.proficiency; #i = index">
+							<tr *ngFor="let proficiency of newConstants?.proficiency; let i = index">
 								<td class="admin-icon-td remove-padding-right red-font">
 									<i role="button" class="fa fa-times" (click)="newConstants?.proficiency.splice(i, 1)"></i>
 								</td>
@@ -77,7 +77,7 @@
 				</div>
 				<!-- Not Editable -->
 				<div class="scrolling-table-small" *ngIf="!editable">
-					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="#statuses of _firebaseData.statuses">
+					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="let statuses of _firebaseData.statuses">
 						{{ statuses.name }}
 					</div>
 				</div>
@@ -85,7 +85,7 @@
 				<div class="scrolling-table-small" *ngIf="editable">
 					<table class="table admin-table">
 						<tbody>
-							<tr *ngFor="#status of newConstants?.statuses; #i = index">
+							<tr *ngFor="let status of newConstants?.statuses; let i = index">
 								<td class="admin-icon-td remove-padding-right red-font">
 									<i role="button" class="fa fa-times" (click)="newConstants?.statuses.splice(i, 1)"></i>
 								</td>
@@ -108,7 +108,7 @@
 				</div>
 				<!-- Not Editable -->
 				<div class="scrolling-table-small" *ngIf="!editable">
-					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="#title of _firebaseData.titles">
+					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="let title of _firebaseData.titles">
 						{{ title.name }}
 					</div>
 				</div>
@@ -116,7 +116,7 @@
 				<div class="scrolling-table-small" *ngIf="editable">
 					<table class="table admin-table">
 						<tbody>
-							<tr *ngFor="#title of newConstants?.titles; #i = index">
+							<tr *ngFor="let title of newConstants?.titles; let i = index">
 								<td class="admin-icon-td remove-padding-right red-font">
 									<i role="button" class="fa fa-times" (click)="newConstants?.titles.splice(i, 1)"></i>
 								</td>
@@ -143,7 +143,7 @@
 				<div class="scrolling-table-large" *ngIf="!editable">
 					<div class="card-block sogeti-card-block" *ngIf="!editable">
 						<div clsss="row">
-							<div class="col-xl-4 bottom-buffer remove-padding-left" *ngFor="#unit of _firebaseData.units?.sort(dynamicSort('name'))">
+							<div class="col-xl-4 bottom-buffer remove-padding-left" *ngFor="let unit of _firebaseData.units?.sort(dynamicSort('name'))">
 								{{ unit.name }}	
 							</div>
 						</div>
@@ -153,7 +153,7 @@
 				<div class="scrolling-table-large" *ngIf="editable">
 					<table class="table admin-table scrolling-table">
 						<tbody>
-							<tr *ngFor="#unit of newConstants?.units; #i = index">
+							<tr *ngFor="let unit of newConstants?.units; let i = index">
 								<td class="admin-icon-td remove-padding-right red-font">
 									<i role="button" class="fa fa-times" (click)="newConstants?.units.splice(i, 1)"></i>
 								</td>
@@ -219,7 +219,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="#user of users?.sort(dynamicSort(sortUsersBy)); #n = index">
+								<tr *ngFor="let user of users?.sort(dynamicSort(sortUsersBy)); let n = index">
 									<td>{{ user.first }}</td>
 									<td>{{ user.last }}</td>
 									<td class="admin-table-cell-center">

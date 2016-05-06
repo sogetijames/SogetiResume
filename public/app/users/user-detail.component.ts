@@ -124,6 +124,6 @@ export class UserDetailComponent implements OnInit {
 
 	formatDate(dateStr: string) {
 		let date = new Date(dateStr);
-		return this._datePipe.transform(date, ['mediumDate']);
+		return this._datePipe.transform(date, 'mediumDate');
 	}
-}			
+}

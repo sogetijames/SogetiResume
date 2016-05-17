@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Sogeti Resume</title>
+        <base href="/">
+        <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+        <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="lib/toastr/build/toastr.min.css" rel='stylesheet' type='text/css'>
+
+        <link href="styles.css" rel='stylesheet'>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <my-app>
+                <i class="fa fa-spin fa-pulse fa-paper-plane-o fa-5x logo-spinner" aria-hidden="true"></i>
+                <span class="logo-spinner-text">Loading...</span>
+            </my-app>
+        </div>
+
+        <script src="lib/es6-shim/es6-shim.js"></script>
+        <script src="lib/reflect-metadata/Reflect.js"></script>
+        <script src="lib/systemjs/dist/system.src.js"></script>
+        <script src="lib/zone.js/dist/zone.js"></script>
+
+        <script src="lib/tether/dist/js/tether.min.js"></script>
+        <script src="lib/jquery/dist/jquery.min.js"></script>
+        <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="lib/toastr/build/toastr.min.js"></script>
+
+        <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+
+        <script>
+            System.import('system-config.js').then(function () {
+                System.import('main');
+            }).catch(console.error.bind(console));
+        </script>
+    </body>
+</html>

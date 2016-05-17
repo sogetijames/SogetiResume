@@ -1,11 +1,12 @@
-import {Component, OnInit} from 'angular2/core';
-import {Router} from 'angular2/router';
-import {FirebaseRef} from '../shared/shared';
-import {AuthenticationService} from '../shared/authentication.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { FirebaseRef } from '../shared/shared';
+import { AuthenticationService } from '../shared/authentication.service';
 
 @Component({
 	selector: 'login',
-	templateUrl: '../../views/user-login.component.html',
+	templateUrl: './app/users/user-login.component.html',
 	providers: [AuthenticationService]
 })
 export class LoginComponent implements OnInit { 

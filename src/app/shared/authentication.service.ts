@@ -1,10 +1,11 @@
-import {Injectable, Inject} from 'angular2/core';
-import {FirebaseRef} from './shared';
+import { Injectable, Inject } from '@angular/core';
+
+import { FirebaseRef } from './shared';
 
 @Injectable()
 export class AuthenticationService {
 	
-	public createUser(email: string, password: string, callback) {
+	public createUser(email: string, password: string, callback: any) {
 		return FirebaseRef.createUser({
 			email: email,
 			password: password
@@ -13,7 +14,7 @@ export class AuthenticationService {
 		});
 	}
 
-	public changePassword(email: string, oldPassword: string, newPassword: string, callback) {
+	public changePassword(email: string, oldPassword: string, newPassword: string, callback: any) {
 		FirebaseRef.changePassword({
 			email       : email,
   			oldPassword : oldPassword,

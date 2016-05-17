@@ -1,14 +1,14 @@
-import {Injectable, NgZone} from "angular2/core";
+import { Injectable } from "@angular/core";
 
 export var FirebaseRef: Firebase = new Firebase('https://dazzling-inferno-8835.firebaseio.com');
 
-export function dynamicSort(property) {
+export function dynamicSort(property: any) {
     var sortOrder = 1;
     if(property[0] === "-") {
         sortOrder = -1;
         property = property.substr(1);
     }
-    return function (a,b) {
+    return function (a: any, b: any) {
     	var result: any;
     	if (typeof a[property] === 'string') {
     		result = (a[property].toUpperCase() < b[property].toUpperCase()) ? -1 : (a[property].toUpperCase() > b[property].toUpperCase()) ? 1 : 0;

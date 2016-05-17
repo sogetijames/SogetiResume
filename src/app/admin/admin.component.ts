@@ -1,11 +1,12 @@
-import {Component, OnInit} from 'angular2/core';
-import {Router} from 'angular2/router';
-import {FirebaseRef, CurrentUser, FirebaseData, dynamicSort} from '../shared/shared';
-import {ValuesPipe} from '../shared/pipe'
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { FirebaseRef, CurrentUser, FirebaseData, dynamicSort } from '../shared/shared';
+import { ValuesPipe } from '../shared/pipe'
 
 @Component({
 	selector: 'admin',
-	templateUrl: '../../views/admin.component.html',
+	templateUrl: './app/admin/admin.component.html',
 	viewBindings: [
 		FirebaseData
 	],
@@ -75,7 +76,7 @@ export class AdminComponent implements OnInit {
 		}
 	}
 
-	swapArrayElements(array, indexA, indexB) {
+	swapArrayElements(array: any[], indexA: number, indexB: number) {
 		let temp = array[indexA];
 		array[indexA] = array[indexB];
 		array[indexB] = temp;

@@ -1,12 +1,13 @@
-import {Component, OnInit} from 'angular2/core';
-import {Router} from 'angular2/router';
-import {CurrentUser, FirebaseRef} from '../shared/shared';
-import {AuthenticationService} from '../shared/authentication.service';
-import {UserService} from './user.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { CurrentUser, FirebaseRef } from '../shared/shared';
+import { AuthenticationService } from '../shared/authentication.service';
+import { UserService } from './user.service';
 
 @Component({
 	selector: 'user-settings',
-	templateUrl: '../../views/user-settings.component.html',
+	templateUrl: './app/users/user-settings.component.html',
 	providers: [ 
 		UserService
 	],
@@ -24,7 +25,7 @@ export class UserSettingsComponent implements OnInit {
 
 	ngOnInit() {
 		if (!FirebaseRef.getAuth()) {
-			this._router.navigate(['Login']);
+			this._router.navigate(['/login']);
 		}
 	}	
 

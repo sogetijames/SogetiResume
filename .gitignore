@@ -1,7 +1,9 @@
+src/**/*.js
+src/**/*.map
+
+node_modules
 typings
-public/app/**/*.js
-public/app/**/*.map
-public/node_modules
-react/node_modules
-.sublime-project
-.sublime-project.sublime-workspace
+dist
+
+*.sublime-project
+*.sublime-project.sublime-workspace

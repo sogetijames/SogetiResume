@@ -1,5 +1,6 @@
-import {Injectable, Inject} from 'angular2/core';
-import {FirebaseRef} from '../shared/shared';
+import { Injectable } from '@angular/core';
+
+import { FirebaseRef } from '../shared/shared';
 
 @Injectable()
 export class UserService {

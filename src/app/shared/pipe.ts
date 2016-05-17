@@ -1,9 +1,9 @@
-import {Pipe, PipeTransform} from 'angular2/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({name: 'values'})
 export class ValuesPipe implements PipeTransform {
     transform(value: any): Object[] {
-        let dataArr = [];
+        let dataArr: any[] = [];
 
         if (value != undefined && value != null) {
             Object.keys(value).forEach(function(key) {
@@ -22,7 +22,7 @@ export class SearchPipe implements PipeTransform {
 		let usersObject = value;
 		let skillsObject = args[0];
 		let searchText = args[1].toUpperCase();
-		let retArray = [];
+		let retArray: any[] = [];
 
 		if (usersObject != undefined && skillsObject != undefined) {
 			Object.keys(usersObject).forEach(function(uid) {
@@ -57,7 +57,7 @@ export class FilterPipe implements PipeTransform {
 	transform(value: any, args: any[]): Object[] {
 		let usersObject = value;
 		let filterObject = args;
-		let retArray = [];
+		let retArray: any[] = [];
 
 		if (usersObject != undefined && filterObject != undefined) {
 			Object.keys(usersObject).forEach((uid) => {

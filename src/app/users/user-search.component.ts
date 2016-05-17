@@ -1,11 +1,12 @@
-import {Component, OnInit} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
-import {FirebaseData} from '../shared/shared';
-import {ValuesPipe, SearchPipe, FilterPipe} from '../shared/pipe';
+import { Component, OnInit } from '@angular/core';
+import { ROUTER_DIRECTIVES } from '@angular/router';
+
+import { FirebaseData } from '../shared/shared';
+import { ValuesPipe, SearchPipe, FilterPipe } from '../shared/pipe';
 
 @Component({
 	selector: 'search',
-	templateUrl: "../../views/user-search.component.html",
+	templateUrl: "./app/users/user-search.component.html",
 	providers: [ 
 		ValuesPipe,
 		SearchPipe

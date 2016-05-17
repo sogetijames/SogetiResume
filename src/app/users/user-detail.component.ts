@@ -1,13 +1,14 @@
-import {Component, OnInit} from 'angular2/core';
-import {NgClass, DatePipe} from 'angular2/common';
-import {Router, RouteParams} from 'angular2/router';
-import {CurrentUser, FirebaseRef, FirebaseData, dynamicSort} from '../shared/shared';
-import {ValuesPipe} from '../shared/pipe';
-import {UserService} from './user.service';
+import { Component, OnInit } from '@angular/core';
+import { NgClass, DatePipe } from '@angular/common';
+import { Router, RouteSegment } from '@angular/router';
+
+import { CurrentUser, FirebaseRef, FirebaseData, dynamicSort } from '../shared/shared';
+import { ValuesPipe } from '../shared/pipe';
+import { UserService } from './user.service';
 
 @Component({
 	selector: 'user-detail',
-	templateUrl: '../../views/user-detail.component.html',
+	templateUrl: './app/users/user-detail.component.html',
 	directives: [
 		NgClass
 	],
@@ -37,8 +38,8 @@ export class UserDetailComponent implements OnInit {
 		this.showSkillNameArrow = true;
 		this.showSkillProficiencyArrow = false;
 
-		let username = this._routeParams.get('username');
-		this._userService.getUserDetails(username, (userObject) => {
+		let username = this.routeSegment.getParam('username');
+		this._userService.getUserDetails(username, (userObject: any) => {
 			this.user = userObject;
 			this.userCopy = $.extend(true, {}, this.user);
 		});
@@ -49,7 +50,7 @@ export class UserDetailComponent implements OnInit {
 	constructor(
 		private _currentUser: CurrentUser,
 		private _userService: UserService, 
-		private _routeParams: RouteParams,
+		private routeSegment: RouteSegment,
 		private _router: Router,
 		private _valuesPipe: ValuesPipe,
 		private _firebaseData: FirebaseData,
@@ -113,7 +114,7 @@ export class UserDetailComponent implements OnInit {
 		}
 	}
 
-	toggleSkillOnProject(project, skill) {
+	toggleSkillOnProject(project: any, skill: string) {
 		let index = project.skills.indexOf(skill);
 		if (index == -1) {
 			project.skills.push(skill);

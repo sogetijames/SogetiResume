@@ -2,23 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { NgClass, DatePipe } from '@angular/common';
 import { Router, RouteSegment } from '@angular/router';
 
-import { CurrentUser, FirebaseRef, FirebaseData, dynamicSort } from '../shared/shared';
-import { ValuesPipe } from '../shared/pipe';
-import { UserService } from './user.service';
+import { 
+	CurrentUser, 
+	dynamicSort, 
+	FIREBASE_REF, 
+	FirebaseData, 
+	ObjectToArrayPipe 
+} from '../../shared';
+import { ResumesService } from '../shared';
 
 @Component({
-	selector: 'user-detail',
-	templateUrl: './app/users/user-detail.component.html',
+	selector: 'resume-detail',
+	templateUrl: './app/+resumes/resume-details/resume-detail.component.html',
 	directives: [
 		NgClass
 	],
 	providers: [ 
-		UserService,
-		ValuesPipe,
+		ResumesService,
+		ObjectToArrayPipe,
 		DatePipe
 	]
 })
-export class UserDetailComponent implements OnInit {
+export class ResumeDetailComponent implements OnInit {
 	editable: boolean;
 	user: any;
 	userCopy: any;
@@ -39,7 +44,7 @@ export class UserDetailComponent implements OnInit {
 		this.showSkillProficiencyArrow = false;
 
 		let username = this.routeSegment.getParam('username');
-		this._userService.getUserDetails(username, (userObject: any) => {
+		this.resumesService.getUserDetails(username, (userObject: any) => {
 			this.user = userObject;
 			this.userCopy = $.extend(true, {}, this.user);
 		});
@@ -48,23 +53,23 @@ export class UserDetailComponent implements OnInit {
 	}
 
 	constructor(
-		private _currentUser: CurrentUser,
-		private _userService: UserService, 
+		private currentUser: CurrentUser,
+		private resumesService: ResumesService, 
 		private routeSegment: RouteSegment,
-		private _router: Router,
-		private _valuesPipe: ValuesPipe,
-		private _firebaseData: FirebaseData,
-		private _datePipe: DatePipe) { } 
+		private router: Router,
+		private objectToArrayPipe: ObjectToArrayPipe,
+		private firebaseData: FirebaseData,
+		private datePipe: DatePipe) { } 
 
 	clickEdit() {
 		this.editable = !this.editable;
 	}
 
 	clickSave() {
-		this._userService.saveUserEducations(this.user.uid, this.user.educations);
-		this._userService.saveUserProjects(this.user.uid, this.user.projects);
-		this._userService.saveUserSkills(this.user.uid, this.user.skills);
-		this._userService.saveUserInfo(this.user.uid, this.user);
+		this.resumesService.saveUserEducations(this.user.uid, this.user.educations);
+		this.resumesService.saveUserProjects(this.user.uid, this.user.projects);
+		this.resumesService.saveUserSkills(this.user.uid, this.user.skills);
+		this.resumesService.saveUserInfo(this.user.uid, this.user);
 
 		this.userCopy = $.extend(true, {}, this.user);
 		this.editable = !this.editable;
@@ -125,6 +130,6 @@ export class UserDetailComponent implements OnInit {
 
 	formatDate(dateStr: string) {
 		let date = new Date(dateStr);
-		return this._datePipe.transform(date, 'mediumDate');
+		return this.datePipe.transform(date, 'mediumDate');
 	}
 }

@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { FirebaseRef, CurrentUser, FirebaseData, dynamicSort } from '../shared/shared';
-import { ValuesPipe } from '../shared/pipe'
+import { FIREBASE_REF, CurrentUser, FirebaseData, dynamicSort, ObjectToArrayPipe } from '../shared';
 
 @Component({
 	selector: 'admin',
-	templateUrl: './app/admin/admin.component.html',
+	templateUrl: './app/+admin/admin.component.html',
 	viewBindings: [
 		FirebaseData
 	],
 	providers: [
-		ValuesPipe
+		ObjectToArrayPipe
 	]
 })
 export class AdminComponent implements OnInit { 
@@ -22,12 +21,12 @@ export class AdminComponent implements OnInit {
 	sortUsersBy: string;
 
 	ngOnInit() {
-		if (!this._currentUser.info.admin) {
+		if (!this.currentUser.info.admin) {
 			window.history.back();
 		}
 
-		this._firebaseData.getDataOnce('users').then((usersSnapshot) => {
-			this.users = this._valuesPipe.transform(usersSnapshot.val());
+		this.firebaseData.getDataOnce('users').then((usersSnapshot) => {
+			this.users = this.objectToArrayPipe.transform(usersSnapshot.val());
 		});
 
 		this.editable = false;
@@ -37,18 +36,18 @@ export class AdminComponent implements OnInit {
 	}
 
 	constructor(
-		private _router: Router,
-		private _currentUser: CurrentUser,
-		private _firebaseData: FirebaseData,
-		private _valuesPipe: ValuesPipe
+		private router: Router,
+		private currentUser: CurrentUser,
+		private firebaseData: FirebaseData,
+		private objectToArrayPipe: ObjectToArrayPipe
 	) {}
 
 	clickEdit() {
-		this.newConstants.practices = this._firebaseData.practices.slice(0);
-		this.newConstants.proficiency = this._firebaseData.proficiency.slice(0);
-		this.newConstants.statuses = this._firebaseData.statuses.slice(0);
-		this.newConstants.titles = this._firebaseData.titles.slice(0);
-		this.newConstants.units = this._firebaseData.units.slice(0);
+		this.newConstants.practices = this.firebaseData.practices.slice(0);
+		this.newConstants.proficiency = this.firebaseData.proficiency.slice(0);
+		this.newConstants.statuses = this.firebaseData.statuses.slice(0);
+		this.newConstants.titles = this.firebaseData.titles.slice(0);
+		this.newConstants.units = this.firebaseData.units.slice(0);
 		this.editable = true;
 	}
 
@@ -57,7 +56,7 @@ export class AdminComponent implements OnInit {
 	}
 
 	clickSave() {
-		FirebaseRef.child('constants').set(this.newConstants, error => {
+		FIREBASE_REF.child('constants').set(this.newConstants, error => {
 			if (error) {
 				toastr.error(error);
 			} else {
@@ -88,7 +87,7 @@ export class AdminComponent implements OnInit {
 		let updateObject = {};
 		updateObject[userStatus] = !user[userStatus];
 
-		FirebaseRef.child('users').child(user.uid).update(updateObject, error => {
+		FIREBASE_REF.child('users').child(user.uid).update(updateObject, error => {
 			if (error) {
 				toastr.error('Error changing ' + userStatus + ' status for ' + fullname);
 			}

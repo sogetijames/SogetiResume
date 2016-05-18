@@ -4,7 +4,7 @@ import { HTTP_BINDINGS } from '@angular/http';
 import { ROUTER_PROVIDERS } from '@angular/router';
 
 import { AppComponent } from './app/app.component';
-import { CurrentUser, FirebaseData } from './app/shared/shared';
+import { CurrentUser, FirebaseData } from './app/shared';
 
 bootstrap(AppComponent, [
 	CurrentUser,

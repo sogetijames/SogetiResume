@@ -1,0 +1,1 @@
+export { ResumeDetailComponent } from './resume-detail.component';

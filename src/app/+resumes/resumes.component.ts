@@ -1,27 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
-import { FirebaseData } from '../shared/shared';
-import { ValuesPipe, SearchPipe, FilterPipe } from '../shared/pipe';
+import { 
+	FirebaseData,
+	ObjectToArrayPipe,
+	ResumeFilterPipe,
+	ResumeSearchPipe
+} from '../shared';
 
 @Component({
-	selector: 'search',
-	templateUrl: "./app/users/user-search.component.html",
+	selector: 'resumes',
+	templateUrl: "./app/+resumes/resumes.component.html",
 	providers: [ 
-		ValuesPipe,
-		SearchPipe
+		ObjectToArrayPipe,
+		ResumeSearchPipe
 	],
 	directives: [
 		ROUTER_DIRECTIVES
 	],
 	pipes: [
-		FilterPipe
+		ResumeFilterPipe
 	],
 	viewBindings: [
 		FirebaseData
 	]
 })
-export class SearchComponent implements OnInit {
+export class ResumesComponent implements OnInit {
 	firebaseUsers: any;
 	firebaseSkills: any;
 	searchResults: any[];
@@ -43,11 +47,11 @@ export class SearchComponent implements OnInit {
 	}
 
 	constructor(
-		private _valuesPipe: ValuesPipe,
-		private _searchPipe: SearchPipe,
-		private _firebaseData: FirebaseData 
+		private objectToArrayPipe: ObjectToArrayPipe,
+		private resumeSearchPipe: ResumeSearchPipe,
+		private firebaseData: FirebaseData 
 	) { 
-		this._firebaseData.getDataOnce('users').then((usersSnapshot) => {
+		this.firebaseData.getDataOnce('users').then((usersSnapshot) => {
 			let users = usersSnapshot.val();
 
 			Object.keys(users).forEach((key) => {
@@ -57,10 +61,10 @@ export class SearchComponent implements OnInit {
 			});
 
 			this.firebaseUsers = users;
-			this.searchResults = this._valuesPipe.transform(this.firebaseUsers);
+			this.searchResults = this.objectToArrayPipe.transform(this.firebaseUsers);
 		});
 
-		this._firebaseData.getDataOnce('skills').then((skillsSnapshot) => {
+		this.firebaseData.getDataOnce('skills').then((skillsSnapshot) => {
 			this.firebaseSkills = skillsSnapshot.val();
 		});
 	}
@@ -72,14 +76,14 @@ export class SearchComponent implements OnInit {
 		this.selectedPractice = '';
 		this.selectedUnit = '';
 
-		this.searchResults = this._valuesPipe.transform(this.firebaseUsers);
+		this.searchResults = this.objectToArrayPipe.transform(this.firebaseUsers);
 	}
 
 	searchUsers(event: any) {
 		if (this.searchText != '') {
-			this.searchResults = this._searchPipe.transform(this.firebaseUsers, [this.firebaseSkills, this.searchText]);
+			this.searchResults = this.resumeSearchPipe.transform(this.firebaseUsers, [this.firebaseSkills, this.searchText]);
 		} else {
-			this.searchResults = this._valuesPipe.transform(this.firebaseUsers);
+			this.searchResults = this.objectToArrayPipe.transform(this.firebaseUsers);
 		}
 	}
 }

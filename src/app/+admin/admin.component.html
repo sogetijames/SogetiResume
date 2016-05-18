@@ -1,4 +1,4 @@
-<form style="margin-bottom:75px;" *ngIf="_firebaseData.practices">
+<form style="margin-bottom:75px;" *ngIf="firebaseData.practices">
 	<div class="row">
 		<!-- Practices -->
 		<div class="col-xl-3">
@@ -9,7 +9,7 @@
 				</div>
 				<!-- Not Editable -->
 				<div class="scrolling-table-small" *ngIf="!editable">
-					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="let practice of _firebaseData.practices">
+					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="let practice of firebaseData.practices">
 						{{ practice.name }}
 					</div>
 				</div>
@@ -40,7 +40,7 @@
 				</div>
 				<!-- Not Editable -->
 				<div class="scrolling-table-small" *ngIf="!editable">
-					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="let proficiency of _firebaseData.proficiency">
+					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="let proficiency of firebaseData.proficiency">
 						{{ proficiency.name }}
 					</div>
 				</div>
@@ -77,7 +77,7 @@
 				</div>
 				<!-- Not Editable -->
 				<div class="scrolling-table-small" *ngIf="!editable">
-					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="let statuses of _firebaseData.statuses">
+					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="let statuses of firebaseData.statuses">
 						{{ statuses.name }}
 					</div>
 				</div>
@@ -108,7 +108,7 @@
 				</div>
 				<!-- Not Editable -->
 				<div class="scrolling-table-small" *ngIf="!editable">
-					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="let title of _firebaseData.titles">
+					<div class="card-block sogeti-card-block admin-card-block-hover" *ngFor="let title of firebaseData.titles">
 						{{ title.name }}
 					</div>
 				</div>
@@ -143,7 +143,7 @@
 				<div class="scrolling-table-large" *ngIf="!editable">
 					<div class="card-block sogeti-card-block" *ngIf="!editable">
 						<div clsss="row">
-							<div class="col-xl-4 bottom-buffer remove-padding-left" *ngFor="let unit of _firebaseData.units?.sort(dynamicSort('name'))">
+							<div class="col-xl-4 bottom-buffer remove-padding-left" *ngFor="let unit of firebaseData.units?.sort(dynamicSort('name'))">
 								{{ unit.name }}	
 							</div>
 						</div>

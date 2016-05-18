@@ -37,23 +37,23 @@
 			</fieldset>
 			<fieldset class="form-group">
 				<select [(ngModel)]="user.unit" class="form-control">
-					<option *ngFor="let unit of _firebaseData.units" [value]="unit.name">{{ unit.name }}</option>
+					<option *ngFor="let unit of firebaseData.units" [value]="unit.name">{{ unit.name }}</option>
 				</select>
 			</fieldset>
 			<fieldset class="form-group">
 				<select [(ngModel)]="user.practice" class="form-control">
-					<option *ngFor="let practice of _firebaseData.practices" [value]="practice.name">{{ practice.name }}</option>
+					<option *ngFor="let practice of firebaseData.practices" [value]="practice.name">{{ practice.name }}</option>
 				</select>
 			</fieldset>
 			<fieldset class="form-group">
 				<select [(ngModel)]="user.title" class="form-control">
-					<option *ngFor="let title of _firebaseData.titles" [value]="title.name">{{ title.name }}</option>
+					<option *ngFor="let title of firebaseData.titles" [value]="title.name">{{ title.name }}</option>
 				</select>
 			</fieldset>
 			<fieldset class="form-group row">
 				<div class="col-xs-4">
 					<select [(ngModel)]="user.status.text" class="form-control">
-						<option *ngFor="let status of _firebaseData.statuses" [value]="status.name">{{ status.name }}</option>
+						<option *ngFor="let status of firebaseData.statuses" [value]="status.name">{{ status.name }}</option>
 					</select>
 				</div>
 				<div class="col-xs-8" *ngIf="user.status.text != 'ATO'">
@@ -224,7 +224,7 @@
 					}">
 						<div class="card-block">
 							<p class="card-text">{{ skill?.name }}</p>
-							<p class="card-text">{{ _firebaseData.proficiency[skill?.proficiency].name }}</p>
+							<p class="card-text">{{ firebaseData.proficiency[skill?.proficiency].name }}</p>
 						</div>
 					</div>
 				</div>
@@ -251,7 +251,7 @@
 							</fieldset>
 							<fieldset class="form-group">            
 								<select [(ngModel)]="skill.proficiency" class="form-control">
-									<option *ngFor="let proficiency of _firebaseData.proficiency; let i = index" [value]="i">{{ proficiency.name }}</option>
+									<option *ngFor="let proficiency of firebaseData.proficiency; let i = index" [value]="i">{{ proficiency.name }}</option>
 								</select>
 							</fieldset>
 						</div>
@@ -303,7 +303,7 @@
 	</div>
 
 	<!-- Footer -->
-	<div class="row" *ngIf="_currentUser.auth.uid == user?.uid">
+	<div class="row" *ngIf="currentUser.auth.uid == user?.uid">
 		<nav class="navbar navbar-fixed-bottom navbar-default">
 			<ul class="nav navbar-nav">
 				<!-- Add Project Button -->

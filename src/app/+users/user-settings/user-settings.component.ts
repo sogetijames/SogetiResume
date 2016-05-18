@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { CurrentUser, FirebaseRef } from '../shared/shared';
-import { AuthenticationService } from '../shared/authentication.service';
-import { UserService } from './user.service';
+import { CurrentUser, FIREBASE_REF } from '../../shared';
+import { AuthenticationService } from '../';
 
 @Component({
 	selector: 'user-settings',
-	templateUrl: './app/users/user-settings.component.html',
-	providers: [ 
-		UserService
-	],
+	templateUrl: './app/+users/user-settings/user-settings.component.html'
 })
 export class UserSettingsComponent implements OnInit {
 	private oldPassword: any;
@@ -18,14 +14,14 @@ export class UserSettingsComponent implements OnInit {
 	private newPassword2: any;
 
 	constructor(
-		private _currentUser: CurrentUser,
-		private _router: Router,
-		private _authenticationService: AuthenticationService
+		private currentUser: CurrentUser,
+		private router: Router,
+		private authenticationService: AuthenticationService
 	) { } 
 
 	ngOnInit() {
-		if (!FirebaseRef.getAuth()) {
-			this._router.navigate(['/login']);
+		if (!FIREBASE_REF.getAuth()) {
+			this.router.navigate(['/login']);
 		}
 	}	
 
@@ -44,12 +40,12 @@ export class UserSettingsComponent implements OnInit {
 	}
 
 	changePassword() {
-		let email = this._currentUser.auth.password.email;
+		let email = this.currentUser.info.email;
 		let oldPassword = this.oldPassword;
 		let newPassword = this.newPassword1;
 
 		if (this.newPassword1 == this.newPassword2) {
-			this._authenticationService.changePassword(email, oldPassword, newPassword, (error: any) => {
+			this.authenticationService.changePassword(email, oldPassword, newPassword, (error: any) => {
 				if (error === null) {
 					toastr.success("Password changed successfully!");
 				} else {

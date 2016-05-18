@@ -4,7 +4,7 @@
       &#9776;
     </button>
     <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar2">
-      <a class="navbar-brand" [routerLink]="['Search']">
+      <a class="navbar-brand" [routerLink]="['/']">
         <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Sogeti Resume
       </a>
       <ul class="nav navbar-nav">
@@ -13,14 +13,14 @@
             {{ currentUser?.info?.first + " " + currentUser?.info?.last }} <span class="caret"></span>
           </a>
           <div class="dropdown-menu dropdown-menu-right" style="top:85%;">
-            <a class="dropdown-item" [routerLink]="['Profile', { username: currentUser.info?.username }]">
+            <a class="dropdown-item" [routerLink]="['/resume', currentUser.info?.username]">
               <i class="fa fa-user" aria-hidden="true"></i><span class="fa-icon-label"> Profile</span>
             </a>
-            <a class="dropdown-item" [routerLink]="['Settings']">
+            <a class="dropdown-item" [routerLink]="['/settings']">
               <i class="fa fa-cog" aria-hidden="true"></i> <span class="fa-icon-label"> Settings</span>
             </a>
             <div class="dropdown-divider" *ngIf="currentUser.info.admin"></div>
-            <a class="dropdown-item" [routerLink]="['Admin']" *ngIf="currentUser.info.admin">
+            <a class="dropdown-item" [routerLink]="['/admin']" *ngIf="currentUser.info.admin">
               <i class="fa fa-tachometer" aria-hidden="true"></i> <span class="fa-icon-label"> Admin Dashboard</span>
             </a>            
             <div class="dropdown-divider"></div>
@@ -30,7 +30,7 @@
           </div>
         </li>
         <li class="pull-xs-right" *ngIf="!currentUser.auth.uid">
-          <a class="btn btn-secondary-outline" role="button" [routerLink]="['Login']">
+          <a class="btn btn-secondary-outline" role="button" [routerLink]="['/login']">
             <i class="fa fa-sign-in" aria-hidden="true"></i> <span class="fa-icon-label"> Login</span>
           </a>
         </li>

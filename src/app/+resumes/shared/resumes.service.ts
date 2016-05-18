@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { FirebaseRef } from '../shared/shared';
+import { FIREBASE_REF } from '../../shared';
 
 @Injectable()
-export class UserService {
+export class ResumesService {
 	private infoEditablePropertiesArray: string[];
 
 	constructor() { 
@@ -11,11 +11,11 @@ export class UserService {
 	}
 
 	public getUserByUid(uid: string) {
-		return FirebaseRef.child('users').child(uid).once('value');
+		return FIREBASE_REF.child('users').child(uid).once('value');
 	}
 
 	public getDataForUidOnce(child: string, uid: string) {
-		return FirebaseRef.child(child).child(uid).once('value');
+		return FIREBASE_REF.child(child).child(uid).once('value');
 	}
 
 	public getUserDetails(username: string, callback: Function) {
@@ -60,21 +60,21 @@ export class UserService {
 	}
 
 	public saveUserEducations(uid: string, educations: any) {
-		FirebaseRef.child('educations').child(uid).set(educations, error => this.showAlert(error, 'Education') );
+		FIREBASE_REF.child('educations').child(uid).set(educations, error => this.showAlert(error, 'Education') );
 	}
 
 	public saveUserProjects(uid: string, projects: any) {
-		FirebaseRef.child('projects').child(uid).set(projects, error => this.showAlert(error, 'Projects') );
+		FIREBASE_REF.child('projects').child(uid).set(projects, error => this.showAlert(error, 'Projects') );
 	}
 
 	public saveUserSkills(uid: string, skills: any) {
-		FirebaseRef.child('skills').child(uid).set(skills, error => this.showAlert(error, 'Skills') );
+		FIREBASE_REF.child('skills').child(uid).set(skills, error => this.showAlert(error, 'Skills') );
 	}
 
 	public saveUserInfo(uid: string, info: any) {
 		let infoObject = {};
 		this.infoEditablePropertiesArray.forEach( property => infoObject[property] = info[property] );
-		FirebaseRef.child('users').child(uid).update(infoObject, error => this.showAlert(error, 'Profile') );
+		FIREBASE_REF.child('users').child(uid).update(infoObject, error => this.showAlert(error, 'Profile') );
 	}
 
 	private showAlert(error: any, property: string) {
@@ -87,6 +87,6 @@ export class UserService {
 	
 	private getUserByUsername(username: string) {
 		let email = username.toLowerCase().replace('_', '.') + '@us.sogeti.com';
-		return FirebaseRef.child('users').orderByChild('email').startAt(email).endAt(email + '\uf8ff').once('value');
+		return FIREBASE_REF.child('users').orderByChild('email').startAt(email).endAt(email + '\uf8ff').once('value');
 	}
 }

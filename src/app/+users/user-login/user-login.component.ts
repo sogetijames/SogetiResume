@@ -1,37 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { FirebaseRef } from '../shared/shared';
-import { AuthenticationService } from '../shared/authentication.service';
+import { FIREBASE_REF } from '../../shared';
+import { AuthenticationService } from '../';
 
 @Component({
-	selector: 'login',
-	templateUrl: './app/users/user-login.component.html',
-	providers: [AuthenticationService]
+	selector: 'user-login',
+	templateUrl: './app/+users/user-login/user-login.component.html'
 })
-export class LoginComponent implements OnInit { 
+export class UserLoginComponent implements OnInit { 
 	email: string;
 	password: string;
 
 	constructor(
-		private _router: Router, 
-		private _authenticationService: AuthenticationService
+		private router: Router, 
+		private authenticationService: AuthenticationService
 	) { 
 		this.email = '';
 		this.password = '';
 	}
 
 	ngOnInit() {
-		if (FirebaseRef.getAuth()) {
-			this._router.navigate(['Profile', { username: FirebaseRef.getAuth().password.email.split('@')[0].replace('.', '_') }]);
+		let authData = FIREBASE_REF.getAuth();
+
+		if (authData) {
+			this.router.navigate(['/resume', authData.password.email.split('@')[0].replace('.', '_')]);
 		}
 	}
 
 	onClickLogin() {
 		if (this.email != '' && this.password != '') {
-			this._authenticationService.login(this.email + "@us.sogeti.com", this.password).then(
+			this.authenticationService.login(this.email + "@us.sogeti.com", this.password).then(
 				(authData: FirebaseAuthData) => {
-					this._router.navigate(['Profile', { username: this.email.replace('.', '_') }]);
+					this.router.navigate(['/resume', this.email.replace('.', '_')]);
 				}, 
 				(error: any) => {
 					toastr.error(error);
@@ -45,13 +46,13 @@ export class LoginComponent implements OnInit {
 			let email = this.email.toLowerCase() + "@us.sogeti.com";
 			let name = this.email.toLowerCase().split('.');
 
-			this._authenticationService.createUser(email, this.password, 
+			this.authenticationService.createUser(email, this.password, 
 				(error: any, authData: FirebaseAuthData) => {
 					if (error) {
 						this.password = '';
 						toastr.error(error);
 					} else {
-						FirebaseRef.child('/users').child(authData.uid).update({
+						FIREBASE_REF.child('/users').child(authData.uid).update({
 							active: true,
 							admin: false,
 							bio: '',
@@ -79,7 +80,7 @@ export class LoginComponent implements OnInit {
 		if (this.email != '') {
 			let email = this.email.toLowerCase() + "@us.sogeti.com";
 			
-			FirebaseRef.resetPassword({email: email}, (error) => {
+			FIREBASE_REF.resetPassword({email: email}, (error) => {
 				if (error) {
 					switch (error.code) {
 						case "":

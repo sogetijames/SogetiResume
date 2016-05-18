@@ -1,12 +1,12 @@
 import { Injectable, Inject } from '@angular/core';
 
-import { FirebaseRef } from './shared';
+import { FIREBASE_REF } from '../../shared';
 
 @Injectable()
 export class AuthenticationService {
 	
 	public createUser(email: string, password: string, callback: any) {
-		return FirebaseRef.createUser({
+		return FIREBASE_REF.createUser({
 			email: email,
 			password: password
 		}, (error: any, authData: FirebaseAuthData) => {
@@ -15,8 +15,8 @@ export class AuthenticationService {
 	}
 
 	public changePassword(email: string, oldPassword: string, newPassword: string, callback: any) {
-		FirebaseRef.changePassword({
-			email       : email,
+		FIREBASE_REF.changePassword({
+				email       : email,
   			oldPassword : oldPassword,
   			newPassword : newPassword
   		}, (error: any) => { 
@@ -25,13 +25,13 @@ export class AuthenticationService {
 	}
 
 	public login(email: string, password: string) {
-		return FirebaseRef.authWithPassword({
+		return FIREBASE_REF.authWithPassword({
 			email: email,
 			password: password
 		});
 	}
 
 	public logout() {
-		FirebaseRef.unauth();
+		FIREBASE_REF.unauth();
 	}
 }

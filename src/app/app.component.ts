@@ -5,8 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { AdminComponent } from './+admin';
 import { ResumeDetailComponent, ResumesComponent } from './+resumes';
 import { 
-    AuthenticationService, 
     UserLoginComponent, 
+    UserLogoutComponent,
     UserSettingsComponent, 
     UserRegisterComponent,
     UserResetPasswordComponent 
@@ -17,8 +17,7 @@ import { CurrentUser, FIREBASE_REF } from './shared';
     selector: 'sogeti-resume',
     templateUrl: "./app/app.component.html",
     providers: [
-        ROUTER_PROVIDERS, 
-        AuthenticationService
+        ROUTER_PROVIDERS
     ],
     directives: [
         ROUTER_DIRECTIVES
@@ -29,6 +28,7 @@ import { CurrentUser, FIREBASE_REF } from './shared';
     { path: '/resume/:username', component: ResumeDetailComponent },
 
     { path: '/login',            component: UserLoginComponent },
+    { path: '/logout',           component: UserLogoutComponent },
     { path: '/register',         component: UserRegisterComponent },
     { path: '/reset',            component: UserResetPasswordComponent },
     { path: '/settings',         component: UserSettingsComponent },
@@ -48,17 +48,15 @@ export class AppComponent implements OnInit {
         }
 
         FIREBASE_REF.onAuth((authData: FirebaseAuthData) => {
-            this.currentUser.setCurrentUser(authData);
+            if (authData == null) {
+                this.currentUser.resetCurrentUser();
+            } else {
+                this.currentUser.setCurrentUser(authData);
+            }
         });    
     }
 
     constructor(
-        private currentUser: CurrentUser,
-        private authenticationService: AuthenticationService 
+        private currentUser: CurrentUser
     ) { }
-
-    onClickLogout() {
-        this.authenticationService.logout();
-        this.currentUser.resetCurrentUser();
-    }
 }

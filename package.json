@@ -6,7 +6,8 @@
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "typings": "typings",
-    "postinstall": "typings install"
+    "postinstall": "typings install",
+    "deploy": "gulp clean && gulp build && firebase deploy"
   },
   "license": "ISC",
   "dependencies": {
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "del": "^2.2.0",
+    "firebase-tools": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-connect": "^4.0.0",
     "gulp-sourcemaps": "^1.6.0",

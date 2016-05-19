@@ -7,7 +7,8 @@ import { AuthenticationService } from '../';
 @Component({
     selector: 'user-register',
     templateUrl: './app/+users/user-register/user-register.component.html',
-    styleUrls: ['./app/+users/user-register/user-register.component.css']
+    styleUrls: ['./app/+users/user-register/user-register.component.css'],
+    providers: [AuthenticationService]
 })
 export class UserRegisterComponent implements OnInit { 
     userDetails: any;

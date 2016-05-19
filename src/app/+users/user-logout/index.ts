@@ -1,0 +1,1 @@
+export { UserLogoutComponent } from './user-logout.component'

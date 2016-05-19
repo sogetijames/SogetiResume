@@ -35,20 +35,22 @@ export class ResumeDetailComponent implements OnInit {
 	dynamicSort: any;
 
 	ngOnInit() {
+		let username = this.routeSegment.getParam('username');
+		if (username == undefined || username == null) {
+			window.history.back();
+		} else {
+			this.resumesService.getUserDetails(username, (userObject: any) => {
+				this.user = userObject;
+				this.userCopy = $.extend(true, {}, this.user);
+			});
+		}
+		
 		this.editable = false;
 		this.openSection = 'Bio';
-
 		this.sortSkillsNameAZ = true;
 		this.sortSkillsProficiencyAZ = true;
 		this.showSkillNameArrow = true;
 		this.showSkillProficiencyArrow = false;
-
-		let username = this.routeSegment.getParam('username');
-		this.resumesService.getUserDetails(username, (userObject: any) => {
-			this.user = userObject;
-			this.userCopy = $.extend(true, {}, this.user);
-		});
-
 		this.dynamicSort = dynamicSort;
 	}
 

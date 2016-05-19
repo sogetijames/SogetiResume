@@ -7,7 +7,8 @@ import { AuthenticationService } from '../';
 @Component({
 	selector: 'user-login',
 	templateUrl: './app/+users/user-login/user-login.component.html',
-	directives: [ROUTER_DIRECTIVES]
+	directives: [ROUTER_DIRECTIVES],
+	providers: [AuthenticationService]
 })
 export class UserLoginComponent implements OnInit { 
 	email: string;

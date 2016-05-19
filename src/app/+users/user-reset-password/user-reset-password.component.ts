@@ -7,7 +7,8 @@ import { AuthenticationService } from '../';
 @Component({
     selector: 'user-reset-password',
     templateUrl: './app/+users/user-reset-password/user-reset-password.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES],
+    providers: [AuthenticationService]
 })
 export class UserResetPasswordComponent implements OnInit { 
     email: string;

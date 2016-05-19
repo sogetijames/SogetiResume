@@ -31,12 +31,14 @@
     "toastr": "^2.1.2"
   },
   "devDependencies": {
+    "codelyzer": "0.0.19",
     "del": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-connect": "^4.0.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-tslint": "^5.0.0",
     "gulp-typescript": "^2.13.4",
+    "tslint": "^3.10.2",
     "typescript": "^1.8.9",
     "typings": "^0.7.12"
   }

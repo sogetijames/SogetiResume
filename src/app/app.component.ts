@@ -2,16 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Routes, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { AdminComponent } from './+admin';
-import { ResumeDetailComponent, ResumesComponent } from './+resumes';
-import { 
+import {
+    AdminComponent,
+    CurrentUser,
+    FIREBASE_REF,
+    ResumeDetailComponent,
+    ResumesComponent,
     UserLoginComponent, 
     UserLogoutComponent,
     UserSettingsComponent, 
     UserRegisterComponent,
-    UserResetPasswordComponent 
-} from './+users';
-import { CurrentUser, FIREBASE_REF } from './shared';
+    UserResetPasswordComponent
+} from './';
 
 @Component({
     selector: 'sogeti-resume',

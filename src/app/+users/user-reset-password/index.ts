@@ -1,0 +1,1 @@
+export { UserResetPasswordComponent } from './user-reset-password.component';

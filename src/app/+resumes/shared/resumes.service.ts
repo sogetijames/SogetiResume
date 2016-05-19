@@ -86,7 +86,6 @@ export class ResumesService {
 	}
 	
 	private getUserByUsername(username: string) {
-		let email = username.toLowerCase().replace('_', '.') + '@us.sogeti.com';
-		return FIREBASE_REF.child('users').orderByChild('email').startAt(email).endAt(email + '\uf8ff').once('value');
+		return FIREBASE_REF.child('users').orderByChild('username').startAt(username).endAt(username).once('value');
 	}
 }

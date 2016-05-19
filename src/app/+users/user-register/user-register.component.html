@@ -1,0 +1,70 @@
+<form>
+<div class="row">
+    <div class="col-xl-12 text-xl-center bottom-buffer">
+        <h3>Create Your Account</h3>
+    </div>
+
+    <div class="col-xl-8 col-xl-offset-2">
+        <div class="card">
+            <div class="card-block">
+                <div class="form-group row">
+                    <div class="col-xl-12">
+                        <label class="form-control-label">Name</label>
+                    </div>
+                    <div class="col-xl-6">
+                        <input [(ngModel)]="userDetails.first" type="text" class="form-control" placeholder="First" required>
+                    </div>
+                    <div class="col-xl-6">
+                        <input [(ngModel)]="userDetails.last" type="text" class="form-control" placeholder="Last" required>
+                    </div>            
+                </div>
+                <div class="form-group row row has-success has-danger">
+                    <div class="col-xl-6">
+                        <label class="form-control-label">Username</label>
+                        <input [(ngModel)]="userDetails.username" type="text" class="form-control" [ngClass]="{ 'form-control-danger': usernameExists && userDetails.username != '', 'form-control-success': !usernameExists && userDetails.username != '' }" (keyup)="checkIfUsernameExists()" required>
+                    </div>
+                    <div class="col-xl-6">
+                        <label class="form-control-label">Email</label>
+                        <input [(ngModel)]="userDetails.email" type="text" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group row has-success has-danger">
+                    <div class="col-xl-6">
+                        <label class="form-control-label">Password</label>
+                        <input [(ngModel)]="userDetails.password" type="password" class="form-control" [ngClass]="{ 'form-control-success': validatePasswordsMatch(), 'form-control-danger': userDetails.passwordConfirm != '' && !validatePasswordsMatch() }" required>
+                    </div>
+                    <div class="col-xl-6">
+                        <label class="form-control-label">Confirm Password</label>
+                        <input [(ngModel)]="userDetails.passwordConfirm" type="password" class="form-control" [ngClass]="{ 'form-control-success': validatePasswordsMatch(), 'form-control-danger': userDetails.passwordConfirm != '' && !validatePasswordsMatch() }" required>
+                    </div>                        
+                </div>
+                <div class="form-group row">
+                    <div class="col-xl-4">
+                        <label class="form-control-label">Unit</label>
+                        <select [(ngModel)]="userDetails.unit" class="form-control">
+                            <option *ngFor="let unit of firebaseData.units" [value]="unit.name">{{ unit.name }}</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-4">
+                        <label class="form-control-label">Practice</label>
+                        <select [(ngModel)]="userDetails.practice" class="form-control">
+                            <option *ngFor="let practice of firebaseData.practices" [value]="practice.name">{{ practice.name }}</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-4">
+                        <label class="form-control-label">Title</label>
+                        <select [(ngModel)]="userDetails.title" class="form-control">
+                            <option *ngFor="let title of firebaseData.titles" [value]="title.name">{{ title.name }}</option>
+                        </select>
+                    </div>
+                </div>                  
+                <div class="form-group text-xl-right">
+                    <button class="btn sogeti-btn" type="submit" (click)="onClickCreate()">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i><span class="fa-icon-label"> Create Account</span> 
+                    </button>
+                </div> 
+            </div>
+        </div>
+    </div> 
+</div>
+</form>

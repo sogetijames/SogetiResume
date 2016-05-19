@@ -6,7 +6,7 @@
 			<a *ngIf="editable" target="_blank" href="https://en.gravatar.com/connect/">Change Gravatar</a>
 		</div>
 		<div class="col-md-2 hidden-md-up bottom-buffer">
-			<img class="img-fluid img-rounded" [ngClass]="{'red-profile': user?.status?.text == 'PTO', 'green-profile': user?.status?.text == 'ATO', 'yellow-profile': user?.status?.text == 'Project'}" src="{{user?.profileImageURL.replace('?s=256','?s=94.21')}}">
+			<img class="img-fluid img-rounded" [ngClass]="{'red-profile': user?.status?.text == 'PTO', 'green-profile': user?.status?.text == 'ATO', 'yellow-profile': user?.status?.text == 'Project'}" src="{{user?.profileImageURL.replace('?s=256','?s=95')}}">
 			<a *ngIf="editable" target="_blank" href="https://en.gravatar.com/connect/">Change Gravatar</a>
 		</div>
 		<div class="col-md-10" *ngIf="!editable">

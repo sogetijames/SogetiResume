@@ -1,32 +1,31 @@
 <div class="row">
-  <div class="col-xl-8 col-xl-offset-2">
-    <div class="card">
-      <h3 class="card-header">Login</h3>
-
-      <div class="card-block">
-        <form class="form">
-          <fieldset class="form-group">
-            <div class="input-group">
-              <input [(ngModel)]="email" type="text" class="form-control" placeholder="Email" aria-describedby="basic-addon2" required>
-              <span class="input-group-addon" id="basic-addon2">@us.sogeti.com</span>
-            </div>
-          </fieldset>
-          <fieldset class="form-group">
-            <input [(ngModel)]="password" type="password" class="form-control" placeholder="Password" required>
-          </fieldset>
-          <fieldset class="form-group">
-            <a role="button" (click)="onClickResetPassword()">Reset Password</a>
-          </fieldset>
-          <fieldset class="form-group text-xl-right">
-            <button class="btn sogeti-btn-outline" type="button" (click)="onClickCreate()">
-              <i class="fa fa-user-plus" aria-hidden="true"></i><span class="fa-icon-label"> Create Account</span> 
-            </button>
-            <button class="btn sogeti-btn" type="submit" (click)="onClickLogin()">
-              <i class="fa fa-sign-in" aria-hidden="true"></i><span class="fa-icon-label"> Login</span> 
-            </button>
-          </fieldset>
-        </form>
-      </div>
+    <div class="col-xl-12 text-xl-center bottom-buffer">
+        <h3>Login to your Account</h3>
     </div>
-  </div>  
+
+    <div class="col-xl-4 col-xl-offset-4">
+        <div class="card">
+            <div class="card-block">
+                <form class="form">
+                    <fieldset class="form-group">
+                        <input [(ngModel)]="email" type="text" class="form-control" placeholder="Email" required>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input [(ngModel)]="password" type="password" class="form-control" placeholder="Password" required>
+                    </fieldset>
+                    <fieldset class="form-group text-xl-right">
+                        <button class="btn sogeti-btn" type="submit" (click)="onClickLogin()">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i><span class="fa-icon-label"> Login</span> 
+                        </button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+
+      <div class="col-xl-4 col-xl-offset-4 text-md-center">
+          <a [routerLink]="['/reset']">Reset Password</a>
+          <span class="red-font"> | </span>
+          <a [routerLink]="['/register']">Create Account</a>          
+      </div>
 </div>

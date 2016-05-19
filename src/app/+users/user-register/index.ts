@@ -1,0 +1,1 @@
+export { UserRegisterComponent } from './user-register.component';

@@ -25,6 +25,8 @@ const barrels: string[] = [
   'app/+users',
   'app/+users/shared',
   'app/+users/user-login',
+  'app/+users/user-register',
+  'app/+users/user-reset-password',
   'app/+users/user-settings',
   'app/shared',
   'app/shared/pipes',

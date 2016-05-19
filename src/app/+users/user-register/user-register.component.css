@@ -1,0 +1,14 @@
+.has-success .form-control,
+.has-failure .form-control {
+    border-color: #ccc;
+}
+
+.has-success .form-control:focus,
+.has-failure .form-control:focus {
+    border-color: #66afe9;
+}
+
+.has-success .form-control-label,
+.has-failure .form-control-label {
+    color: inherit;
+}

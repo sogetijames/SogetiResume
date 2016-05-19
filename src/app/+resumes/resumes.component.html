@@ -20,25 +20,25 @@
 							<div class="col-xs-12 col-xl-3 bottom-buffer">
 								<select [(ngModel)]="selectedStatus" class="form-control">
 									<option [value]="''">Any Status</option>
-									<option *ngFor="let status of _firebaseData?.statuses">{{ status.name }}</option>
+									<option *ngFor="let status of firebaseData?.statuses">{{ status.name }}</option>
 								</select>
 							</div>
 							<div class="col-xs-12 col-xl-3 bottom-buffer">
 								<select [(ngModel)]="selectedTitle" class="form-control">
 									<option [value]="''">Any Title</option>
-									<option *ngFor="let title of _firebaseData?.titles">{{ title.name }}</option>
+									<option *ngFor="let title of firebaseData?.titles">{{ title.name }}</option>
 								</select>
 							</div>
 							<div class="col-xs-12 col-xl-3 bottom-buffer">
 								<select [(ngModel)]="selectedPractice" class="form-control">
 									<option [value]="''">Any Practice</option>
-									<option *ngFor="let practice of _firebaseData?.practices">{{ practice.name }}</option>
+									<option *ngFor="let practice of firebaseData?.practices">{{ practice.name }}</option>
 								</select>
 							</div>
 							<div class="col-xs-12 col-xl-2 bottom-buffer">
 								<select [(ngModel)]="selectedUnit" class="form-control">
 									<option [value]="''">Any Unit</option>
-									<option *ngFor="let unit of _firebaseData?.units">{{ unit.name }}</option>
+									<option *ngFor="let unit of firebaseData?.units">{{ unit.name }}</option>
 								</select>
 							</div>
 							<div class="col-xs-12 col-xl-1 bottom-buffer text-xl-right">
@@ -58,11 +58,11 @@
 									| resumeFilter:{'title':selectedTitle}  
 									| resumeFilter:{'practice':selectedPractice}  
 									| resumeFilter:{'unit':selectedUnit}">
-		<a [routerLink]="['/resume', result?.email?.split('@')[0].replace('.', '_')]" class="card-link">
+		<a [routerLink]="['/resume', result?.username]" class="card-link">
 			<div class="card card-hover text-xs-center" [ngClass]="{'red-profile': result?.status?.text == 'PTO', 'green-profile': result?.status?.text == 'ATO', 'yellow-profile': result?.status?.text == 'Project'}">
 				<div class="card-block">
 					<h4 class="card-title red-font">
-						<img class="img-fluid img-rounded center-block" src="{{ result?.profileImageURL.replace('http://', 'https://') }}" /> 
+						<img class="img-fluid img-rounded center-block" src="{{ result?.profileImageURL.replace('?s=256', '?s=80') }}" /> 
 						{{ result?.first + " " + result?.last }}
 					</h4>
 					<p class="card-text">{{ result?.title }} <span class="red-font">|</span> {{ result?.unit }}</p>

@@ -2,10 +2,9 @@
   "name": "sogeti-resume",
   "version": "1.0.0",
   "scripts": {
-    "start": "concurrent --kill-others \"gulp watch\" \"lite-server\"",
+    "start": "gulp clean && gulp connect",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
-    "lite": "lite-server",
     "typings": "typings",
     "postinstall": "typings install"
   },
@@ -31,13 +30,12 @@
     "toastr": "^2.1.2"
   },
   "devDependencies": {
-    "concurrently": "^2.0.0",
     "del": "^2.2.0",
     "gulp": "^3.9.1",
+    "gulp-connect": "^4.0.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-tslint": "^5.0.0",
     "gulp-typescript": "^2.13.4",
-    "lite-server": "^2.2.0",
     "typescript": "^1.8.9",
     "typings": "^0.7.12"
   }

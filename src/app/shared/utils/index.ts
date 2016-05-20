@@ -1,7 +1,6 @@
 export * from './current-user';
 export * from './firebase-data';
-
-export const FIREBASE_REF: Firebase = new Firebase('https://dazzling-inferno-8835.firebaseio.com');
+export * from './firebase-ref';
 
 export function dynamicSort(property: any) {
     var sortOrder = 1;

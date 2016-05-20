@@ -20,9 +20,7 @@ export class UserResetPasswordComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        let authData = FIREBASE_REF.getAuth();
-
-        if (authData) {
+        if (firebase.auth().currentUser) {
             this.router.navigate(['/resume', this.currentUser.info.username]);
         }
 
@@ -31,11 +29,9 @@ export class UserResetPasswordComponent implements OnInit {
 
     onClickResetPassword() {
         if (this.email != '') {
-            this.authenticationService.resetPassword(this.email, (error: any) => {
-                if (!error) {
-                    this.router.navigate(['/login']);
-                }
-            });            
+            this.authenticationService.sendPasswordResetEmail(this.email, (error: any) => {
+                // TODO: implement call to confirm password reset
+            });
         } 
     }
 }

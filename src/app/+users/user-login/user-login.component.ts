@@ -21,9 +21,7 @@ export class UserLoginComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		let authData = FIREBASE_REF.getAuth();
-
-		if (authData) {
+		if (firebase.auth().currentUser) {
 			this.router.navigate(['/resume', this.currentUser.info.username]);
 		}
 		
@@ -33,33 +31,13 @@ export class UserLoginComponent implements OnInit {
 
 	onClickLogin() {
 		if (this.email != '' && this.password != '') {
-			this.authenticationService.login(this.email, this.password).then(
-				(authData: FirebaseAuthData) => this.router.navigate(['/resume', this.currentUser.info.username]), 
-				(error: any) => toastr.error(error) 
-			);
-		}
-	}
-
-	onClickResetPassword() {
-		if (this.email != '') {
-			let email = this.email.toLowerCase() + "@us.sogeti.com";
-			
-			FIREBASE_REF.resetPassword({email: email}, (error) => {
+			this.authenticationService.signIn(this.email, this.password, (error: any) => {
 				if (error) {
-					switch (error.code) {
-						case "":
-							toastr.error('The specified user account does not exist.');
-							break;						
-						default:
-							toastr.error(error);
-							break;
-					}
+					toastr.error(error.message, error.code);
 				} else {
-					toastr.info('Password reset email sent successfully!');
+					this.router.navigate(['/resume', this.currentUser.info.username]);
 				}
 			});
-		} else {
-			toastr.error('No email specified!');
 		}
 	}
 }

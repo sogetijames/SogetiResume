@@ -1,14 +1,14 @@
 <form style="margin-bottom:75px;" *ngIf="user">
 	<!-- Profile Image/Info -->
 	<div class="row">
-		<div class="col-md-2 hidden-sm-down">
+		<!-- <div class="col-md-2 hidden-sm-down">
 			<img class="img-fluid img-rounded" [ngClass]="{'red-profile': user?.status?.text == 'PTO', 'green-profile': user?.status?.text == 'ATO', 'yellow-profile': user?.status?.text == 'Project'}" src="{{user?.profileImageURL}}">
 			<a *ngIf="editable" target="_blank" href="https://en.gravatar.com/connect/">Change Gravatar</a>
 		</div>
 		<div class="col-md-2 hidden-md-up bottom-buffer">
 			<img class="img-fluid img-rounded" [ngClass]="{'red-profile': user?.status?.text == 'PTO', 'green-profile': user?.status?.text == 'ATO', 'yellow-profile': user?.status?.text == 'Project'}" src="{{user?.profileImageURL.replace('?s=256','?s=95')}}">
 			<a *ngIf="editable" target="_blank" href="https://en.gravatar.com/connect/">Change Gravatar</a>
-		</div>
+		</div> -->
 		<div class="col-md-10" *ngIf="!editable">
 			<h2 class="red-font">
 				{{ user?.first + " " + user?.last  }} <small class="text-muted">{{ user?.email }}</small>
@@ -101,14 +101,20 @@
 				</div>
 			</div>
 
+			<!-- No bio data -->
+			<div class="col-xl-12" *ngIf="!user?.bio">
+				<span>Bio not provided.</span>
+			</div>
+
 			<!-- Not Editable -->
-			<div class="col-xl-12">
-				<div class="card sogeti-card" *ngIf="!editable">
+			<div class="col-xl-12" *ngIf="!editable && user?.bio">
+				<div class="card sogeti-card">
 					<div class="card-block sogeti-card-block">
 						<p class="card-text">{{ user?.bio }}</p>
 					</div>
 				</div>
 			</div>
+
 			<!-- Editable -->
 			<div class="col-xl-12" *ngIf="editable">
 				<textarea class="form-control" rows="10" [(ngModel)]="user.bio" ></textarea>
@@ -121,6 +127,11 @@
 				<div class="card sogeti-card profile-section-header-card">
 					<div class="card-block profile-section-header-card-block">Projects</div>
 				</div>
+			</div>
+
+			<!-- No projects data -->
+			<div class="col-xl-12" *ngIf="user?.projects.length == 0">
+				<span>Projects data not provided.</span>
 			</div>
 
 			<!-- Not Editable -->
@@ -202,8 +213,13 @@
 				</div>
 			</div>
 
+			<!-- No skills data -->
+			<div class="col-xl-12" *ngIf="user?.skills.length == 0">
+				<span>Skills data not provided.</span>
+			</div>
+
 			<!-- Sorting Buttons -->
-			<div class="col-xl-12" style="margin-bottom:10px;">
+			<div class="col-xl-12" style="margin-bottom:10px;" *ngIf="user?.skills.length > 0">
 				<button type="button" class="btn sogeti-btn-outline btn-sm" (click)="toggleSortSkillsByName()">
 					Skill <i *ngIf="showSkillNameArrow" class="fa" [ngClass]="{ 'fa-sort-asc': sortSkillsNameAZ, 'fa-sort-desc': !sortSkillsNameAZ }"></i>
 				</button>
@@ -211,6 +227,7 @@
 					Proficiency <i *ngIf="showSkillProficiencyArrow" class="fa" [ngClass]="{ 'fa-sort-asc': sortSkillsProficiencyAZ, 'fa-sort-desc': !sortSkillsProficiencyAZ }"></i>
 				</button>
 			</div>
+
 			<!-- Not Editable -->
 			<div *ngIf="!editable" >
 				<div class="col-xl-2" *ngFor="let skill of user?.skills">
@@ -229,6 +246,7 @@
 					</div>
 				</div>
 			</div>
+
 			<!-- Editable -->
 			<div *ngIf="editable">
 				<div class="col-xl-2" *ngFor="let skill of user?.skills; let i = index">
@@ -268,6 +286,11 @@
 				</div>
 			</div>
 
+			<!-- No project data -->
+			<div class="col-xl-12" *ngIf="user?.educations.length == 0">
+				<span>Education data not provided.</span>
+			</div>
+
 			<!-- Not Editable -->
 			<div *ngIf="!editable && user?.educations?.length > 0">
 				<div class="col-xl-3" *ngFor="let education of user?.educations">
@@ -279,6 +302,7 @@
 					</div>
 				</div>
 			</div>
+
 			<!-- Editable -->
 			<div *ngIf="editable">
 				<div class="col-xl-3" *ngFor="let education of user?.educations; let j = index">

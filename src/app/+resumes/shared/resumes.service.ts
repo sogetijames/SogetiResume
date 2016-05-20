@@ -11,7 +11,7 @@ export class ResumesService {
 	}
 
 	public getUserByUid(uid: string) {
-		return FIREBASE_REF.child('users').child(uid).once('value');
+		return FIREBASE_REF.child('resumes').child(uid).once('value');
 	}
 
 	public getDataForUidOnce(child: string, uid: string) {
@@ -19,14 +19,14 @@ export class ResumesService {
 	}
 
 	public getUserDetails(username: string, callback: Function) {
-		this.getUserByUsername(username).then((user) => {
+		this.getUserByUsername(username).then((user: any) => {
 			let data = user.val();
 
 			let uid = Object.keys(data)[0];
 			let userObject = data[uid];
 
 			userObject.uid = uid;
-			userObject.profileImageURL = userObject.profileImageURL.replace('http://', 'https://') + "?s=256";
+			// userObject.profileImageURL = userObject.profileImageURL.replace('http://', 'https://') + "?s=256";
 			userObject.educations = [];
 			userObject.projects = [];
 			userObject.skills = [];
@@ -60,21 +60,21 @@ export class ResumesService {
 	}
 
 	public saveUserEducations(uid: string, educations: any) {
-		FIREBASE_REF.child('educations').child(uid).set(educations, error => this.showAlert(error, 'Education') );
+		FIREBASE_REF.child('educations').child(uid).set(educations, (error: any) => this.showAlert(error, 'Education') );
 	}
 
 	public saveUserProjects(uid: string, projects: any) {
-		FIREBASE_REF.child('projects').child(uid).set(projects, error => this.showAlert(error, 'Projects') );
+		FIREBASE_REF.child('projects').child(uid).set(projects, (error: any) => this.showAlert(error, 'Projects') );
 	}
 
 	public saveUserSkills(uid: string, skills: any) {
-		FIREBASE_REF.child('skills').child(uid).set(skills, error => this.showAlert(error, 'Skills') );
+		FIREBASE_REF.child('skills').child(uid).set(skills, (error: any) => this.showAlert(error, 'Skills') );
 	}
 
 	public saveUserInfo(uid: string, info: any) {
 		let infoObject = {};
 		this.infoEditablePropertiesArray.forEach( property => infoObject[property] = info[property] );
-		FIREBASE_REF.child('users').child(uid).update(infoObject, error => this.showAlert(error, 'Profile') );
+		FIREBASE_REF.child('resumes').child(uid).update(infoObject, (error: any) => this.showAlert(error, 'Profile') );
 	}
 
 	private showAlert(error: any, property: string) {
@@ -86,6 +86,6 @@ export class ResumesService {
 	}
 	
 	private getUserByUsername(username: string) {
-		return FIREBASE_REF.child('users').orderByChild('username').startAt(username).endAt(username).once('value');
+		return FIREBASE_REF.child('resumes').orderByChild('username').startAt(username).endAt(username).once('value');
 	}
 }

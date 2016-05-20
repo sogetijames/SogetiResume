@@ -1,8 +1,9 @@
 {
-  "firebase": "dazzling-inferno-8835",
-  "public": "dist",
-  "rewrites": [{
-  	"source": "**",
-  	"destination": "/index.html"
-	}]
+    "hosting": {
+        "public": "dist",
+        "rewrites": [{
+            "source": "**",
+            "destination": "/index.html"
+        }]
+    }
 }

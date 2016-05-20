@@ -32,7 +32,18 @@
         <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="lib/toastr/build/toastr.min.js"></script>
 
-        <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+        
+        <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyDsxNiEYCaVOsv0H6v2hYnYTjEbKpPd2tI",
+                authDomain: "sogeti-resume.firebaseapp.com",
+                databaseURL: "https://sogeti-resume.firebaseio.com",
+                storageBucket: "sogeti-resume.appspot.com"
+            };
+            firebase.initializeApp(config);
+        </script>
 
         <script>
             System.import('system-config.js').then(function () {

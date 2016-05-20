@@ -12,7 +12,7 @@ export class FirebaseData {
 
   constructor() {
     ['practices', 'proficiency', 'statuses', 'titles', 'units'].forEach((key) => {
-      FIREBASE_REF.child('constants').child(key).on('value', (dataSnapshot) => {
+      FIREBASE_REF.child('constants').child(key).on('value', (dataSnapshot: any) => {
         this[key] = dataSnapshot.val();
       })
     });  

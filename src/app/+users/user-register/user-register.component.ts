@@ -22,7 +22,7 @@ export class UserRegisterComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        if (FIREBASE_REF.getAuth()) {
+        if (firebase.auth().currentUser) {
             this.router.navigate(['/resume', this.currentUser.info.username]);
         }
 
@@ -46,9 +46,9 @@ export class UserRegisterComponent implements OnInit {
                 if (error) {
                     this.userDetails.password = '';
                     this.userDetails.passwordConfirm = '';
-                    toastr.error(error);
+                    toastr.error(error.message, error.code);
                 } else {
-                    this.router.navigate(['/resume', this.currentUser.info.username]);
+                    //this.router.navigate(['/resume', this.currentUser.info.username]);
                 }
             });
         }

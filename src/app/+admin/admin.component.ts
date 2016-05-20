@@ -25,7 +25,7 @@ export class AdminComponent implements OnInit {
 			window.history.back();
 		}
 
-		this.firebaseData.getDataOnce('users').then((usersSnapshot) => {
+		this.firebaseData.getDataOnce('resumes').then((usersSnapshot: any) => {
 			this.users = this.objectToArrayPipe.transform(usersSnapshot.val());
 		});
 
@@ -56,7 +56,7 @@ export class AdminComponent implements OnInit {
 	}
 
 	clickSave() {
-		FIREBASE_REF.child('constants').set(this.newConstants, error => {
+		FIREBASE_REF.child('constants').set(this.newConstants, (error: any) => {
 			if (error) {
 				toastr.error(error);
 			} else {
@@ -87,7 +87,7 @@ export class AdminComponent implements OnInit {
 		let updateObject = {};
 		updateObject[userStatus] = !user[userStatus];
 
-		FIREBASE_REF.child('users').child(user.uid).update(updateObject, error => {
+		FIREBASE_REF.child('users').child(user.uid).update(updateObject, (error: any) => {
 			if (error) {
 				toastr.error('Error changing ' + userStatus + ' status for ' + fullname);
 			}

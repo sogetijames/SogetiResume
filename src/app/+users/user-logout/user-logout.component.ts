@@ -19,10 +19,8 @@ export class UserLogoutComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        let authData = FIREBASE_REF.getAuth();
-
-        if (authData) {
-            this.authenticationService.logout();
+        if (firebase.auth().currentUser) {
+            this.authenticationService.signOut();
             window.location.href = '/login';
         } else {
             this.router.navigate(['/login']);

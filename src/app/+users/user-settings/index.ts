@@ -1,1 +1,0 @@
-export { UserSettingsComponent } from './user-settings.component';

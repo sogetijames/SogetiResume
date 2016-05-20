@@ -12,11 +12,11 @@ export class CurrentUser {
         this.info = {};
     }
 
-    public setCurrentUser(authData: any) {
-        if (authData != null) {
-            this.auth = authData;
+    public setCurrentUser(user: any) {
+        if (user != null) {
+            this.auth = user;
 
-            FIREBASE_REF.child('users').child(authData.uid).on('value', info => {
+            FIREBASE_REF.child('resumes').child(user.uid).on('value', (info: any) => {
                 this.info = info.val();
             });
         }

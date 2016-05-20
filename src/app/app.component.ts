@@ -6,11 +6,11 @@ import {
     AdminComponent,
     CurrentUser,
     FIREBASE_REF,
+    FIREBASE_AUTH,
     ResumeDetailComponent,
     ResumesComponent,
     UserLoginComponent, 
     UserLogoutComponent,
-    UserSettingsComponent, 
     UserRegisterComponent,
     UserResetPasswordComponent
 } from './';
@@ -33,7 +33,6 @@ import {
     { path: '/logout',           component: UserLogoutComponent },
     { path: '/register',         component: UserRegisterComponent },
     { path: '/reset',            component: UserResetPasswordComponent },
-    { path: '/settings',         component: UserSettingsComponent },
     
     { path: '/admin',            component: AdminComponent },
 
@@ -44,18 +43,18 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         toastr.options.positionClass = "toast-top-right";
 
-        let authData = FIREBASE_REF.getAuth();
-        if (authData) {
-            this.currentUser.setCurrentUser(authData);
+        let user = FIREBASE_AUTH.currentUser;
+        if (user) {
+            this.currentUser.setCurrentUser(user);
         }
 
-        FIREBASE_REF.onAuth((authData: FirebaseAuthData) => {
-            if (authData == null) {
-                this.currentUser.resetCurrentUser();
+        FIREBASE_AUTH.onAuthStateChanged((user: any) => {
+            if (user) {
+                this.currentUser.setCurrentUser(user);
             } else {
-                this.currentUser.setCurrentUser(authData);
+                this.currentUser.resetCurrentUser();
             }
-        });    
+        });   
     }
 
     constructor(

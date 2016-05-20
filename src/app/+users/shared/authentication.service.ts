@@ -1,22 +1,26 @@
 import { Injectable, Inject } from '@angular/core';
 
-import { FIREBASE_REF } from '../../shared';
+import { FIREBASE_AUTH, FIREBASE_REF } from '../../shared';
 
 @Injectable()
 export class AuthenticationService {
 
-    public changePassword(email: string, oldPassword: string, newPassword: string, callback: any) {
-        FIREBASE_REF.changePassword({
-            email       : email,
-            oldPassword : oldPassword,
-            newPassword : newPassword
-        }, (error: any) => { 
-            callback(error);
-        });
+    public sendPasswordResetEmail(email: string, callback: any) {
+        FIREBASE_AUTH.sendPasswordResetEmail(email).then(
+            () => callback(),
+            (error: any) => callback(error)
+        );
+    }
+
+    public confirmPasswordReset(code: string, newPassword: string, callback: any) {
+        FIREBASE_AUTH.confirmPasswordReset(code, newPassword).then(
+            () => callback(),
+            (error: any) => callback(error)
+        );
     }
 
     public checkIfUsernameExists(username: string, callback: any) {
-        FIREBASE_REF.child('users').orderByChild('username').startAt(username).endAt(username).once('value', (dataSnapshot) => {
+        FIREBASE_REF.child('resumes').orderByChild('username').startAt(username).endAt(username).once('value', (dataSnapshot: any) => {
             let exists = false;
             let data = dataSnapshot.val();
             if (data != null) {
@@ -27,52 +31,29 @@ export class AuthenticationService {
     }
     
     public createUser(userDetails: any, callback: any) {
-        FIREBASE_REF.createUser({ 
-            email: userDetails.email, 
-            password: userDetails.password 
-        }, 
-        (error: any, authData: FirebaseAuthData) => {
-            if (error) {
-                callback(error);
-            } else {
-                this.createUserResume(authData.uid, userDetails, callback);
-            }
-        });    
+        FIREBASE_AUTH.createUserWithEmailAndPassword(userDetails.email, userDetails.password).then(
+            (user: any) => this.createUserResume(user.uid, userDetails, callback),
+            (error: any) => callback(error)
+        )
     }
 
-    public login(email: string, password: string) {
-        return FIREBASE_REF.authWithPassword({
-            email: email,
-            password: password
-        });
+    public signIn(email: string, password: string, callback: any) {
+        FIREBASE_AUTH.signInWithEmailAndPassword(email, password).then(
+            (user: any) => callback(),
+            (error: any) => callback(error)
+        );
     }
 
-    public logout() {
-        FIREBASE_REF.unauth();
-    }
-
-    public resetPassword(email: string, callback: any) {
-        FIREBASE_REF.resetPassword({email: email}, (error) => {
-            if (error) {
-                switch (error.code) {
-                    case "INVALID_USER":
-                        toastr.error('The specified user account does not exist.');
-                        break;                        
-                    default:
-                        toastr.error(error);
-                        break;
-                }
-            } else {
-                toastr.info('Password reset email sent successfully!');
-            }
-            callback(error);
-        });
+    public signOut() {
+        FIREBASE_AUTH.signOut();
     }
 
     private createUserResume(uid: string, userDetails: any, callback: any) {
-        this.login(userDetails.email, userDetails.password).then((authData: FirebaseAuthData) => {
-            if (authData != null) {
-                FIREBASE_REF.child('users').child(uid).update({
+        this.signIn(userDetails.email, userDetails.password, (error: any) => {
+            if (error) {
+                callback(error);
+            } else {
+                FIREBASE_REF.child('resumes').child(uid).set({
                     active: true,
                     admin: false,
                     bio: '',
@@ -80,7 +61,7 @@ export class AuthenticationService {
                     first: userDetails.first,
                     last: userDetails.last,
                     practice: userDetails.practice,
-                    profileImageURL: authData.password.profileImageURL.replace("?d=retro","?s=256").replace('http://', 'https://'),
+                    // profileImageURL: authData.password.profileImageURL.replace("?d=retro","?s=256").replace('http://', 'https://'),
                     status: {
                         description: '',
                         text: ''
@@ -88,12 +69,8 @@ export class AuthenticationService {
                     title: userDetails.title,
                     unit: userDetails.unit,
                     username: userDetails.username
-                }, (error) => {
-                    callback(error);
                 });
             }
-        }, (error: any) => {
-            callback(error);
         });
     }
 }

@@ -6,7 +6,7 @@ import {
 	ObjectToArrayPipe,
 	ResumeFilterPipe,
 	ResumeSearchPipe
-} from '../shared';
+} from '../';
 
 @Component({
 	selector: 'resumes',
@@ -51,20 +51,22 @@ export class ResumesComponent implements OnInit {
 		private resumeSearchPipe: ResumeSearchPipe,
 		private firebaseData: FirebaseData 
 	) { 
-		this.firebaseData.getDataOnce('users').then((usersSnapshot) => {
+		this.firebaseData.getDataOnce('resumes').then((usersSnapshot: any) => {
 			let users = usersSnapshot.val();
 
-			Object.keys(users).forEach((key) => {
-				if (!users[key].active) {
-					delete users[key];
-				}
-			});
+			if (users != null) {
+				Object.keys(users).forEach((key) => {
+					if (!users[key].active) {
+						delete users[key];
+					}
+				});
+			}			
 
 			this.firebaseUsers = users;
 			this.searchResults = this.objectToArrayPipe.transform(this.firebaseUsers);
 		});
 
-		this.firebaseData.getDataOnce('skills').then((skillsSnapshot) => {
+		this.firebaseData.getDataOnce('skills').then((skillsSnapshot: any) => {
 			this.firebaseSkills = skillsSnapshot.val();
 		});
 	}
